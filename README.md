@@ -6,7 +6,9 @@
 
 *A Hindu wedding invitation told as one auspicious day, from dusk to dawn.* · **#kaarvinlove**
 
-**[shubh-aarambh.pages.dev](https://shubh-aarambh.pages.dev)**
+**[kaarvinlove.pages.dev](https://kaarvinlove.pages.dev)** · branch `framer-clone`
+
+<sub>Single-column envelope edition. The full storytelling edition lives on `main` at shubh-aarambh.pages.dev.</sub>
 
 <sub>Crafted by The Corporate Pot</sub>
 
