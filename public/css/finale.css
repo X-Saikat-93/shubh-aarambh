@@ -36,3 +36,7 @@
 @media (max-width: 520px) { .fn__row .fn__lamp:nth-child(1), .fn__row .fn__lamp:nth-child(9) { display: none; } }
 .fn__credit { margin-top: 2.2rem; font-family: var(--f-label); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--fg-soft); }
 @media (prefers-reduced-motion: reduce) { .fn__lamp.is-lit::before, .fn__lamp.is-lit svg path { animation: none !important; } }
+
+/* Wedding hashtag */
+.fn__tag { margin-top: 1.2rem; font-family: var(--f-label); font-size: var(--fs-label); letter-spacing: .3em; text-transform: uppercase; color: var(--fg-soft); }
+.fn__tag span { display: block; margin-top: .5rem; font-family: var(--f-display); font-style: italic; font-size: clamp(1.4rem, 5vw, 2rem); letter-spacing: .02em; text-transform: none; color: var(--accent); }

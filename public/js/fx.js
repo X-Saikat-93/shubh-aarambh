@@ -24,6 +24,7 @@ const MIX = {
   moon: { jasmine: 5, blush: 1, gold: 3 },
   haldi: { marigold: 5, saffron: 3, gold: 2 },
   sangeet: { magenta: 4, rose: 3, gold: 3 },
+  mayra: { marigold: 3, jasmine: 2, rose: 1, gold: 3 },
   wedding: { rose: 3, marigold: 3, blush: 1, gold: 3 },
 };
 

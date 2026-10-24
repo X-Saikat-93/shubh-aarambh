@@ -49,8 +49,8 @@ export default function init({ root, config }) {
               <span class="gate__n gate__n2" aria-hidden="true">${couple.bride}</span>
             </h1>
             <p class="gate__wed label">are getting married</p>
-            <p class="gate__date display">26 <em>&amp;</em> 27 November 2026</p>
-            <p class="gate__venue">${config.venue.name} · Zirakpur</p>
+            <p class="gate__date display">${config.dateLine.replace('&', '<em>&amp;</em>')}</p>
+            <p class="gate__venue">${config.venue.name} · ${config.venue.place}</p>
           </div>
           <div class="gate__doors">${door('l')}${door('r')}</div>
         </div>

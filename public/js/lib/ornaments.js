@@ -159,9 +159,9 @@ const SEAL_PATH = (() => {
   return d + 'Z';
 })();
 
-/** Wax seal with monogram; unique gradient ids per call. */
+/** Wax seal; `mono` is a logo image URL or a [a, b] letter pair. Unique gradient ids per call. */
 let sealN = 0;
-export const seal = ([a, b] = ['K', 'A'], id = `s${++sealN}`) => `
+export const seal = (mono = ['G', 'K'], id = `s${++sealN}`) => `
 <svg class="seal-svg" viewBox="0 0 200 200" aria-hidden="true">
   <defs>
     <radialGradient id="${id}g" cx="40%" cy="34%" r="72%">
@@ -179,5 +179,7 @@ export const seal = ([a, b] = ['K', 'A'], id = `s${++sealN}`) => `
   <circle cx="100" cy="100" r="62" fill="none" stroke="url(#${id}o)" stroke-width="1.8"/>
   <circle cx="100" cy="100" r="56" fill="none" stroke="url(#${id}o)" stroke-width=".7" stroke-dasharray="1.5 3.5" opacity=".75"/>
   <ellipse cx="72" cy="58" rx="26" ry="12" transform="rotate(-28 72 58)" fill="#fff" opacity=".1"/>
-  <text x="100" y="114" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="46" fill="url(#${id}o)">${a}<tspan font-size="24" dx="1" dy="-4">&amp;</tspan><tspan dx="1" dy="4">${b}</tspan></text>
+  ${typeof mono === 'string'
+    ? `<image href="${mono}" x="52" y="56" width="96" height="88" preserveAspectRatio="xMidYMid meet"/>`
+    : `<text x="100" y="114" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="46" fill="url(#${id}o)">${mono[0]}<tspan font-size="24" dx="1" dy="-4">&amp;</tspan><tspan dx="1" dy="4">${mono[1]}</tspan></text>`}
 </svg>`;

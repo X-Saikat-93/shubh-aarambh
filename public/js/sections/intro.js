@@ -1,9 +1,9 @@
-// Envelope intro: tap the seal -> video plays (names painted in) -> the card swells, its gold frame
+// Envelope intro: tap the seal -> film plays to the garden -> the couple's names write in live -> the card swells, its gold frame
 // expands outward and the stage dissolves to white, handing over to #gate.
 import { gsap, reduced, EASE } from '../lib/motion.js';
 import { diya } from '../lib/ornaments.js';
 
-const VW = 478, VH = 850, SEAL = { x: 0.5, y: 0.615 }, NAMES_AT = 8;
+const VW = 478, VH = 850, SEAL = { x: 0.5, y: 0.615 };
 
 export default function init({ root, config }) {
   const src = '/media/intro.mp4';
@@ -14,7 +14,13 @@ export default function init({ root, config }) {
         <div class="intro__clip">
           <div class="intro__zoom">
             <video class="intro__video" src="${src}" poster="/media/env-poster.jpg" muted playsinline webkit-playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
-            <img class="intro__names" src="/media/names.jpg" alt="" />
+            <img class="intro__names" src="/media/garden.jpg" alt="" />
+          </div>
+          <div class="intro__couple" aria-hidden="true">
+            <span class="script ic__n">${config.couple.groom}</span>
+            <span class="display ic__amp"><em>&amp;</em></span>
+            <span class="script ic__n">${config.couple.bride}</span>
+            <span class="label ic__wed">are getting married</span>
           </div>
           <div class="intro__vig"></div>
           <div class="intro__flash"></div>
@@ -40,6 +46,7 @@ export default function init({ root, config }) {
   const stage = $('.intro__stage'), card = $('.intro__card'), video = $('.intro__video'), namesImg = $('.intro__names');
   const ring = $('.intro__ring'), cta = $('.intro__cta'), invoc = $('.intro__invoc'), flash = $('.intro__flash');
   const hit = $('.intro__hit'), skip = $('.intro__skip'), cue = $('.intro__cue'), loader = $('.intro__loader');
+  const couple = $('.intro__couple'), coupleBits = [...couple.children];
   const zoom = $('.intro__zoom'), vig = $('.intro__vig'), frame = $('.intro__frame'), clip = $('.intro__clip'), ambientBox = $('.intro__ambient');
   let ambient = null, opened = false, cueShown = false, done = false, autoTimer, seal = { x: 0, y: 0 };
   video.muted = true; video.defaultMuted = true;
@@ -53,6 +60,7 @@ export default function init({ root, config }) {
     seal = { x: (cw - VW * s) / 2 + VW * s * SEAL.x, y: (ch - VH * s) / 2 + VH * s * SEAL.y };
     gsap.set([ring, flash], { left: seal.x, top: seal.y });
     gsap.set(zoom, { transformOrigin: `${seal.x}px ${seal.y}px` });
+    card.style.setProperty('--vw', VW * s + 'px'); // names scale with the rendered film width
     const ringSize = Math.max(72, VW * s * 0.31);
     ring.style.width = ring.style.height = ringSize + 'px';
     ring.style.margin = `${-ringSize / 2}px 0 0 ${-ringSize / 2}px`;
@@ -104,7 +112,21 @@ export default function init({ root, config }) {
   // Another module (or the test harness) may fire intro:done itself.
   document.addEventListener('intro:done', () => { if (!done) { done = true; clearTimeout(autoTimer); root.remove(); } });
 
-  // ---- names visible: cue + auto-advance ----
+  // ---- the film ends on the clean garden: names write in live, then the cue ----
+  gsap.set(coupleBits, { autoAlpha: 0 });
+  let named = false;
+  function showNames() {
+    if (named || done) return;
+    named = true;
+    if (reduced) { gsap.set(coupleBits, { autoAlpha: 1 }); return showCue(); }
+    gsap.timeline({ onComplete: showCue })
+      .fromTo(coupleBits[0], { autoAlpha: 0, y: 24, filter: 'blur(10px)', clipPath: 'inset(0 100% 0 0)' }, { autoAlpha: 1, y: 0, filter: 'blur(0px)', clipPath: 'inset(-20% -10% -20% 0)', duration: 1.5, ease: EASE.out })
+      .fromTo(coupleBits[1], { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.9, ease: 'back.out(2)' }, '-=0.6')
+      .fromTo(coupleBits[2], { autoAlpha: 0, y: 24, filter: 'blur(10px)', clipPath: 'inset(0 100% 0 0)' }, { autoAlpha: 1, y: 0, filter: 'blur(0px)', clipPath: 'inset(-20% -10% -20% 0)', duration: 1.5, ease: EASE.out }, '-=0.4')
+      .fromTo(coupleBits[3], { autoAlpha: 0, letterSpacing: '.8em' }, { autoAlpha: 1, letterSpacing: '.38em', duration: 1.2, ease: EASE.out }, '-=0.6');
+  }
+
+  // ---- cue + auto-advance ----
   function showCue() {
     if (cueShown || done) return;
     cueShown = true;
@@ -124,13 +146,13 @@ export default function init({ root, config }) {
   cue.addEventListener('click', finish);
   skip.addEventListener('click', finish);
 
-  // Fallback path: crossfade straight to names.jpg.
+  // Fallback path: crossfade straight to the garden frame, then the live names.
   function fallback() {
-    if (done || cueShown) return;
+    if (done || named) return;
     video.pause();
     gsap.to(namesImg, { opacity: 1, duration: 1.4, ease: 'sine.inOut' });
     gsap.to(vig, { opacity: 0, duration: 1 });
-    setTimeout(showCue, 1200);
+    setTimeout(showNames, 900);
   }
 
   // ---- open ----
@@ -157,11 +179,10 @@ export default function init({ root, config }) {
   hit.addEventListener('click', open);
   hit.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
 
-  // Names appear around 8s: check on timeupdate rather than a timer.
-  video.addEventListener('timeupdate', () => { if (video.currentTime >= NAMES_AT) showCue(); });
-  video.addEventListener('ended', showCue);
+  // The film is trimmed to end on the clean garden (before the template's painted names).
+  video.addEventListener('ended', () => { ambient?.pause(); showNames(); });
   video.addEventListener('error', () => opened && fallback());
-  const stall = () => opened && !cueShown && loader.classList.add('is-on');
+  const stall = () => opened && !named && loader.classList.add('is-on');
   video.addEventListener('waiting', stall); video.addEventListener('stalled', stall);
   video.addEventListener('playing', () => loader.classList.remove('is-on'));
 }

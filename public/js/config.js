@@ -1,62 +1,69 @@
 // Single source of truth for every word, date and link on the invite.
 export const CONFIG = {
-  couple: { bride: 'Anika', groom: 'Krish', monogram: ['K', 'A'] },
-  families: 'Malhotra & Mehta',
+  couple: {
+    groom: 'Garv', bride: 'Kaavya',
+    groomFull: 'Garv Garg', brideFull: 'Kaavya Chandalia',
+    monogram: '/media/monogram.png', // the couple's G & K logo (gold, transparent)
+  },
+  families: 'Chandalia & Garg',
+  hashtag: '#kaarvinlove',
   invocation: { deva: '॥ श्री गणेशाय नमः ॥', latin: 'Shri Ganeshaya Namah' },
   tagline: 'A sacred union of hearts, families, and traditions as we begin our forever.',
-  // Formal invitation wording (The Letter section).
-  letter: [
-    'Together with their families,',
-    'the Malhotras & the Mehtas',
-    'request the honour of your presence',
-    'as their children',
-  ],
-  // Countdown target = wedding start (IST).
-  weddingISO: '2026-11-27T16:00:00+05:30',
-  dateLabel: '27 · 11 · 2026',
-  venue: {
-    name: 'Radisson Hotel',
-    city: 'Zirakpur, Punjab',
-    address: 'Patiala Road, Village Nabha, Green Enclave Road, Zirakpur, Punjab',
-    map: 'https://maps.app.goo.gl/mizirRQuE7iddZYk6',
-    embed: 'https://www.google.com/maps?q=Radisson+Hotel+Zirakpur+Patiala+Road&output=embed',
+
+  // The Letter — traditional bride-side wording.
+  letter: {
+    blessingLabel: 'With the divine blessings of',
+    blessings: ['Lt. Shri Laxmipat Singh Chandalia', 'Lt. Smt. Bhiki Devi Chandalia'],
+    hosts: 'Smt. Sunita & Shri Rakesh Kumar Chandalia',
+    request: 'request the honour of your gracious presence at the wedding of their beloved daughter',
+    joiner: 'with',
+    groomParents: 'son of Smt. Kavita & Shri Sanjay Garg',
+    groomBlessings: [], // groom's grandparents — to be shared; add names here and they appear automatically
   },
+
+  // Countdown target. Timings are not announced yet, so this counts to the wedding day itself (IST).
+  weddingISO: '2026-12-12T00:00:00+05:30',
+  dateLine: '11 & 12 December 2026',
+  dateLabel: '12 · 12 · 2026',
+
+  venue: {
+    name: 'Sher Bengal River Resort',
+    place: 'Kolaghat',
+    city: 'Kolaghat, West Bengal',
+    address: 'Kolaghat, Purba Medinipur, West Bengal',
+    map: 'https://share.google/ondJkXiFkBXDm8Jhc',
+    embed: 'https://www.google.com/maps?q=Sher+Bengal+River+Resort+Kolaghat&output=embed',
+  },
+
   // Each event is a "scene"; `theme` maps to a palette in main.js THEMES.
+  // `hour` is the large decorative word behind each scene.
   events: [
     {
-      id: 'haldi',
-      name: 'Haldi Carnival',
-      date: '26th November 2026',
-      short: '26 Nov',
-      day: 'Thursday',
-      time: '10 AM onwards',
-      hour: 'Morning',
-      blurb: 'A vibrant morning of haldi, laughter, and blessings to brighten the celebrations.',
-      theme: 'haldi',
+      id: 'mayra', name: 'Mayra', date: '11th December 2026', short: '11 Dec', day: 'Friday',
+      time: 'Timings to be announced', hour: 'Ashirwad',
+      blurb: 'The maternal family arrives with gifts and heartfelt blessings — a cherished tradition that opens the celebrations.',
+      theme: 'mayra',
     },
     {
-      id: 'sangeet',
-      name: 'Sangeet',
-      date: '26th November 2026',
-      short: '26 Nov',
-      day: 'Thursday',
-      time: '7 PM onwards',
-      hour: 'Evening',
-      blurb: 'An evening of music, dance and celebration to kick off the wedding festivities.',
+      id: 'sangeet', name: 'Sangeet', date: '11th December 2026', short: '11 Dec', day: 'Friday',
+      time: 'Timings to be announced', hour: 'Sur',
+      blurb: 'An evening of music, dance and celebration as both families come together.',
       theme: 'sangeet',
     },
     {
-      id: 'wedding',
-      name: 'Wedding',
-      date: '27th November 2026',
-      short: '27 Nov',
-      day: 'Friday',
-      time: '4 PM onwards',
-      hour: 'Dusk',
+      id: 'haldi', name: 'Haldi Carnival', date: '12th December 2026', short: '12 Dec', day: 'Saturday',
+      time: 'Timings to be announced', hour: 'Rang',
+      blurb: 'A vibrant celebration of haldi, laughter, and blessings to brighten the big day.',
+      theme: 'haldi',
+    },
+    {
+      id: 'wedding', name: 'Wedding', date: '12th December 2026', short: '12 Dec', day: 'Saturday',
+      time: 'Timings to be announced', hour: 'Vivah',
       blurb: 'Under the canopy of blessings, two souls become one — join us as we take our pheras.',
       theme: 'wedding',
     },
   ],
+
   // Our-story chapters (photo index refers to /media/photos/pNN-*.webp).
   story: [
     { photo: 0, numeral: 'I', title: 'Two paths', text: 'Somewhere between ordinary days and unplanned conversations, two strangers became each other’s favourite place.' },

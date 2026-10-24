@@ -1,5 +1,5 @@
 // Cloudflare Pages Function: POST /api/rsvp -> KV binding `RSVP`.
-const EVENTS = ['haldi', 'sangeet', 'wedding'];
+const EVENTS = ['mayra', 'sangeet', 'haldi', 'wedding'];
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
 

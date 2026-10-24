@@ -67,7 +67,7 @@ export default function init({ root, config }) {
       <div class="sec-head">
         <p class="label">Shubh Muhurat</p>
         <h2 class="h2">Until <em>forever</em></h2>
-        <p class="lede">${day} · ${wedEvent ? wedEvent.time : '4 PM onwards'}</p>
+        <p class="lede">${day} · ${wedEvent ? wedEvent.time : ''}</p>
       </div>
       <div class="cd__stage" role="timer" aria-label="Time until the wedding">
         ${dial()}
@@ -101,7 +101,7 @@ export default function init({ root, config }) {
       `UID:${icsDate(start)}@shubh-vivah`, `DTSTAMP:${icsDate(new Date())}`, `DTSTART:${icsDate(start)}`, `DTEND:${icsDate(end)}`,
       `SUMMARY:${ics(evTitle)}`, `LOCATION:${ics(where)}`, `DESCRIPTION:${ics('With the blessings of our families. ' + venue.map)}`,
       'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
-    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([body], { type: 'text/calendar' })), download: 'krish-anika-wedding.ics' });
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([body], { type: 'text/calendar' })), download: `${config.couple.groom}-${config.couple.bride}-wedding.ics`.toLowerCase() });
     document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });
 

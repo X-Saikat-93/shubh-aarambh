@@ -2,9 +2,9 @@
 
 # Shubh Aarambh
 
-### Krish &amp; Anika · 26 – 27 November 2026 · Radisson Hotel, Zirakpur
+### Garv &amp; Kaavya · 11 – 12 December 2026 · Sher Bengal River Resort, Kolaghat
 
-*A Hindu wedding invitation told as one auspicious day, from dusk to dawn.*
+*A Hindu wedding invitation told as one auspicious day, from dusk to dawn.* · **#kaarvinlove**
 
 **[shubh-aarambh.pages.dev](https://shubh-aarambh.pages.dev)**
 
@@ -20,17 +20,17 @@ The invitation is one continuous scroll. The page's palette moves through the da
 
 | | Chapter | What happens |
 |---|---|---|
-| 01 | **The Envelope** | Guests tap the wax seal, the envelope film plays and marigold and rose petals shower down. |
+| 01 | **The Envelope** | Guests tap the wax seal, the envelope film plays and marigold and rose petals shower down, and the couple's names write in over the garden. |
 | 02 | **Shubh Aarambh** | Under a marigold toran, carved temple doors swing open in 3D to reveal ॥ श्री गणेशाय नमः ॥ and the couple's names. |
-| 03 | **The Invitation** | A letterpress card rises from its envelope and each line inks in. |
+| 03 | **The Invitation** | A letterpress card rises from its envelope and each line inks in: the grandparents' blessing, the parents, then the couple. |
 | 04 | **Our Story** | A gold thread draws through three chapters framed in temple arches. |
-| 05 | **The Celebrations** | Haldi, Sangeet and Wedding each get a full scene with drawn motifs: sun, moon and agni. |
+| 05 | **The Celebrations** | Mayra, Sangeet, Haldi Carnival and Wedding each get a full scene with drawn motifs: rosette and diyas, moon, sun and agni. |
 | 06 | **Saat Phere** | Seven vows light up one by one around the sacred fire. |
 | 07 | **The Venue** | A map in an arch window, a compass, directions and copy-address. |
 | 08 | **Moments** | A 3D fly-through gallery on desktop, an editorial collage on mobile, and a lightbox. |
 | 09 | **Shubh Muhurat** | A gold astrolabe countdown with add-to-calendar (.ics and Google). |
 | 10 | **RSVP** | The reply card folds into an envelope and is sealed with wax. |
-| 11 | **Finale** | Diyas light one by one under the closing blessing. |
+| 11 | **Finale** | Diyas light one by one under the closing blessing, with the #kaarvinlove hashtag. |
 
 All sections work on phones, respect *reduced motion*, and can be used with a keyboard.
 
@@ -63,9 +63,10 @@ wrangler.toml           Pages config and the RSVP KV binding
 
 Almost everything you'd want to change is in **[`public/js/config.js`](public/js/config.js)**:
 
-- couple, families and the Ganesha invocation
-- the invitation letter lines
-- events (name, date, time, description)
+- couple, families, hashtag and the Ganesha invocation
+- the invitation letter (grandparents, parents, wording); the groom's grandparents go in `letter.groomBlessings`
+- events (name, date, time, description). Timings currently read "Timings to be announced"; replace `time` per event when they're fixed
+- the couple's G & K logo is `public/media/monogram.png`
 - venue and Google Maps links
 - story chapters, the seven vows and gallery order
 - the countdown target (`weddingISO`)

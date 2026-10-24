@@ -21,6 +21,7 @@ export const THEMES = {
   moon:    { bg: '#F7F6FB', bg2: '#E9E6F3', fg: '#252238', soft: 'rgba(37,34,56,.64)',  accent: '#7D74A8', line: 'rgba(125,116,168,.38)' },
   haldi:   { bg: '#FFF8E6', bg2: '#FBEBC0', fg: '#4A2A06', soft: 'rgba(74,42,6,.66)',   accent: '#C9850E', line: 'rgba(201,133,14,.4)' },
   sangeet: { bg: '#FCF1F5', bg2: '#F4DCE7', fg: '#3F1230', soft: 'rgba(63,18,48,.66)',  accent: '#A23C72', line: 'rgba(162,60,114,.36)' },
+  mayra:   { bg: '#F5FAF3', bg2: '#E1EEDC', fg: '#1F3324', soft: 'rgba(31,51,36,.66)',  accent: '#4E7D4F', line: 'rgba(78,125,79,.36)' },
   wedding: { bg: '#FDF1EC', bg2: '#F6DCD2', fg: '#4A1013', soft: 'rgba(74,16,19,.66)',  accent: '#B3362C', line: 'rgba(179,54,44,.36)' },
 };
 const applyTheme = (name, instant = false) => {

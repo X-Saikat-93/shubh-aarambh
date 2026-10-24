@@ -23,6 +23,7 @@ export default function init({ root, config, lenis }) {
           <p class="fn__d">${config.dateLabel}</p>
         </div>
         <p class="fn__love">With love — the ${config.families} families</p>
+        ${config.hashtag ? `<p class="fn__tag">Share your moments with <span>${config.hashtag}</span></p>` : ''}
         <button class="btn" type="button" data-top>Back to top</button>
       </div>
       <div class="fn__row" aria-hidden="true">${lampsHtml}</div>
@@ -50,7 +51,7 @@ export default function init({ root, config, lenis }) {
     .from('.fn__bless', { y: 16, autoAlpha: 0, duration: 1.2, ease: EASE.out }, 0.4)
     .from(chars, { yPercent: 70, rotate: 6, autoAlpha: 0, filter: 'blur(10px)', duration: 1.5, ease: EASE.out, stagger: 0.07, clearProps: 'filter' }, 0.7)
     .from('.fn__amp', { scale: 0.4, autoAlpha: 0, duration: 1.4, ease: EASE.out }, 1.1)
-    .from('.fn__date > *, .fn__love, [data-top]', { y: 28, autoAlpha: 0, duration: 1.2, ease: EASE.out, stagger: 0.12 }, 1.8);
+    .from('.fn__date > *, .fn__love, .fn__tag, [data-top]', { y: 28, autoAlpha: 0, duration: 1.2, ease: EASE.out, stagger: 0.12 }, 1.8);
 
   // Row of diyas lights from the centre outward.
   const row = [...root.querySelectorAll('.fn__row .fn__lamp')];

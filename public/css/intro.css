@@ -21,6 +21,15 @@
 .intro__zoom { position: absolute; inset: 0; }
 .intro__video, .intro__names { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .intro__names { opacity: 0; }
+/* Live couple names, written over the clean garden frame where the film's painted names would sit. */
+.intro__couple {
+  position: absolute; left: 50%; top: 26%; transform: translateX(-50%); z-index: 3; pointer-events: none;
+  display: grid; justify-items: center; width: calc(var(--vw, 100vw) * .9); text-align: center;
+  --fs: calc(var(--vw, 100vw) * .19);
+}
+.ic__n { font-size: var(--fs); line-height: 1.05; color: #6B1A1F; text-shadow: 0 0 22px rgba(255, 251, 247, .95), 0 0 6px rgba(255, 251, 247, .8); padding: 0 .12em; }
+.ic__amp { font-size: calc(var(--fs) * .42); line-height: 1; margin: -.05em 0; color: #A07C3A; text-shadow: 0 0 14px rgba(255, 251, 247, .95); }
+.ic__wed { margin-top: calc(var(--fs) * .28); font-size: clamp(.62rem, calc(var(--vw, 100vw) * .026), .82rem); letter-spacing: .38em; color: #94733A; text-shadow: 0 0 10px rgba(255, 251, 247, 1); }
 .intro__vig { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 90px rgba(255,251,247,.35); transition: opacity 1.2s; }
 .intro__flash { position: absolute; left: 0; top: 0; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; opacity: 0; pointer-events: none;
   background: radial-gradient(circle, #fff 0%, rgba(255,231,168,.85) 35%, rgba(228,173,67,0) 70%); }

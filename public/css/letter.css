@@ -24,10 +24,13 @@
 .letter__crest { width: clamp(56px, 16vw, 78px); color: var(--gold-deep); }
 .letter__crest svg { width: 100%; height: auto; overflow: visible; }
 .letter__lines { display: grid; gap: .1rem; font-style: italic; font-size: clamp(1.05rem, 4.2vw, 1.3rem); line-height: 1.5; }
-.letter__lines p:nth-child(2) { font-style: normal; font-family: var(--f-display); font-size: 1.15em; letter-spacing: .02em; color: var(--accent); }
+.letter__hosts { font-style: normal; font-family: var(--f-display); font-size: 1.15em; letter-spacing: .02em; color: var(--accent); }
 .letter__names { font-size: clamp(3.4rem, 16vw, 5.4rem); line-height: 1.05; color: var(--fg); padding-block: .1em; }
 .ink-name { display: grid; justify-items: center; }
 .letter__names em { font-size: .36em; font-style: italic; color: var(--accent); line-height: .7; }
+.letter__blabel { color: var(--fg-soft); font-size: .6rem; margin-bottom: .1rem; }
+.letter__elder { font-family: var(--f-display); font-size: clamp(.95rem, 3.6vw, 1.12rem); line-height: 1.35; }
+.letter__elder + .letter__lines, .letter__elder + .orn { margin-top: .9rem; }
 .letter__occ { font-style: italic; font-size: clamp(1rem, 4vw, 1.2rem); color: var(--fg-soft); max-width: 22ch; }
 .letter__rule { width: min(180px, 50vw); color: var(--gold-deep); overflow: visible; }
 .letter__date { font-size: clamp(1.4rem, 6vw, 2rem); letter-spacing: 0; line-height: 1.1; }

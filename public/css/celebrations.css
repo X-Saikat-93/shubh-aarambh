@@ -33,6 +33,7 @@
 .scene__motif .orn path, .scene__motif .orn circle, .scene__motif .orn ellipse { vector-effect: none; stroke-width: .5; }
 .m-main { position: absolute; inset: 6%; width: 88%; height: 88%; }
 .glow { position: absolute; inset: -10%; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--glow, var(--haldi)) 34%, transparent), transparent 66%); }
+.scene--mayra .glow { --glow: #9CC69B; opacity: .7; }
 .scene--sangeet .glow { --glow: var(--magenta); opacity: .8; }
 .scene--wedding .glow { --glow: var(--vermilion); animation: flick 2.4s ease-in-out infinite; }
 @keyframes flick { 0%, 100% { filter: brightness(1); } 35% { filter: brightness(1.25) saturate(1.1); } 60% { filter: brightness(.9); } }

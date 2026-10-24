@@ -15,6 +15,7 @@ function deckle(n = 36, j = 0.35) {
 
 export default function init({ root, config }) {
   const { couple, letter, venue, families } = config;
+  const elders = (label, list) => (list.length ? `<p class="ink letter__blabel label">${label}</p>${list.map((n) => `<p class="ink letter__elder">${n}</p>`).join('')}` : '');
   root.innerHTML = `
     <div class="letter__bg" aria-hidden="true">
       <span class="letter__pa letter__pa--1">${paisley()}</span>
@@ -27,15 +28,20 @@ export default function init({ root, config }) {
         <div class="letter__sheet">
           <article class="letter__card" style="clip-path:${deckle()}">
             <div class="letter__crest">${kalash()}</div>
-            <div class="letter__lines">${letter.map((l) => `<p class="ink">${l}</p>`).join('')}</div>
-            <h2 class="letter__names script" aria-label="${couple.groom} and ${couple.bride}">
-              <span class="ink-name" aria-hidden="true">${couple.groom}<em class="display">&amp;</em>${couple.bride}</span>
+            ${elders(letter.blessingLabel, letter.blessings)}
+            <div class="letter__lines">
+              <p class="ink letter__hosts">${letter.hosts}</p>
+              <p class="ink">${letter.request}</p>
+            </div>
+            <h2 class="letter__names script" aria-label="${couple.brideFull} with ${couple.groomFull}">
+              <span class="ink-name" aria-hidden="true">${couple.bride}<em class="display">${letter.joiner}</em>${couple.groom}</span>
             </h2>
-            <p class="ink letter__occ">on the auspicious occasion of their wedding</p>
+            <p class="ink letter__occ">${letter.groomParents}</p>
+            ${elders('Grandson of', letter.groomBlessings)}
             ${rule('letter__rule')}
-            <p class="ink letter__date display">26 <em>&amp;</em> 27 November 2026</p>
-            <p class="ink letter__venue label">${venue.name} · ${venue.city.split(',')[0]}</p>
-            <p class="ink letter__bless"><span class="label">With the blessings of</span><span class="letter__fam display"><em>${families}</em> families</span></p>
+            <p class="ink letter__date display">${config.dateLine.replace('&', '<em>&amp;</em>')}</p>
+            <p class="ink letter__venue label">${venue.name} · ${venue.place}</p>
+            <p class="ink letter__bless"><span class="label">With best compliments from</span><span class="letter__fam display"><em>${families}</em> families</span></p>
           </article>
         </div>
         <div class="letter__pocket" aria-hidden="true"></div>
@@ -63,10 +69,13 @@ export default function init({ root, config }) {
     .to('.letter__pocket, .letter__flap', { yPercent: 40, autoAlpha: 0, duration: 1.1, ease: 'power2.in' }, 2.5)
     .to(crest.querySelectorAll('.draw'), { strokeDashoffset: 0, duration: 2, ease: EASE.silk, stagger: 0.08 }, 2.6);
   // Ink in, one line at a time, then the names as a slow pen wipe.
+  // Lines above the names ink in first, then the names, then everything below — by DOM order.
   const text = [...inks];
-  const nameAt = 3.1 + 4 * 0.38;
+  const above = text.filter((el) => el.compareDocumentPosition(name) & Node.DOCUMENT_POSITION_FOLLOWING);
+  const nameAt = 3.1 + above.length * 0.32;
   text.forEach((el, i) => {
-    const at = el.classList.contains('letter__occ') || i >= 4 ? nameAt + 1.6 + (i - 4) * 0.3 : 3.1 + i * 0.38;
+    const k = i - above.length;
+    const at = k < 0 ? 3.1 + i * 0.32 : nameAt + 1.6 + k * 0.3;
     tl.to(el, { clipPath: 'inset(-10% 0% -10% 0)', autoAlpha: 1, duration: 1.1, ease: 'power2.out' }, at);
   });
   tl.to(name, { clipPath: 'inset(-30% -5% -30% 0)', autoAlpha: 1, duration: 2.2, ease: 'power2.inOut' }, nameAt)

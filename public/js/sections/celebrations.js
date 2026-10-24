@@ -1,10 +1,11 @@
-// Celebrations — three full-viewport "scenes" (morning → evening → dusk). Each carries its own data-theme so
+// Celebrations — one full-viewport "scenes" (morning → evening → dusk). Each carries its own data-theme so
 // the page re-tints as it arrives. Desktop: each scene pins while its motif draws and type settles.
 // Mobile: no pins; the same timeline is scrubbed as the scene scrolls into place.
 import { gsap, ScrollTrigger, SplitText, sectionHead, reduced, EASE } from '../lib/motion.js';
-import { rule, sun, marigold, moon, agni, kalash } from '../lib/ornaments.js';
+import { rule, sun, marigold, moon, agni, kalash, rosette, diya } from '../lib/ornaments.js';
 
-const ROMAN = ['I', 'II', 'III'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const WORDS = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 const star = (c = '') => `<svg class="orn star ${c}" viewBox="0 0 24 24" aria-hidden="true"><path class="draw" d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>`;
 // Dholak-beat bars: static heights are the reduced-motion state; CSS animates scaleY.
 const wave = () => `<div class="wave" aria-hidden="true">${Array.from({ length: 31 }, (_, i) => {
@@ -13,6 +14,7 @@ const wave = () => `<div class="wave" aria-hidden="true">${Array.from({ length: 
 }).join('')}</div>`;
 
 const MOTIF = {
+  mayra: () => `<div class="glow"></div>${rosette('m-main')}${diya('m-side m-side--l')}${diya('m-side m-side--r')}`,
   haldi: () => `<div class="glow"></div>${sun('m-main')}
     <div class="spin spin--a">${marigold('m-bloom')}</div><div class="spin spin--b">${marigold('m-bloom')}</div><div class="spin spin--c">${marigold('m-bloom')}</div>`,
   sangeet: () => `<div class="glow"></div>${moon('m-main')}${star('s1')}${star('s2')}${star('s3')}${star('s4')}${wave()}`,
@@ -26,7 +28,7 @@ export default function init({ root, config }) {
   root.innerHTML = `
   <header class="cel__intro section" data-theme="dawn">
     <div class="sec-head">
-      <span class="label">Three moments · Two days</span>
+      <span class="label">${WORDS[config.events.length - 1]} moments · ${WORDS[new Set(config.events.map((e) => e.date)).size - 1]} days</span>
       <h2 class="h2">The <em>celebrations</em></h2>
       ${rule()}
     </div>

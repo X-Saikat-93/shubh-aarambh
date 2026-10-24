@@ -21,7 +21,7 @@ export default function init({ root, config }) {
     ${config.story.map((c, i) => `
     <article class="chapter chapter--${i + 1}">
       <figure class="chapter__photo">
-        <div class="chapter__frame"><div class="chapter__clip"><img class="chapter__img" src="${photo(c.photo)}" alt="Krish and Anika, chapter ${c.numeral}" loading="lazy" decoding="async" /></div></div>
+        <div class="chapter__frame"><div class="chapter__clip"><img class="chapter__img" src="${photo(c.photo)}" alt="${config.couple.groom} and ${config.couple.bride}, chapter ${c.numeral}" loading="lazy" decoding="async" /></div></div>
         ${arch('chapter__arch')}
       </figure>
       <div class="chapter__text">
