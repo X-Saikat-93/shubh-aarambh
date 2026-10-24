@@ -20,7 +20,7 @@ The invitation is one continuous scroll. The page's palette moves through the da
 
 | | Chapter | What happens |
 |---|---|---|
-| 01 | **The Envelope** | Guests tap the wax seal, the envelope film plays and marigold and rose petals shower down, and the couple's names write in over the garden. |
+| 01 | **The Envelope** | A live, code-drawn envelope: guests tap the G & K wax seal, the flap swings open in 3D, petals shower down and the invitation card rises out with the couple's names. |
 | 02 | **Shubh Aarambh** | Under a marigold toran, carved temple doors swing open in 3D to reveal ॥ श्री गणेशाय नमः ॥ and the couple's names. |
 | 03 | **The Invitation** | A letterpress card rises from its envelope and each line inks in: the grandparents' blessing, the parents, then the couple. |
 | 04 | **Our Story** | A gold thread draws through three chapters framed in temple arches. |
@@ -39,7 +39,7 @@ All sections work on phones, respect *reduced motion*, and can be used with a ke
 - **Plain HTML, CSS and ES modules.** No framework and no build step.
 - **[GSAP 3.13](https://gsap.com)** (ScrollTrigger, SplitText, CustomEase) and **[Lenis](https://lenis.darkroom.engineering)** smooth scroll, loaded from CDNs with pinned versions.
 - **Cloudflare Pages** hosts the site, a **Pages Function** handles RSVPs, and **Workers KV** stores the replies.
-- All ornaments (toran, kalash, diya, rosette, paisley and the rest) are hand-drawn inline SVG, so there is no third-party artwork.
+- All ornaments (toran, kalash, diya, rosette, paisley and the rest) and the envelope itself are hand-drawn in SVG/CSS, so there is no third-party artwork or video.
 
 ## Project structure
 
@@ -54,7 +54,7 @@ public/                 ← everything that is deployed
   js/lib/motion.js      shared animation helpers
   js/lib/ornaments.js   hand-drawn SVG ornament library
   js/sections/*.js      one module per section
-  media/                intro film, posters, optimised photos (WebP)
+  media/                G & K monogram, optimised photos (WebP)
 functions/api/rsvp.js   RSVP endpoint: validates and stores in KV
 wrangler.toml           Pages config and the RSVP KV binding
 ```

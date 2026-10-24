@@ -39,7 +39,7 @@ export default function init({ root, config }) {
       <div class="gate__toran" aria-hidden="true">${toran('', 9)}</div>
       <div class="gate__frame">
         <div class="gate__clip">
-          <img class="gate__paint" src="/media/garden.jpg" alt="" />
+          <div class="gate__paint" aria-hidden="true">${rosette('gate__halo')}</div>
           <div class="gate__light" aria-hidden="true"></div>
           <div class="gate__reveal">
             <p class="gate__invoc"><span lang="hi">${invocation.deva}</span><span class="label">${invocation.latin}</span></p>
@@ -114,7 +114,7 @@ export default function init({ root, config }) {
       .fromTo('.door--r', { rotationY: 0 }, { rotationY: 112, duration: 5, ease: 'power2.inOut' }, 0.3)
       .to('.door__shade', { opacity: 0.55, duration: 5, ease: 'power1.in' }, 0.3)
       .fromTo('.gate__light', { scale: 0.5, opacity: 0.9 }, { scale: 1.4, opacity: 0.35, duration: 7 }, 0.3)
-      .fromTo('.gate__paint', { opacity: 0, scale: 1.15 }, { opacity: 0.34, scale: 1, duration: 6 }, 1.5)
+      .fromTo('.gate__paint', { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 6 }, 1.5)
       .from('.gate__invoc > *', { autoAlpha: 0, y: 18, filter: 'blur(6px)', stagger: 0.3, duration: 1.2, ease: EASE.out }, 3.4)
       .from(split.chars, { autoAlpha: 0, yPercent: 40, rotation: 9, filter: 'blur(14px)', duration: 1.6, stagger: 0.22, ease: 'power3.out' }, 4)
       .from('.gate__amp', { autoAlpha: 0, scale: 2.6, duration: 1.4, ease: 'power3.out' }, 4.9)

@@ -66,7 +66,7 @@ async function boot() {
 
   const counter = { v: 0 };
   const counting = gsap.to(counter, { v: 90, duration: 1.6, ease: 'power2.out', onUpdate: () => (pct.textContent = String(Math.round(counter.v)).padStart(2, '0')) });
-  const poster = new Promise((r) => { const i = new Image(); i.onload = i.onerror = r; i.src = '/media/env-poster.jpg'; });
+  const poster = new Promise((r) => { const i = new Image(); i.onload = i.onerror = r; i.src = CONFIG.couple.monogram; });
 
   const modules = await Promise.all(SECTIONS.map((s) => import(`./sections/${s}.js`).catch((err) => {
     console.error(`[${s}]`, err);
