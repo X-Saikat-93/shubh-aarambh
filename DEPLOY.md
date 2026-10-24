@@ -1,12 +1,16 @@
 # Deploy to Cloudflare Pages
 
-1. Push the project to Git (or use `wrangler pages deploy public`).
-2. Cloudflare dashboard -> Workers & Pages -> Create -> Pages -> connect the repo.
-3. Build settings: **Framework preset: None**, **Build command: (empty)**, **Build output directory: `public`**.
-   The `functions/` folder at the project root is picked up automatically as Pages Functions (`/api/rsvp`).
-4. RSVP storage: Workers & Pages -> KV -> Create namespace (e.g. `wedding-rsvp`).
-   Then Pages project -> Settings -> Bindings (Functions) -> Add -> KV namespace, variable name **`RSVP`**, pick the namespace. Redeploy.
-   Without the binding the API answers 503 and the form falls back to "Send via WhatsApp".
+Live: https://shubh-aarambh.pages.dev (account thecorporatepotfiles@gmail.com)
+
+Manual deploy from the project root (picks up `public/`, `functions/` and the KV binding in `wrangler.toml`):
+
+```bash
+npx wrangler login        # once
+npx wrangler pages deploy --branch=main
+```
+
+`wrangler.toml` binds the KV namespace `wedding-rsvp` (id `ab57e49849fc489d892a8f8980f07a5a`) as `RSVP`,
+so bindings are managed in that file, not in the dashboard.
 
 ## Reading RSVPs
 - Dashboard: KV -> your namespace -> View (keys are `rsvp:<timestamp>:<phone>`).
