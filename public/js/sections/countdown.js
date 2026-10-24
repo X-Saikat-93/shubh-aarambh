@@ -67,7 +67,7 @@ export default function init({ root, config }) {
       <div class="sec-head">
         <p class="label">Shubh Muhurat</p>
         <h2 class="h2">Until <em>forever</em></h2>
-        <p class="lede">${day} · ${wedEvent ? wedEvent.time : ''}</p>
+        <p class="lede">${day}${wedEvent ? `<br>${wedEvent.time}` : ''}</p>
       </div>
       <div class="cd__stage" role="timer" aria-label="Time until the wedding">
         ${dial()}

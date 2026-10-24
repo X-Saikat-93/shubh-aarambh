@@ -26,7 +26,7 @@ The invitation is one continuous scroll. The page's palette moves through the da
 | 04 | **Our Story** | A gold thread draws through three chapters framed in temple arches. |
 | 05 | **The Celebrations** | Mayra, Sangeet, Haldi Carnival and Wedding each get a full scene with drawn motifs: rosette and diyas, moon, sun and agni. |
 | 06 | **Saat Phere** | Seven vows light up one by one around the sacred fire. |
-| 07 | **The Venue** | A map in an arch window, a compass, directions and copy-address. |
+| 07 | **The Venue** | A hand-drawn map of the riverbank (Rupnarayan, NH 16, the resort pin) in a temple-arch window that opens Google Maps, plus a compass and copy-address. |
 | 08 | **Moments** | A 3D fly-through gallery on desktop, an editorial collage on mobile, and a lightbox. |
 | 09 | **Shubh Muhurat** | A gold astrolabe countdown with add-to-calendar (.ics and Google). |
 | 10 | **RSVP** | The reply card folds into an envelope and is sealed with wax. |

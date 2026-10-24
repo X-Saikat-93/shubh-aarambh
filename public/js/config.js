@@ -32,7 +32,6 @@ export const CONFIG = {
     city: 'Kolaghat, West Bengal',
     address: 'Kolaghat, Purba Medinipur, West Bengal',
     map: 'https://share.google/ondJkXiFkBXDm8Jhc',
-    embed: 'https://www.google.com/maps?q=Sher+Bengal+River+Resort+Kolaghat&output=embed',
   },
 
   // Each event is a "scene"; `theme` maps to a palette in main.js THEMES.
