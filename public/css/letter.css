@@ -1,0 +1,46 @@
+/* The letter: letterpress card on cotton paper. */
+.letter { overflow: hidden; padding-block: clamp(5rem, 14vh, 9rem); }
+.letter__bg { position: absolute; inset: 0; pointer-events: none; }
+.letter__pa { position: absolute; width: clamp(90px, 18vw, 220px); color: var(--accent); opacity: .5; }
+.letter__pa svg { width: 100%; height: auto; overflow: visible; }
+.letter__pa--1 { left: 3%; top: 8%; transform: rotate(-24deg); }
+.letter__pa--2 { right: 4%; top: 40%; transform: rotate(18deg) scaleX(-1); }
+.letter__pa--3 { left: 6%; bottom: 6%; transform: rotate(160deg); width: clamp(70px, 13vw, 160px); }
+
+.letter__wrap { display: grid; place-items: center; }
+.letter__stage { position: relative; width: min(100%, 520px); clip-path: inset(-20% -10% 0 -10%); padding-bottom: 0; }
+.letter__sheet { position: relative; z-index: 1; filter: drop-shadow(0 30px 40px rgba(110, 80, 40, .22)) drop-shadow(0 2px 3px rgba(110, 80, 40, .18)); }
+.letter__card {
+  position: relative; display: grid; justify-items: center; gap: clamp(.7rem, 2.2vw, 1.1rem); text-align: center;
+  padding: clamp(2.6rem, 9vw, 4rem) clamp(1.6rem, 8vw, 3.4rem);
+  background: radial-gradient(ellipse at 30% 10%, #FFFFFF, #FBF6EA 70%), #FBF6EA; color: var(--fg);
+  text-shadow: 0 1px 0 rgba(255,255,255,.95), 0 -1px 0 rgba(60,40,20,.14); /* letterpress emboss */
+}
+/* Double gold rule border */
+.letter__card::before, .letter__card::after { content: ''; position: absolute; pointer-events: none; }
+.letter__card::before { inset: clamp(.7rem, 3vw, 1.1rem); border: 1px solid var(--gold); }
+.letter__card::after { inset: calc(clamp(.7rem, 3vw, 1.1rem) + 5px); border: 1px solid rgba(201,164,92,.5); }
+
+.letter__crest { width: clamp(56px, 16vw, 78px); color: var(--gold-deep); }
+.letter__crest svg { width: 100%; height: auto; overflow: visible; }
+.letter__lines { display: grid; gap: .1rem; font-style: italic; font-size: clamp(1.05rem, 4.2vw, 1.3rem); line-height: 1.5; }
+.letter__lines p:nth-child(2) { font-style: normal; font-family: var(--f-display); font-size: 1.15em; letter-spacing: .02em; color: var(--accent); }
+.letter__names { font-size: clamp(3.4rem, 16vw, 5.4rem); line-height: 1.05; color: var(--fg); padding-block: .1em; }
+.ink-name { display: grid; justify-items: center; }
+.letter__names em { font-size: .36em; font-style: italic; color: var(--accent); line-height: .7; }
+.letter__occ { font-style: italic; font-size: clamp(1rem, 4vw, 1.2rem); color: var(--fg-soft); max-width: 22ch; }
+.letter__rule { width: min(180px, 50vw); color: var(--gold-deep); overflow: visible; }
+.letter__date { font-size: clamp(1.4rem, 6vw, 2rem); letter-spacing: 0; line-height: 1.1; }
+.letter__date em { color: var(--accent); }
+.letter__venue { color: var(--fg-soft); letter-spacing: .26em; }
+.letter__bless { display: grid; gap: .3rem; margin-top: .8rem; }
+.letter__bless .label { color: var(--fg-soft); font-size: .62rem; }
+.letter__fam { font-size: clamp(1.1rem, 4.6vw, 1.4rem); letter-spacing: 0; line-height: 1.2; }
+.letter__fam em { color: var(--accent); }
+
+/* Envelope: open flap behind the card, pocket in front */
+.letter__flap { position: absolute; z-index: 0; left: 2%; right: 2%; bottom: 120px; height: 110px; background: #F1E3CB; clip-path: polygon(0 100%, 50% 0, 100% 100%); transform-origin: 50% 100%; }
+.letter__pocket { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 190px; background: linear-gradient(180deg, #EFDFC4, #E6D3B2); clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%); filter: drop-shadow(0 -2px 3px rgba(110,80,40,.2)); }
+.letter__stage { overflow: visible; }
+
+.letter.is-static .letter__flap, .letter.is-static .letter__pocket { display: none; }

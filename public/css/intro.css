@@ -1,0 +1,54 @@
+/* Envelope intro: fixed white stage above the site (below grain/fx/preloader). */
+.intro { position: fixed; inset: 0; z-index: 70; background: #FFFBF7; overflow: hidden; touch-action: none; }
+.intro__stage { position: absolute; inset: 0; }
+.intro__ambient { position: absolute; inset: 0; display: none; overflow: hidden; }
+.intro__ambient video, .intro__ambient img { position: absolute; inset: -10%; width: 120%; height: 120%; object-fit: cover; filter: blur(50px) saturate(1.1); opacity: .5; }
+.intro__ambient::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(255,251,247,.2), #FFFBF7 78%); }
+
+.intro__card { position: absolute; inset: 0; }
+.intro__clip { position: absolute; inset: 0; overflow: hidden; background: #ecd0c8; will-change: transform, opacity, filter; }
+.is-card .intro__ambient { display: block; }
+.is-card .intro__card {
+  inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  height: min(86svh, calc(92vw * 850 / 478)); aspect-ratio: 478 / 850;
+  filter: drop-shadow(0 40px 60px rgba(120, 70, 50, .22));
+}
+/* Fine gold hairline frame, inset around the card (inside the screen on phones). */
+.intro__frame { position: absolute; inset: 10px; z-index: 5; pointer-events: none; border: 1px solid rgba(255, 244, 214, .85); box-shadow: 0 0 0 1px rgba(160,112,63,.25); }
+.is-card .intro__frame { inset: -16px; border-color: var(--gold); box-shadow: none; }
+.is-card .intro__frame::after { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(201,164,92,.45); }
+
+.intro__zoom { position: absolute; inset: 0; }
+.intro__video, .intro__names { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.intro__names { opacity: 0; }
+.intro__vig { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 90px rgba(255,251,247,.35); transition: opacity 1.2s; }
+.intro__flash { position: absolute; left: 0; top: 0; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; opacity: 0; pointer-events: none;
+  background: radial-gradient(circle, #fff 0%, rgba(255,231,168,.85) 35%, rgba(228,173,67,0) 70%); }
+
+/* Interactive overlay */
+.intro__ui { position: absolute; inset: 0; pointer-events: none; text-align: center; color: var(--maroon); }
+.intro__invoc { position: absolute; left: 0; right: 0; top: max(2.2rem, calc(env(safe-area-inset-top) + 1.4rem)); font-family: 'Tiro Devanagari Hindi', serif; font-size: clamp(.95rem, 3.6vw, 1.1rem); letter-spacing: .06em; text-shadow: 0 0 12px rgba(255,251,247,.95), 0 0 3px rgba(255,251,247,.8); }
+.intro__ring { position: absolute; width: 96px; height: 96px; border-radius: 50%; border: 1px solid var(--gold); box-shadow: 0 0 18px rgba(255,235,180,.95), inset 0 0 12px rgba(255,235,180,.5); }
+.intro__ring::before, .intro__ring::after { content: ''; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid var(--gold); animation: introPulse 2.8s var(--ease-out) infinite; }
+.intro__ring::after { animation-delay: 1.4s; }
+@keyframes introPulse { from { transform: scale(1); opacity: .9; } to { transform: scale(2); opacity: 0; } }
+.intro__cta { position: absolute; left: 0; right: 0; display: grid; justify-items: center; gap: .5rem; }
+.intro__tap { font-family: var(--f-label); font-size: clamp(.72rem, 3vw, .85rem); letter-spacing: .5em; padding-left: .5em; text-transform: uppercase; text-shadow: 0 0 14px rgba(255,251,247,1), 0 0 4px rgba(255,251,247,.9); animation: introBreath 3.6s ease-in-out infinite; }
+@keyframes introBreath { 50% { opacity: .5; text-shadow: 0 0 26px rgba(255,235,180,1), 0 0 4px rgba(255,251,247,.9); } }
+.intro__diya { width: 46px; height: auto; color: var(--gold-deep); overflow: visible; }
+.intro__hint { font-family: var(--f-serif); font-style: italic; font-size: clamp(1rem, 4vw, 1.12rem); text-shadow: 0 0 12px rgba(255,251,247,1), 0 0 3px rgba(255,251,247,.85); }
+
+/* Full-stage accessible button */
+.intro__hit { position: absolute; inset: 0; z-index: 3; cursor: pointer; outline-offset: -6px; -webkit-tap-highlight-color: transparent; }
+.intro__hit.is-off { pointer-events: none; }
+
+.intro__skip, .intro__cue { position: absolute; z-index: 6; font-family: var(--f-label); text-transform: uppercase; color: var(--maroon); }
+.intro__skip { top: max(1rem, env(safe-area-inset-top)); right: max(1rem, env(safe-area-inset-right)); padding: .7rem 1.1rem; font-size: .6rem; letter-spacing: .3em; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--line); background: rgba(255,251,247,.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); visibility: hidden; }
+.intro__cue { left: 0; right: 0; bottom: max(1.8rem, env(safe-area-inset-bottom)); margin-inline: auto; width: max-content; padding: .8rem 1.4rem; font-size: .68rem; letter-spacing: .4em; text-shadow: 0 0 14px rgba(255,251,247,.95); visibility: hidden; }
+.intro__cue span { display: inline-block; animation: introBob 1.8s ease-in-out infinite; }
+@keyframes introBob { 50% { transform: translateY(5px); } }
+
+.intro__loader { position: absolute; left: 50%; top: 50%; z-index: 2; width: 44px; height: 44px; margin: -22px; border-radius: 50%; border: 1px solid rgba(201,164,92,.3); border-top-color: var(--gold); opacity: 0; pointer-events: none; transition: opacity .4s; animation: introSpin 1s linear infinite; }
+.intro__loader.is-on { opacity: 1; }
+@keyframes introSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .intro__tap, .intro__ring::before, .intro__ring::after { animation: none; } }

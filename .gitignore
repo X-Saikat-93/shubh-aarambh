@@ -1,0 +1,5 @@
+# Raw WhatsApp originals — optimised copies live in public/media
+assets/
+node_modules/
+.wrangler/
+.DS_Store
