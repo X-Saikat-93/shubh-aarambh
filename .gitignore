@@ -3,3 +3,27 @@ assets/
 node_modules/
 .wrangler/
 .DS_Store
+
+# Temporary scratch scripts and debug dumps
+*.py
+*.pyc
+__pycache__/
+*.txt
+fonts/
+public/index.original.html
+framer_page.html
+page_component.js
+shared_lib.js
+public/media/frame_*.jpg
+public/media/test_*
+public/media/seal_test*
+public/media/seal_crop.jpg
+public/media/seal_aligned_check.jpg
+public/media/font_*
+public/media/ref_*
+public/media/peacock_cover_*
+public/media/exact_framer_cover.png
+public/media/peacock_card_*
+public/media/scratch_revealed.png
+public/media/terrace_animated_*.mp4
+test_codec.mp4
