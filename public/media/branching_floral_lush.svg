@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 130" width="100%" height="auto" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="richGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE8A3"/>
+      <stop offset="35%" stop-color="#D4AF37"/>
+      <stop offset="70%" stop-color="#99751D"/>
+      <stop offset="100%" stop-color="#F7DB87"/>
+    </linearGradient>
+    <linearGradient id="foliageGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#81C784"/>
+      <stop offset="50%" stop-color="#388E3C"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+    <linearGradient id="blushRose" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0F3"/>
+      <stop offset="50%" stop-color="#F48FB1"/>
+      <stop offset="100%" stop-color="#C2185B"/>
+    </linearGradient>
+    <linearGradient id="warmAmber" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <filter id="branchShadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#4A141A" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#branchShadow)">
+    <!-- Major Primary Vine Branches spreading from left & right corners toward center -->
+    <g fill="none" stroke="url(#richGold)" stroke-linecap="round">
+      <!-- Left main thick branch from pillar -->
+      <path d="M 0,15 Q 120,55 240,42 T 380,85" stroke-width="4"/>
+      <path d="M 40,10 Q 150,75 290,52 T 400,98" stroke-width="2.5" opacity="0.85"/>
+      <path d="M 90,30 Q 180,95 270,72" stroke-width="2"/>
+      
+      <!-- Right main thick branch from pillar -->
+      <path d="M 800,15 Q 680,55 560,42 T 420,85" stroke-width="4"/>
+      <path d="M 760,10 Q 650,75 510,52 T 400,98" stroke-width="2.5" opacity="0.85"/>
+      <path d="M 710,30 Q 620,95 530,72" stroke-width="2"/>
+
+      <!-- Secondary delicate curling tendrils -->
+      <path d="M 160,48 C 130,75 145,105 180,95 C 205,88 200,68 185,72" stroke-width="1.8"/>
+      <path d="M 270,55 C 250,85 275,115 310,105 C 330,98 325,80 305,85" stroke-width="1.8"/>
+      <path d="M 640,48 C 670,75 655,105 620,95 C 595,88 600,68 615,72" stroke-width="1.8"/>
+      <path d="M 530,55 C 550,85 525,115 490,105 C 470,98 475,80 495,85" stroke-width="1.8"/>
+    </g>
+
+    <!-- Lush Auspicious Leaves clustered along the branches -->
+    <g fill="url(#foliageGreen)">
+      <!-- Left side leaves -->
+      <path d="M 60,25 C 40,42 70,62 85,45 C 95,35 80,20 60,25 Z"/>
+      <path d="M 110,38 C 90,60 125,80 142,60 C 150,48 135,30 110,38 Z"/>
+      <path d="M 170,50 C 150,75 190,95 208,72 C 215,60 195,45 170,50 Z"/>
+      <path d="M 230,52 C 210,80 250,100 270,78 C 278,65 255,48 230,52 Z"/>
+      <path d="M 290,62 C 275,90 315,108 332,88 C 340,75 315,58 290,62 Z"/>
+      <path d="M 350,82 C 340,105 375,120 390,102 C 395,92 375,78 350,82 Z"/>
+
+      <!-- Right side leaves -->
+      <path d="M 740,25 C 760,42 730,62 715,45 C 705,35 720,20 740,25 Z"/>
+      <path d="M 690,38 C 710,60 675,80 658,60 C 650,48 665,30 690,38 Z"/>
+      <path d="M 630,50 C 650,75 610,95 592,72 C 585,60 605,45 630,50 Z"/>
+      <path d="M 570,52 C 590,80 550,100 530,78 C 522,65 545,48 570,52 Z"/>
+      <path d="M 510,62 C 525,90 485,108 468,88 C 460,75 485,58 510,62 Z"/>
+      <path d="M 450,82 C 460,105 425,120 410,102 C 405,92 425,78 450,82 Z"/>
+    </g>
+
+    <!-- Blooming Floral Buds & Lotus Florets -->
+    <!-- Left Floral Clusters -->
+    <g transform="translate(145, 60) scale(0.85)">
+      <circle cx="0" cy="0" r="10" fill="url(#blushRose)"/>
+      <circle cx="-6" cy="-4" r="7" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="6" cy="-4" r="7" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="0" cy="0" r="4" fill="url(#richGold)"/>
+    </g>
+    <g transform="translate(250, 72) scale(0.95)">
+      <circle cx="0" cy="0" r="11" fill="url(#blushRose)"/>
+      <circle cx="-7" cy="-5" r="8" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="7" cy="-5" r="8" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="0" cy="0" r="4.5" fill="url(#richGold)"/>
+    </g>
+    <g transform="translate(330, 92) scale(0.75)">
+      <circle cx="0" cy="0" r="9" fill="url(#warmAmber)"/>
+      <circle cx="0" cy="0" r="4" fill="url(#richGold)"/>
+    </g>
+
+    <!-- Right Floral Clusters -->
+    <g transform="translate(655, 60) scale(0.85)">
+      <circle cx="0" cy="0" r="10" fill="url(#blushRose)"/>
+      <circle cx="-6" cy="-4" r="7" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="6" cy="-4" r="7" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="0" cy="0" r="4" fill="url(#richGold)"/>
+    </g>
+    <g transform="translate(550, 72) scale(0.95)">
+      <circle cx="0" cy="0" r="11" fill="url(#blushRose)"/>
+      <circle cx="-7" cy="-5" r="8" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="7" cy="-5" r="8" fill="url(#blushRose)" opacity="0.9"/>
+      <circle cx="0" cy="0" r="4.5" fill="url(#richGold)"/>
+    </g>
+    <g transform="translate(470, 92) scale(0.75)">
+      <circle cx="0" cy="0" r="9" fill="url(#warmAmber)"/>
+      <circle cx="0" cy="0" r="4" fill="url(#richGold)"/>
+    </g>
+
+    <!-- Center Hanging Lotus Droplet -->
+    <g transform="translate(400, 102)">
+      <path d="M 0,-8 C -12,0 -8,16 0,20 C 8,16 12,0 0,-8 Z" fill="url(#blushRose)"/>
+      <path d="M 0,-2 C -18,-2 -16,12 -5,16 C -2,15 0,10 0,-2 Z" fill="url(#blushRose)" opacity="0.85"/>
+      <path d="M 0,-2 C 18,-2 16,12 5,16 C 2,15 0,10 0,-2 Z" fill="url(#blushRose)" opacity="0.85"/>
+      <circle cx="0" cy="6" r="3" fill="url(#richGold)"/>
+    </g>
+  </g>
+</svg>

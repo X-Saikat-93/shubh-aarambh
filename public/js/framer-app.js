@@ -131,92 +131,7 @@ function initScrollObserver() {
   targets.forEach((el) => observer.observe(el));
 }
 
-// ───────── Events Cards with Exact Artwork ─────────
-function populateEvents() {
-  const container = document.getElementById('events-container');
-  if (!container) return;
 
-  const eventData = [
-    {
-      id: 'mayra',
-      name: 'Mayra',
-      dateUpper: '11TH DECEMBER 2026',
-      timeUpper: 'FRIDAY · TIMINGS TO BE ANNOUNCED',
-      venue: `${CONFIG.venue.name}, ${CONFIG.venue.place}`,
-      blurb: 'The maternal family arrives with gifts and heartfelt blessings — a cherished tradition that opens the celebrations.',
-      image: '/media/event_mayra.jpg',
-      floralFrame: '/media/parchment_roses.png'
-    },
-    {
-      id: 'sangeet',
-      name: 'Sangeet',
-      dateUpper: '11TH DECEMBER 2026',
-      timeUpper: 'FRIDAY · TIMINGS TO BE ANNOUNCED',
-      venue: `${CONFIG.venue.name}, ${CONFIG.venue.place}`,
-      blurb: 'An evening of music, dance, cocktails and celebration as both families come together.',
-      image: '/media/sangeet_couple.png',
-      floralFrame: '/media/sangeet_blue_frame.png'
-    },
-    {
-      id: 'haldi',
-      name: 'Haldi Carnival',
-      dateUpper: '12TH DECEMBER 2026',
-      timeUpper: 'SATURDAY · TIMINGS TO BE ANNOUNCED',
-      venue: `${CONFIG.venue.name}, ${CONFIG.venue.place}`,
-      blurb: 'A vibrant morning of haldi, laughter, and blessings to brighten the celebrations.',
-      image: '/media/haldi_couple.png',
-      floralFrame: '/media/haldi_sunflower_frame.png'
-    },
-    {
-      id: 'wedding',
-      name: 'The Wedding',
-      dateUpper: '12TH DECEMBER 2026',
-      timeUpper: 'SATURDAY · TIMINGS TO BE ANNOUNCED',
-      venue: `${CONFIG.venue.name}, ${CONFIG.venue.place}`,
-      blurb: 'Under the canopy of blessings, two souls become one — join us as we take our sacred pheras.',
-      image: '/media/wedding_couple.png',
-      floralFrame: '/media/wedding_roses_frame.png'
-    }
-  ];
-
-  container.innerHTML = eventData.map((ev) => `
-    <div class="event-scene-wrap">
-      <img class="event-floral-bg" src="${ev.floralFrame}" alt="${ev.name} floral frame" loading="lazy" />
-      <article class="event-framer-card">
-        <div class="event-illustration-wrap">
-          <img class="event-illustration" src="${ev.image}" alt="${ev.name}" loading="lazy" />
-          <div class="event-illustration-overlay">
-            <h3 class="event-overlay-title">${ev.name}</h3>
-            <p class="event-overlay-blurb">${ev.blurb}</p>
-          </div>
-        </div>
-        <div class="event-card-body">
-          <div class="event-card-date">${ev.dateUpper}</div>
-          <div class="event-card-timing-row">
-            <span class="timing-divider-line"></span>
-            <span class="event-card-time">${ev.timeUpper}</span>
-            <span class="timing-divider-line"></span>
-          </div>
-          <div class="event-card-venue">
-            <span class="venue-label">VENUE:</span>
-            <span class="venue-val">${ev.venue}</span>
-          </div>
-          <a class="event-card-btn-directions" href="${CONFIG.venue.map}" target="_blank" rel="noopener">
-            TAP FOR DIRECTIONS
-          </a>
-        </div>
-      </article>
-    </div>
-  `).join('');
-}
-
-function getCalendarUrl(ev) {
-  const title = encodeURIComponent(`${ev.name} — Garv & Kaavya Wedding`);
-  const details = encodeURIComponent(`${ev.blurb}\nVenue: ${CONFIG.venue.name}, ${CONFIG.venue.city}\n#kaarvinlove`);
-  const location = encodeURIComponent(`${CONFIG.venue.name}, ${CONFIG.venue.address}`);
-  const dates = '20261211T063000Z/20261212T183000Z';
-  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
-}
 
 
 
@@ -432,22 +347,16 @@ function initScratchCard() {
 document.addEventListener('DOMContentLoaded', () => {
   initPetals();
   initCountdown();
-  populateEvents();
   initMomentsMarquee();
   initRSVP();
   initScrollObserver();
   initScratchCard();
 
-  const envelopeWrapper = document.getElementById('envelope-wrapper');
-  const envelopeVideo = document.getElementById('envelope-video');
-  const envelopeContainer = document.getElementById('envelope-container');
-  const mainCard = document.getElementById('main-card-layout');
   const coverVideo = document.getElementById('cover-video');
   const weddingAudio = document.getElementById('wedding-audio');
   const musicBtn = document.getElementById('music-btn');
   const iconPlay = document.getElementById('music-icon-play');
   const iconPause = document.getElementById('music-icon-pause');
-  let hasOpened = false;
 
   function updateMusicState() {
     if (!weddingAudio) return;
@@ -460,57 +369,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function triggerOpen() {
-    if (hasOpened) return;
-    hasOpened = true;
+  // Start the animated terrace loop on the cover card immediately
+  if (coverVideo) {
+    coverVideo.currentTime = 3.6;
+    coverVideo.play().catch(() => {});
+    coverVideo.addEventListener('timeupdate', () => {
+      if (coverVideo.currentTime >= 14.8) {
+        coverVideo.currentTime = 3.8;
+      }
+    });
+  }
 
-    // Start playing 'Until I Found You'
-    if (weddingAudio) {
+  // Ensure scratch canvas sizing is ready
+  if (window.__refreshScratchCanvas) {
+    window.__refreshScratchCanvas();
+    setTimeout(window.__refreshScratchCanvas, 300);
+  }
+
+  // Auto-play music on first interaction (click / touch anywhere)
+  let hasStartedAudio = false;
+  function startAudioOnFirstInteraction() {
+    if (hasStartedAudio) return;
+    hasStartedAudio = true;
+    if (weddingAudio && weddingAudio.paused) {
       weddingAudio.play().then(updateMusicState).catch(() => {});
     }
-
-    // Trigger video playback for glowing light burst
-    envelopeWrapper.classList.add('is-playing-video');
-    if (envelopeVideo) {
-      envelopeVideo.currentTime = 0;
-      envelopeVideo.play().catch(() => {});
-    }
-
-    // At the radiant golden burst peak (~3.1s), seamlessly transition in place
-    setTimeout(() => {
-      document.body.classList.remove('is-envelope-closed');
-      mainCard.classList.add('is-revealed');
-      envelopeWrapper.classList.add('is-hidden');
-
-      if (window.__refreshScratchCanvas) {
-        window.__refreshScratchCanvas();
-      }
-
-      // Start the animated terrace loop on the cover card
-      if (coverVideo) {
-        coverVideo.currentTime = 3.6;
-        coverVideo.play().catch(() => {});
-        coverVideo.addEventListener('timeupdate', () => {
-          if (coverVideo.currentTime >= 14.8) {
-            coverVideo.currentTime = 3.8;
-          }
-        });
-      }
-
-      setTimeout(() => {
-        envelopeWrapper.style.display = 'none';
-        if (envelopeVideo) envelopeVideo.pause();
-        if (window.__refreshScratchCanvas) {
-          window.__refreshScratchCanvas();
-        }
-      }, 800);
-    }, 3100);
   }
-
-  // Tapping wax seal or container starts the glowing opening
-  if (envelopeContainer) {
-    envelopeContainer.addEventListener('click', triggerOpen);
-  }
+  window.addEventListener('click', startAudioOnFirstInteraction, { once: true });
+  window.addEventListener('touchstart', startAudioOnFirstInteraction, { once: true });
 
   // Music Play/Pause Toggle button
   if (musicBtn && weddingAudio) {
@@ -534,6 +420,18 @@ document.addEventListener('DOMContentLoaded', () => {
     btnTop.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Scroll to Page 2 Invitation transition button
+  const btnInvite = document.getElementById('btn-scroll-invite');
+  if (btnInvite) {
+    btnInvite.addEventListener('click', (e) => {
+      e.preventDefault();
+      const p2 = document.getElementById('page-2-invitation');
+      if (p2) {
+        p2.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   }
 });

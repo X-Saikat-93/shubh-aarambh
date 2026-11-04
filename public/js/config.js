@@ -89,5 +89,5 @@ export const CONFIG = {
 };
 
 // Photo orientation lookup (portrait unless listed) so layouts can reserve space.
-export const LANDSCAPE = new Set([7, 8]);
-export const photo = (i, size = 'lg') => `/media/photos/p${String(i).padStart(2, '0')}-${size}.webp`;
+export const LANDSCAPE = new Set([]);
+export const photo = (i, size = 'lg') => `/media/photos/p${String(i).padStart(2, '0')}-${size}.webp?v=2`;
