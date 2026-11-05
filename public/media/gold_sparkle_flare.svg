@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <!-- Radiant golden radial bloom -->
+    <radialGradient id="bloomGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="25%" stop-color="#FFE79A" stop-opacity="0.9" />
+      <stop offset="55%" stop-color="#F5B838" stop-opacity="0.5" />
+      <stop offset="85%" stop-color="#E28514" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#E28514" stop-opacity="0" />
+    </radialGradient>
+    <!-- Sharp ray gradient -->
+    <linearGradient id="rayH" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#F5B838" stop-opacity="0" />
+      <stop offset="40%" stop-color="#FFEAA2" stop-opacity="0.95" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="60%" stop-color="#FFEAA2" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#F5B838" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="rayV" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#F5B838" stop-opacity="0" />
+      <stop offset="40%" stop-color="#FFEAA2" stop-opacity="0.95" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="60%" stop-color="#FFEAA2" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#F5B838" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient glowing aura -->
+  <circle cx="50" cy="50" r="42" fill="url(#bloomGrad)" />
+
+  <!-- Diagonal smaller rays -->
+  <path d="M50 18 C50 44 44 50 18 50 C44 50 50 56 50 82 C50 56 56 50 82 50 C56 50 50 44 50 18 Z" 
+        fill="#FFE388" opacity="0.6" transform="rotate(45 50 50)" />
+
+  <!-- 4-point Diamond Star Flare (Major Rays) -->
+  <path d="M50 2 C50 42 42 50 2 50 C42 50 50 58 50 98 C50 58 58 50 98 50 C58 50 50 42 50 2 Z" 
+        fill="url(#rayH)" />
+  <path d="M50 2 C50 42 42 50 2 50 C42 50 50 58 50 98 C50 58 58 50 98 50 C58 50 50 42 50 2 Z" 
+        fill="url(#rayV)" />
+
+  <!-- Central Brilliant Core -->
+  <circle cx="50" cy="50" r="5" fill="#FFFFFF" />
+</svg>
+

@@ -5,7 +5,7 @@ import { CONFIG, photo } from './config.js';
 
 
 
-// ───────── Falling Rose Petals Canvas ─────────
+// ───────── Falling Red Rose Petals Canvas ─────────
 function initPetals() {
   const canvas = document.getElementById('petals-canvas');
   if (!canvas) return;
@@ -19,18 +19,30 @@ function initPetals() {
   });
 
   const petals = [];
-  const COUNT = 25;
+  // Reduced quantity: gentle, elegant royal shower
+  const COUNT = 14;
+
+  const ROSE_SHADES = [
+    { fill: 'rgba(182, 24, 39, 0.82)', dark: 'rgba(120, 12, 22, 0.45)' },
+    { fill: 'rgba(158, 16, 28, 0.86)', dark: 'rgba(98, 8, 16, 0.50)' },
+    { fill: 'rgba(196, 32, 48, 0.78)', dark: 'rgba(132, 16, 26, 0.42)' },
+    { fill: 'rgba(142, 14, 24, 0.84)', dark: 'rgba(85, 6, 14, 0.52)' }
+  ];
 
   for (let i = 0; i < COUNT; i++) {
+    const shade = ROSE_SHADES[Math.floor(Math.random() * ROSE_SHADES.length)];
     petals.push({
       x: Math.random() * width,
       y: Math.random() * height - height,
-      r: 8 + Math.random() * 10,
-      dx: -0.5 + Math.random() * 1,
-      dy: 1 + Math.random() * 1.4,
+      r: 8 + Math.random() * 7,
+      dx: -0.3 + Math.random() * 0.6,
+      dy: 0.85 + Math.random() * 0.95,
+      rot: Math.random() * 360,
+      rotSpeed: -0.8 + Math.random() * 1.6,
       tilt: Math.random() * 360,
-      tiltSpeed: 0.8 + Math.random() * 1.5,
-      color: Math.random() > 0.4 ? 'rgba(235, 180, 185, 0.72)' : 'rgba(248, 205, 210, 0.65)'
+      tiltSpeed: 1.2 + Math.random() * 1.8,
+      color: shade.fill,
+      darkColor: shade.dark
     });
   }
 
@@ -39,22 +51,36 @@ function initPetals() {
     petals.forEach((p) => {
       ctx.save();
       ctx.translate(p.x, p.y);
-      ctx.rotate((p.tilt * Math.PI) / 180);
+      ctx.rotate((p.rot * Math.PI) / 180);
+      // Realistic 3D flutter tumbling in wind:
+      ctx.scale(Math.cos((p.tilt * Math.PI) / 180), 1);
 
+      // Authentic botanical curved rose petal shape
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.bezierCurveTo(-p.r / 2, -p.r, -p.r, p.r / 3, 0, p.r);
-      ctx.bezierCurveTo(p.r, p.r / 3, p.r / 2, -p.r, 0, 0);
+      ctx.moveTo(0, -p.r * 1.15);
+      ctx.bezierCurveTo(p.r * 0.95, -p.r * 1.1, p.r * 1.05, p.r * 0.45, 0, p.r * 1.15);
+      ctx.bezierCurveTo(-p.r * 1.05, p.r * 0.45, -p.r * 0.95, -p.r * 1.1, 0, -p.r * 1.15);
+      ctx.closePath();
       ctx.fillStyle = p.color;
       ctx.fill();
+
+      // Subtle inner depth vein
+      ctx.beginPath();
+      ctx.moveTo(0, -p.r * 0.85);
+      ctx.quadraticCurveTo(p.r * 0.28, 0, 0, p.r * 0.85);
+      ctx.strokeStyle = p.darkColor;
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+
       ctx.restore();
 
       p.y += p.dy;
-      p.x += Math.sin((p.y * Math.PI) / 180) * 0.8 + p.dx;
+      p.x += Math.sin((p.y * Math.PI) / 180) * 0.65 + p.dx;
+      p.rot += p.rotSpeed;
       p.tilt += p.tiltSpeed;
 
-      if (p.y > height + 20) {
-        p.y = -20;
+      if (p.y > height + 25) {
+        p.y = -25;
         p.x = Math.random() * width;
       }
     });
@@ -343,6 +369,53 @@ function initScratchCard() {
   canvas.addEventListener('touchend', handleEnd);
 }
 
+// ───────── Page 1 Monogram Star Flare Alignment ─────────
+function initGkGlow() {
+  const coverImg = document.querySelector('#cover-card .page-fullwidth-img');
+  const flare = document.querySelector('.gk-ring-star-flare');
+  if (!coverImg || !flare) return;
+
+  function update() {
+    const rect = coverImg.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    // Canva Page 1 natural: 2025 x 3600
+    // Flare position on golden ring: X = 67.5%, Y = 20.5%
+    const naturalRatio = 2025 / 3600;
+    const currentRatio = rect.width / rect.height;
+
+    let renderedW, renderedH;
+    if (currentRatio > naturalRatio) {
+      renderedW = rect.width;
+      renderedH = rect.width / naturalRatio;
+    } else {
+      renderedH = rect.height;
+      renderedW = rect.height * naturalRatio;
+    }
+
+    const flareX = (rect.width / 2) + (renderedW * (0.675 - 0.5));
+    const flareY = renderedH * 0.205;
+
+    flare.style.left = `${flareX}px`;
+    flare.style.top = `${flareY}px`;
+
+    const shine = document.querySelector('.gk-gold-shine');
+    if (shine) {
+      shine.style.left = `${(rect.width / 2) + renderedW * (0.24691 - 0.5)}px`;
+      shine.style.top = `${renderedH * 0.19528}px`;
+      shine.style.width = `${renderedW * 0.50420}px`;
+    }
+  }
+
+  update();
+  if (coverImg.complete) {
+    update();
+  } else {
+    coverImg.addEventListener('load', update);
+  }
+  window.addEventListener('resize', update, { passive: true });
+}
+
 // ───────── Master Boot & Video Opening Flow ─────────
 document.addEventListener('DOMContentLoaded', () => {
   initPetals();
@@ -351,12 +424,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initRSVP();
   initScrollObserver();
   initScratchCard();
+  initGkGlow();
 
+  const envelopeWrapper = document.getElementById('envelope-wrapper');
+  const envelopeVideo = document.getElementById('envelope-video');
+  const envelopeContainer = document.getElementById('envelope-container');
+  const mainCard = document.getElementById('main-card-layout');
   const coverVideo = document.getElementById('cover-video');
   const weddingAudio = document.getElementById('wedding-audio');
   const musicBtn = document.getElementById('music-btn');
   const iconPlay = document.getElementById('music-icon-play');
   const iconPause = document.getElementById('music-icon-pause');
+  let hasOpened = false;
 
   function updateMusicState() {
     if (!weddingAudio) return;
@@ -369,34 +448,74 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Start the animated terrace loop on the cover card immediately
-  if (coverVideo) {
-    coverVideo.currentTime = 3.6;
-    coverVideo.play().catch(() => {});
-    coverVideo.addEventListener('timeupdate', () => {
-      if (coverVideo.currentTime >= 14.8) {
-        coverVideo.currentTime = 3.8;
-      }
-    });
-  }
+  function triggerOpen() {
+    if (hasOpened) return;
+    hasOpened = true;
 
-  // Ensure scratch canvas sizing is ready
-  if (window.__refreshScratchCanvas) {
-    window.__refreshScratchCanvas();
-    setTimeout(window.__refreshScratchCanvas, 300);
-  }
-
-  // Auto-play music on first interaction (click / touch anywhere)
-  let hasStartedAudio = false;
-  function startAudioOnFirstInteraction() {
-    if (hasStartedAudio) return;
-    hasStartedAudio = true;
-    if (weddingAudio && weddingAudio.paused) {
+    // 1. Start wedding music immediately on user tap gesture
+    if (weddingAudio) {
       weddingAudio.play().then(updateMusicState).catch(() => {});
     }
+
+    // 2. Hide the wax seal button and play the envelope opening + radiant light burst video
+    if (envelopeWrapper) {
+      envelopeWrapper.classList.add('is-playing-video');
+    }
+    if (envelopeVideo) {
+      envelopeVideo.currentTime = 0;
+      envelopeVideo.play().catch(() => {});
+    }
+
+    // 3. At t = 3.1s (peak of the radiant golden light burst), crossfade to the landing page
+    setTimeout(() => {
+      document.body.classList.remove('is-envelope-closed');
+      if (mainCard) mainCard.classList.add('is-revealed');
+      if (envelopeWrapper) envelopeWrapper.classList.add('is-hidden');
+
+      // Start the page slightly scrolled down to begin directly at the brown arch beam
+      const cardWidth = Math.min(window.innerWidth || 400, 480);
+      const brownOffset = Math.round(cardWidth * 0.058);
+      window.scrollTo(0, brownOffset);
+      document.documentElement.scrollTop = brownOffset;
+      document.body.scrollTop = brownOffset;
+
+      if (window.__refreshScratchCanvas) {
+        window.__refreshScratchCanvas();
+      }
+
+      if (coverVideo) {
+        coverVideo.currentTime = 3.6;
+        coverVideo.play().catch(() => {});
+        coverVideo.addEventListener('timeupdate', () => {
+          if (coverVideo.currentTime >= 14.8) {
+            coverVideo.currentTime = 3.8;
+          }
+        });
+      }
+
+      // Clean up envelope video after fade completes
+      setTimeout(() => {
+        if (envelopeWrapper) envelopeWrapper.style.display = 'none';
+        if (envelopeVideo) envelopeVideo.pause();
+        if (window.__refreshScratchCanvas) {
+          window.__refreshScratchCanvas();
+        }
+      }, 800);
+    }, 3100);
   }
-  window.addEventListener('click', startAudioOnFirstInteraction, { once: true });
-  window.addEventListener('touchstart', startAudioOnFirstInteraction, { once: true });
+
+  if (envelopeContainer) {
+    envelopeContainer.addEventListener('click', triggerOpen);
+  } else {
+    document.body.classList.remove('is-envelope-closed');
+    if (mainCard) mainCard.classList.add('is-revealed');
+  }
+
+  if (window.location.search.includes('open')) {
+    document.body.classList.remove('is-envelope-closed');
+    if (mainCard) mainCard.classList.add('is-revealed');
+    if (envelopeWrapper) envelopeWrapper.style.display = 'none';
+  }
 
   // Music Play/Pause Toggle button
   if (musicBtn && weddingAudio) {
@@ -419,7 +538,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnTop) {
     btnTop.addEventListener('click', (e) => {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const cardWidth = Math.min(window.innerWidth || 400, 480);
+      const brownOffset = Math.round(cardWidth * 0.058);
+      window.scrollTo({ top: brownOffset, behavior: 'smooth' });
     });
   }
 
@@ -433,5 +554,19 @@ document.addEventListener('DOMContentLoaded', () => {
         p2.scrollIntoView({ behavior: 'smooth' });
       }
     });
+  }
+
+  // Floating scroll cue: visible on all pages, hidden at footer
+  const royalScrollPrompt = document.getElementById('royalScrollPrompt');
+  if (royalScrollPrompt) {
+    royalScrollPrompt.addEventListener('click', () => {
+      window.scrollBy({ top: Math.round(window.innerHeight * 0.8), behavior: 'smooth' });
+    });
+    const footerEl = document.querySelector('footer');
+    if (footerEl && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((en) => document.body.classList.toggle('at-footer', en.isIntersecting));
+      }, { threshold: 0.05 }).observe(footerEl);
+    }
   }
 });

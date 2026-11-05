@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>The Wedding Celebration · Garv &amp; Kaavya</title>
-  <meta name="description" content="We invite you to share our joy! Tap to open and view the details of our special day — Garv &amp; Kaavya. 11 &amp; 12 December 2026 at Sher Bengal River Resort, Kolaghat. #kaarvinlove" />
+  <meta name="description"
+    content="We invite you to share our joy! Tap to open and view the details of our special day — Garv &amp; Kaavya. 11 &amp; 12 December 2026 at Sher Bengal River Resort, Kolaghat. #kaarvinlove" />
   <meta name="theme-color" content="#FAF5F0" />
   <meta name="color-scheme" content="light" />
   <meta name="robots" content="noindex, nofollow" />
@@ -12,7 +14,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="The Wedding Celebration (Envelope)" />
-  <meta property="og:description" content="We invite you to share our joy! Tap to open and view the details of our special day. #kaarvinlove" />
+  <meta property="og:description"
+    content="We invite you to share our joy! Tap to open and view the details of our special day. #kaarvinlove" />
   <meta property="og:image" content="/media/peacock_terrace_cover.jpg" />
 
   <!-- Favicons -->
@@ -20,37 +23,75 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Everdezign Framer Theme CSS -->
-  <link rel="stylesheet" href="/css/framer-theme.css?v=19" />
+  <link rel="stylesheet" href="/css/framer-theme.css?v=73" />
 </head>
-<body>
+
+<body class="is-envelope-closed">
   <!-- Subtle Elegant Radial Warm Background -->
   <div class="framer-bg" aria-hidden="true"></div>
+
+  <!-- Floating scroll cue (all pages, hidden at footer) -->
+  <button type="button" class="royal-scroll-prompt" id="royalScrollPrompt" aria-label="Scroll down">
+    <span class="royal-scroll-text">SCROLL</span>
+    <svg class="royal-scroll-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <polyline points="6 9 12 15 18 9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
 
   <!-- Falling Rose Petals Canvas -->
   <canvas id="petals-canvas" aria-hidden="true"></canvas>
 
   <!-- ═══════════════════════════════════════════════════════════
-       INVITATION CARD
+       1. ENVELOPE LANDING SECTION (Tap to Glow & Open Video)
        ═══════════════════════════════════════════════════════════ -->
-  <main id="main-card-layout" class="main-card-layout is-revealed">
+  <section id="envelope-wrapper" class="envelope-wrapper" aria-label="Wedding Invitation Envelope">
+    <div id="envelope-container" class="envelope-card-container">
+      <!-- Envelope Opening Video with Radiant Glow Burst -->
+      <video id="envelope-video" class="envelope-video" src="/media/envelope_open_glow.mp4" playsinline muted
+        preload="auto"></video>
 
-    <!-- Music Play/Pause Button (quietly sitting at top right edge above the card, scrolls with page) -->
-    <div class="music-control-wrapper">
-      <button id="music-btn" class="music-play-pause-btn" type="button" aria-label="Toggle music">
-        <svg id="music-icon-play" class="music-icon" viewBox="0 0 24 24">
-          <polygon points="6 4 20 12 6 20 6 4"/>
-        </svg>
-        <svg id="music-icon-pause" class="music-icon is-hidden" viewBox="0 0 24 24">
-          <rect x="6" y="4" width="4" height="16" rx="1"/>
-          <rect x="14" y="4" width="4" height="16" rx="1"/>
-        </svg>
-      </button>
-      <audio id="wedding-audio" src="/media/music.mp3" preload="none" loop></audio>
+      <!-- Pre-Tap Wax Seal Overlay -->
+      <div class="envelope-cover-overlay">
+        <img src="/media/envelope_closed_wax_seal.jpg?v=5" alt="" class="envelope-still-bg" aria-hidden="true" />
+        <div class="wax-seal-wrapper">
+          <button id="wax-seal-btn" class="wax-seal-button" type="button" aria-label="Tap to open invitation"></button>
+          <div class="wax-seal-hint">Tap wax seal to open</div>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       2. INVITATION CARD
+       ═══════════════════════════════════════════════════════════ -->
+  <main id="main-card-layout" class="main-card-layout">
 
     <!-- ── 2A. Page 1: Royal Arch Cover (Full Width Edge-to-Edge) ── -->
     <article id="cover-card" class="page-fullwidth cover-royal-entrance">
-      <img src="/media/canva_page_1.webp?v=7" alt="Kaavya &amp; Garv · #kaarvinlove · 11 - 12 December 2026, Sher Bengal River Resort, Kolaghat, West Bengal" class="page-fullwidth-img" />
+      <!-- Music Play/Pause Button (quietly sitting at top right edge inside cover card) -->
+      <div class="music-control-wrapper">
+        <button id="music-btn" class="music-play-pause-btn" type="button" aria-label="Toggle music">
+          <svg id="music-icon-play" class="music-icon" viewBox="0 0 24 24">
+            <polygon points="6 4 20 12 6 20 6 4" />
+          </svg>
+          <svg id="music-icon-pause" class="music-icon is-hidden" viewBox="0 0 24 24">
+            <rect x="6" y="4" width="4" height="16" rx="1" />
+            <rect x="14" y="4" width="4" height="16" rx="1" />
+          </svg>
+        </button>
+        <audio id="wedding-audio" src="/media/music.mp3" preload="none" loop></audio>
+      </div>
+
+      <img src="/media/canva_page_1.webp?v=10"
+        alt="Kaavya &amp; Garv · #kaarvinlove · Sher Bengal River Resort, Kolaghat, West Bengal"
+        class="page-fullwidth-img" />
+
+      <!-- Monogram Gold Star Flare (Exact Match to User Reference) -->
+      <div class="gk-logo-glow-wrap" aria-hidden="true">
+        <img src="/media/gk_gold_overlay.png?v=1" alt="" class="gk-gold-shine" />
+        <img src="/media/gold_sparkle_flare.svg?v=2" alt="" class="gk-ring-star-flare" />
+      </div>
+
     </article>
 
     <!-- Branching Floral Design at End of Page 1 -->
@@ -58,21 +99,45 @@
       <img src="/media/branching_floral_lush.svg?v=1" alt="" class="branching-floral-svg" />
     </div>
 
-    <!-- ── Transitional Design between Page 1 & Page 2 (Shubh Vivah Only) ── -->
-    <div class="royal-page-transition scroll-reveal" id="transition-p1-p2">
-      <div class="transition-exact-wrapper">
-        <img src="/media/shubh_vivah_only@2x.webp?v=1" alt="॥ शुभ विवाह ॥" class="transition-exact-img" />
+    <!-- ── Sacred Ganesh Mandap Frame Section between Page 1 & Page 2 ── -->
+    <section class="ganesh-card-section scroll-reveal" aria-label="Shree Ganesh Invocation">
+      <div class="ganesh-card-container">
+        <img src="/media/ganesh_canva_arch_clean.webp?v=3" alt="" class="ganesh-mandap-bg" />
+        <div class="ganesh-card-content">
+          <h3 class="ganesh-invoc-text">॥ श्री गणेशाय नमः ॥</h3>
+          <div class="ganesh-divider" aria-hidden="true"><span class="gd-line"></span><svg class="gd-lotus"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M12 3c1.7 2.3 2.5 4.4 2.5 6.4 0 1.7-.9 3.1-2.5 4.1-1.6-1-2.5-2.400-2.500-4.100C9.500 7.400 10.300 5.300 12 3zM4.500 8c2.500.3 4.600 1.500 5.800 3.300.6 1 .7 2.100.4 3.100-2.500.3-4.700-.6-6-2.500C4.100 10.600 4 9.300 4.500 8zm15 0c.5 1.300.4 2.600-.7 3.900-1.300 1.900-3.500 2.800-6 2.500-.3-1-.2-2.100.4-3.100C14.400 9.500 17 8.300 19.500 8zM12 15.500c2.200.1 4 1 5.400 2.700H6.600c1.400-1.700 3.200-2.600 5.400-2.700z" />
+            </svg><span class="gd-line"></span></div>
+          <div class="ganesh-logo-reveal scroll-reveal">
+            <img src="/media/ganesh_logo_vivid.png?v=1" alt="Lord Ganesha" class="ganesh-logo-img" />
+          </div>
+          <div class="ganesh-divider" aria-hidden="true"><span class="gd-line"></span><svg class="gd-lotus"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M12 3c1.7 2.3 2.5 4.4 2.5 6.4 0 1.7-.9 3.1-2.5 4.1-1.6-1-2.5-2.400-2.500-4.100C9.500 7.400 10.300 5.300 12 3zM4.500 8c2.500.3 4.600 1.500 5.800 3.300.6 1 .7 2.100.4 3.100-2.500.3-4.700-.6-6-2.500C4.100 10.600 4 9.300 4.500 8zm15 0c.5 1.300.4 2.600-.7 3.900-1.300 1.900-3.500 2.800-6 2.500-.3-1-.2-2.100.4-3.100C14.400 9.500 17 8.300 19.500 8zM12 15.500c2.200.1 4 1 5.400 2.700H6.600c1.400-1.700 3.200-2.600 5.400-2.700z" />
+            </svg><span class="gd-line"></span></div>
+          <p class="ganesh-shloka-text">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः<br />निर्विघ्नं कुरु मे देव सर्वकार्येषु
+            सर्वदा ॥</p>
+          <div class="ganesh-divider" aria-hidden="true"><span class="gd-line"></span><svg class="gd-lotus"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M12 3c1.7 2.3 2.5 4.4 2.5 6.4 0 1.7-.9 3.1-2.5 4.1-1.6-1-2.5-2.400-2.500-4.100C9.500 7.400 10.300 5.300 12 3zM4.500 8c2.500.3 4.600 1.500 5.800 3.300.6 1 .7 2.100.4 3.100-2.500.3-4.700-.6-6-2.500C4.100 10.600 4 9.300 4.500 8zm15 0c.5 1.300.4 2.600-.7 3.900-1.300 1.900-3.500 2.800-6 2.500-.3-1-.2-2.100.4-3.100C14.400 9.500 17 8.300 19.500 8zM12 15.500c2.200.1 4 1 5.400 2.700H6.600c1.400-1.700 3.200-2.600 5.400-2.700z" />
+            </svg><span class="gd-line"></span></div>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- Branching Floral Design at Start of Page 2 -->
-    <div class="branching-floral-p2 scroll-reveal" aria-hidden="true">
+    <div class="branching-floral-p2 ganesh-next-floral-reveal scroll-reveal" aria-hidden="true">
       <img src="/media/branching_floral_lush.svg?v=1" alt="" class="branching-floral-svg is-mirrored" />
     </div>
 
     <!-- ── 2B. Page 2: Sacred Blessings & Formal Invitation (Full Width Edge-to-Edge with Grand 3D Unfold Animation) ── -->
     <article id="page-2-invitation" class="page-fullwidth page-two-reveal scroll-reveal">
-      <img src="/media/canva_page_2.webp?v=7" alt="Wedding Invitation · Chandalia Family · Kaavya Weds Garv" class="page-fullwidth-img" />
+      <img src="/media/canva_page_2.webp?v=8" alt="Wedding Invitation · Chandalia Family · Kaavya Weds Garv"
+        class="page-fullwidth-img" />
     </article>
 
     <!-- ── 2C. Save The Date & Interactive Scratch Card (Exact Framer Match) ── -->
@@ -86,14 +151,17 @@
       <div id="scratch-widget" class="scratch-widget-container zoom-reveal">
         <!-- Revealed Base Layer (The Date Underneath) -->
         <div class="scratch-underlay">
-          <img src="/media/scratch_revealed_garv_kaavya.png?v=7" alt="Wedding Date: 11 - 12 December, 2026" class="scratch-underlay-img" />
+          <img src="/media/scratch_revealed_garv_kaavya.png?v=8" alt="Wedding Date: 11 - 12 December, 2026"
+            class="scratch-underlay-img" />
         </div>
 
         <!-- Scratch Canvas (Foreground erasing layer) -->
         <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
       </div>
-      
-      <div id="scratch-hint" class="scratch-instruction-hint">Scratch the gold card above to reveal the auspicious date</div>
+
+      <div id="scratch-hint" class="scratch-instruction-hint">Scratch the gold card above to reveal the auspicious
+        date
+      </div>
     </article>
 
     <!-- ── 2D. Venue & Direction Card ── -->
@@ -103,10 +171,11 @@
       </div>
       <h3 class="venue-name zoom-reveal">Sher Bengal River Resort</h3>
       <p class="venue-address">Kolaghat, Purba Medinipur, West Bengal</p>
-      <a class="btn-directions zoom-reveal" href="https://share.google/ondJkXiFkBXDm8Jhc" target="_blank" rel="noopener">
+      <a class="btn-directions zoom-reveal" href="https://share.google/ondJkXiFkBXDm8Jhc" target="_blank"
+        rel="noopener">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-          <circle cx="12" cy="9" r="2.5"/>
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+          <circle cx="12" cy="9" r="2.5" />
         </svg>
         Tap for Directions
       </a>
@@ -133,7 +202,7 @@
           <span class="countdown-label">Seconds</span>
         </div>
       </div>
-      <p class="countdown-target-date">11 &amp; 12 December 2026</p>
+      <p class="countdown-target-date">11<sup class="ord-sup">th</sup> &amp; 12<sup class="ord-sup">th</sup> December 2026</p>
     </article>
 
     <!-- ── 2E. Special Moments (Slow Continuous Marquee Match to Reference Site) ── -->
@@ -164,234 +233,158 @@
         Here's where the celebrations begin
       </p>
 
-      <div class="events-list">
-        <!-- Event 1: Mayra (PDF Page 3) -->
-        <article class="canva-card event-canva-card anim-mayra scroll-reveal">
-          <img src="/media/canva_page_3_mayra.webp?v=4" alt="Mayra · 11 December 2026 · 11:30am onwards · Sher Bengal, Banquet Hall" class="canva-card-img" loading="lazy" />
-          <div class="event-card-actions">
-            <span class="event-action-flourish">❖</span>
-            <a class="event-action-btn event-action-btn-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mayra+%E2%80%94+Garv+%26+Kaavya+Wedding&dates=20261211T060000Z/20261211T100000Z&details=Mayra+Celebration+at+Sher+Bengal+Banquet+Hall.+Join+us+as+the+festivities+begin%21+%23kaarvinlove&location=Sher+Bengal+River+Resort%2C+Kolaghat%2C+West+Bengal" target="_blank" rel="noopener">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              Add to Calendar
-            </a>
-            <span class="event-action-flourish">❖</span>
-          </div>
-        </article>
+      <div id="events-container" class="events-list">
 
-        <!-- Event 2: Sangeet (PDF Page 4) -->
-        <article class="canva-card event-canva-card anim-sangeet scroll-reveal">
-          <img src="/media/canva_page_4_sangeet.webp?v=4" alt="Sangeet · 11 December 2026 · Tika: 6:30pm · Sangeet: 7:15pm onwards · Sher Bengal, Lawn" class="canva-card-img" loading="lazy" />
-          <div class="event-card-actions">
-            <span class="event-action-flourish">❖</span>
-            <a class="event-action-btn event-action-btn-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tika+%26+Sangeet+%E2%80%94+Garv+%26+Kaavya+Wedding&dates=20261211T130000Z/20261211T180000Z&details=Tika+at+6%3A30pm%2C+Sangeet+at+7%3A15pm+onwards+at+Sher+Bengal+Lawn.+%23kaarvinlove&location=Sher+Bengal+River+Resort%2C+Kolaghat%2C+West+Bengal" target="_blank" rel="noopener">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              Add to Calendar
-            </a>
-            <span class="event-action-flourish">❖</span>
+        <div class="event-scene-wrap event-scene-mayra scroll-reveal">
+          <img class="event-floral-bg" src="/media/event_bg_mayra.webp?v=14" alt="" aria-hidden="true" loading="lazy" />
+          <div class="event-card-container">
+            <article class="event-framed-card anim-mayra">
+              <div class="event-art-frame">
+                <img src="/media/event_art_mayra.webp?v=1" alt="Mayra Celebration" class="event-art-img"
+                  loading="lazy" />
+                <div class="event-art-caption">
+                  <h3 class="event-caption-title has-dashes">Mayra</h3>
+                  <p class="event-caption-desc">A cherished family ritual that marks<br />the beginning of joyous
+                    celebrations.</p>
+                </div>
+              </div>
+              <div class="event-info-body">
+                <span class="event-date-big">11<sup class="ord-sup">th</sup> DECEMBER 2026</span>
+                <span class="event-date-sub">FRIDAY · 11:30 AM ONWARDS</span>
+                <div class="event-venue-block">
+                  <span class="event-venue-label">VENUE:</span>
+                  <span class="event-venue-name">Sher Bengal Banquet Hall</span>
+                </div>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mayra+%E2%80%94+Garv+%26+Kaavya+Wedding&dates=20261211T060000Z/20261211T100000Z&details=A+cherished+family+ritual+that+marks+the+beginning+of+joyous+celebrations.&location=Sher+Bengal+Banquet+Hall%2C+Sher+Bengal+River+Resort%2C+Kolaghat"
+                  target="_blank" rel="noopener" class="event-directions-pill" aria-label="Add Mayra to Calendar">
+                  <svg class="btn-pin-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5v-5z" />
+                  </svg>
+                  <span>ADD TO CALENDAR</span>
+                </a>
+              </div>
+            </article>
           </div>
-        </article>
+          <img class="event-floral-fg" src="/media/event_fg_mayra.webp?v=14" alt="" aria-hidden="true" loading="lazy" />
+        </div>
 
-        <!-- Event 3: Carnival & Haldi (PDF Page 5) -->
-        <article class="canva-card event-canva-card anim-haldi scroll-reveal">
-          <img src="/media/canva_page_5_haldi.webp?v=4" alt="Carnival &amp; Haldi · 12 December 2026 · Carnival: 9:15am · Haldi: 11:15am onwards · Sher Bengal, Lawn" class="canva-card-img" loading="lazy" />
-          <div class="event-card-actions">
-            <span class="event-action-flourish">❖</span>
-            <a class="event-action-btn event-action-btn-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Carnival+%26+Haldi+%E2%80%94+Garv+%26+Kaavya+Wedding&dates=20261212T034500Z/20261212T083000Z&details=Carnival+at+9%3A15am%2C+Haldi+at+11%3A15am+onwards+at+Sher+Bengal+Lawn.+%23kaarvinlove&location=Sher+Bengal+River+Resort%2C+Kolaghat%2C+West+Bengal" target="_blank" rel="noopener">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              Add to Calendar
-            </a>
-            <span class="event-action-flourish">❖</span>
+        <div class="event-scene-wrap event-scene-sangeet scroll-reveal">
+          <img class="event-floral-bg" src="/media/event_bg_sangeet.webp?v=14" alt="" aria-hidden="true"
+            loading="lazy" />
+          <div class="event-card-container">
+            <article class="event-framed-card anim-sangeet">
+              <div class="event-art-frame">
+                <img src="/media/event_art_sangeet.webp?v=1" alt="Sangeet Celebration" class="event-art-img"
+                  loading="lazy" />
+                <div class="event-art-caption">
+                  <h3 class="event-caption-title has-dashes">Sangeet</h3>
+                  <p class="event-caption-desc">An evening of music, dance, and<br />unforgettable smiles.</p>
+                </div>
+              </div>
+              <div class="event-info-body">
+                <span class="event-date-big">11<sup class="ord-sup">th</sup> DECEMBER 2026</span>
+                <span class="event-date-sub">FRIDAY · 07:30 PM ONWARDS</span>
+                <div class="event-venue-block">
+                  <span class="event-venue-label">VENUE:</span>
+                  <span class="event-venue-name">Sher Bengal Lawn</span>
+                </div>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sangeet+%E2%80%94+Garv+%26+Kaavya+Wedding&dates=20261211T140000Z/20261211T183000Z&details=An+evening+of+music%2C+dance%2C+and+unforgettable+smiles.&location=Sher+Bengal+Lawn%2C+Sher+Bengal+River+Resort%2C+Kolaghat"
+                  target="_blank" rel="noopener" class="event-directions-pill" aria-label="Add Sangeet to Calendar">
+                  <svg class="btn-pin-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5v-5z" />
+                  </svg>
+                  <span>ADD TO CALENDAR</span>
+                </a>
+              </div>
+            </article>
           </div>
-        </article>
+          <img class="event-floral-fg" src="/media/event_fg_sangeet.webp?v=14" alt="" aria-hidden="true"
+            loading="lazy" />
+        </div>
 
-        <!-- Event 4: Varmala & Phere (PDF Page 6) -->
-        <article class="canva-card event-canva-card anim-wedding scroll-reveal">
-          <img src="/media/canva_page_6_wedding.webp?v=4" alt="Varmala &amp; Phere · 12 December 2026 · Reception: 6:15pm · Phera: 10:15pm onwards · Sher Bengal, Lawn" class="canva-card-img" loading="lazy" />
-          <div class="event-card-actions">
-            <span class="event-action-flourish">❖</span>
-            <a class="event-action-btn event-action-btn-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Varmala+%26+Phere+%28Wedding%29+%E2%80%94+Garv+%26+Kaavya&dates=20261212T124500Z/20261212T203000Z&details=Reception+at+6%3A15pm%2C+Pheras+at+10%3A15pm+onwards+at+Sher+Bengal+Lawn.+%23kaarvinlove&location=Sher+Bengal+River+Resort%2C+Kolaghat%2C+West+Bengal" target="_blank" rel="noopener">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              Add to Calendar
-            </a>
-            <span class="event-action-flourish">❖</span>
+        <div class="event-scene-wrap event-scene-haldi scroll-reveal">
+          <img class="event-floral-bg" src="/media/event_bg_haldi.webp?v=14" alt="" aria-hidden="true" loading="lazy" />
+          <div class="event-card-container">
+            <article class="event-framed-card anim-haldi">
+              <div class="event-art-frame">
+                <img src="/media/event_art_haldi.webp?v=2" alt="Carnival Haldi Celebration" class="event-art-img"
+                  loading="lazy" />
+                <div class="event-art-caption">
+                  <h3 class="event-caption-title">Carnival Haldi</h3>
+                  <p class="event-caption-desc">A vibrant morning of haldi, laughter,<br />and blessings to brighten the
+                    celebrations.</p>
+                </div>
+              </div>
+              <div class="event-info-body">
+                <span class="event-date-big">12<sup class="ord-sup">th</sup> DECEMBER 2026</span>
+                <span class="event-date-sub">SATURDAY · 11:15 AM ONWARDS</span>
+                <div class="event-venue-block">
+                  <span class="event-venue-label">VENUE:</span>
+                  <span class="event-venue-name">Sher Bengal Lawn</span>
+                </div>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Carnival+Haldi+%E2%80%94+Garv+%26+Kaavya+Wedding&dates=20261212T054500Z/20261212T100000Z&details=A+vibrant+morning+of+haldi%2C+laughter%2C+and+blessings+to+brighten+the+celebrations.&location=Sher+Bengal+Lawn%2C+Sher+Bengal+River+Resort%2C+Kolaghat"
+                  target="_blank" rel="noopener" class="event-directions-pill"
+                  aria-label="Add Carnival Haldi to Calendar">
+                  <svg class="btn-pin-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5v-5z" />
+                  </svg>
+                  <span>ADD TO CALENDAR</span>
+                </a>
+              </div>
+            </article>
           </div>
-        </article>
+          <img class="event-floral-fg" src="/media/event_fg_haldi.webp?v=14" alt="" aria-hidden="true" loading="lazy" />
+        </div>
+
+        <div class="event-scene-wrap event-scene-wedding scroll-reveal">
+          <img class="event-floral-bg" src="/media/event_bg_wedding.webp?v=14" alt="" aria-hidden="true"
+            loading="lazy" />
+          <div class="event-card-container">
+            <article class="event-framed-card anim-wedding">
+              <div class="event-art-frame">
+                <img src="/media/event_art_wedding.webp?v=5" alt="Varmala and Phere Celebration" class="event-art-img"
+                  loading="lazy" />
+                <div class="event-art-caption">
+                  <h3 class="event-caption-title">Varmala &amp; Phere</h3>
+                  <p class="event-caption-desc">The sacred vows that unite two souls<br />in a lifelong journey
+                    together.</p>
+                </div>
+              </div>
+              <div class="event-info-body">
+                <span class="event-date-big">12<sup class="ord-sup">th</sup> DECEMBER 2026</span>
+                <span class="event-date-sub">SATURDAY · RECEPTION: 06:30 PM<br />PHERE: 10:15 PM</span>
+                <div class="event-venue-block">
+                  <span class="event-venue-label">VENUE:</span>
+                  <span class="event-venue-name">Sher Bengal Lawn</span>
+                </div>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Varmala+%26+Phere+%E2%80%94+Garv+%26+Kaavya+Wedding&dates=20261212T130000Z/20261212T193000Z&details=The+sacred+vows+that+unite+two+souls+in+a+lifelong+journey+together.&location=Sher+Bengal+Lawn%2C+Sher+Bengal+River+Resort%2C+Kolaghat"
+                  target="_blank" rel="noopener" class="event-directions-pill"
+                  aria-label="Add Varmala and Phere to Calendar">
+                  <svg class="btn-pin-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5v-5z" />
+                  </svg>
+                  <span>ADD TO CALENDAR</span>
+                </a>
+              </div>
+            </article>
+          </div>
+          <img class="event-floral-fg" src="/media/event_fg_wedding.webp?v=14" alt="" aria-hidden="true"
+            loading="lazy" />
+        </div>
+
       </div>
     </section>
 
-    <!-- ── 2G. Awaiting Your Presence (Replicated Exactly from PDF Page 7) ── -->
-    <article class="canva-card family-presence-card anim-family scroll-reveal">
-      <img src="/media/canva_page_7_family.webp?v=4" alt="Awaiting your presence! · Paternal Family · Special Welcome · Maternal Family · RSVP" class="canva-card-img" loading="lazy" />
-    </article>
-
-    <!-- ── Auspicious Floral Toran Transition Overlapping Footer Arch Top Edge ── -->
-    <div class="footer-floral-transition scroll-reveal" aria-hidden="true">
-      <svg class="footer-toran-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 110" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="goldMetal" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#FDF0D0"/>
-            <stop offset="25%" stop-color="#D4AF37"/>
-            <stop offset="65%" stop-color="#8F6B1E"/>
-            <stop offset="100%" stop-color="#F5D77F"/>
-          </linearGradient>
-          <linearGradient id="marigoldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#FFE082"/>
-            <stop offset="45%" stop-color="#FFA000"/>
-            <stop offset="100%" stop-color="#D84315"/>
-          </linearGradient>
-          <linearGradient id="lotusPink" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#FFF5F7"/>
-            <stop offset="45%" stop-color="#F06292"/>
-            <stop offset="100%" stop-color="#AD1457"/>
-          </linearGradient>
-          <linearGradient id="leafGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#A5D6A7"/>
-            <stop offset="50%" stop-color="#388E3C"/>
-            <stop offset="100%" stop-color="#1B5E20"/>
-          </linearGradient>
-          <radialGradient id="pearlGrad" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stop-color="#FFFFFF"/>
-            <stop offset="60%" stop-color="#FFF9EC"/>
-            <stop offset="100%" stop-color="#D6C4A1"/>
-          </radialGradient>
-          <filter id="toranShadow" x="-10%" y="-10%" width="120%" height="150%">
-            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#3A0E14" flood-opacity="0.38"/>
-          </filter>
-        </defs>
-
-        <g filter="url(#toranShadow)">
-          <!-- Top Ornamental Gold Bar -->
-          <path d="M0,14 L800,14 L800,21 L0,21 Z" fill="url(#goldMetal)"/>
-          <path d="M0,21 Q 20,29 40,21 Q 60,29 80,21 Q 100,29 120,21 Q 140,29 160,21 Q 180,29 200,21 Q 220,29 240,21 Q 260,29 280,21 Q 300,29 320,21 Q 340,29 360,21 Q 380,29 400,21 Q 420,29 440,21 Q 460,29 480,21 Q 500,29 520,21 Q 540,29 560,21 Q 580,29 600,21 Q 620,29 640,21 Q 660,29 680,21 Q 700,29 720,21 Q 740,29 760,21 Q 780,29 800,21" fill="none" stroke="url(#goldMetal)" stroke-width="2.5"/>
-
-          <!-- Auspicious Mango Leaves -->
-          <path d="M60,21 C50,38 70,55 60,65 C50,55 70,38 60,21" fill="url(#leafGrad)"/>
-          <path d="M140,21 C130,38 150,55 140,65 C130,55 150,38 140,21" fill="url(#leafGrad)"/>
-          <path d="M220,21 C210,38 230,55 220,65 C210,55 230,38 220,21" fill="url(#leafGrad)"/>
-          <path d="M300,21 C290,38 310,55 300,65 C290,55 310,38 300,21" fill="url(#leafGrad)"/>
-          <path d="M500,21 C490,38 510,55 500,65 C490,55 510,38 500,21" fill="url(#leafGrad)"/>
-          <path d="M580,21 C570,38 590,55 580,65 C570,55 590,38 580,21" fill="url(#leafGrad)"/>
-          <path d="M660,21 C650,38 670,55 660,65 C650,55 670,38 660,21" fill="url(#leafGrad)"/>
-          <path d="M740,21 C730,38 750,55 740,65 C730,55 750,38 740,21" fill="url(#leafGrad)"/>
-
-          <!-- Floral Marigold Swags -->
-          <path d="M 0,22 Q 133,62 266,22" fill="none" stroke="url(#marigoldGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="2,11"/>
-          <path d="M 0,22 Q 133,62 266,22" fill="none" stroke="url(#goldMetal)" stroke-width="2" stroke-linecap="round"/>
-          
-          <path d="M 266,22 Q 400,74 533,22" fill="none" stroke="url(#marigoldGrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="2,12"/>
-          <path d="M 266,22 Q 400,74 533,22" fill="none" stroke="url(#goldMetal)" stroke-width="2.5" stroke-linecap="round"/>
-          
-          <path d="M 533,22 Q 666,62 800,22" fill="none" stroke="url(#marigoldGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="2,11"/>
-          <path d="M 533,22 Q 666,62 800,22" fill="none" stroke="url(#goldMetal)" stroke-width="2" stroke-linecap="round"/>
-
-          <!-- Hanging Temple Bells (Ghanti) with Pearls -->
-          <g transform="translate(133, 44)" class="toran-bell-anim">
-            <line x1="0" y1="0" x2="0" y2="16" stroke="url(#goldMetal)" stroke-width="2"/>
-            <circle cx="0" cy="8" r="3.5" fill="url(#pearlGrad)"/>
-            <path d="M -9,28 C -9,20 -5,16 0,16 C 5,16 9,20 9,28 Z" fill="url(#goldMetal)"/>
-            <circle cx="0" cy="28" r="2.5" fill="url(#marigoldGrad)"/>
-            <circle cx="0" cy="35" r="3.5" fill="url(#pearlGrad)"/>
-          </g>
-
-          <g transform="translate(266, 22)" class="toran-bell-anim">
-            <circle cx="0" cy="6" r="6" fill="url(#marigoldGrad)"/>
-            <line x1="0" y1="6" x2="0" y2="24" stroke="url(#goldMetal)" stroke-width="2"/>
-            <path d="M -9,36 C -9,27 -5,23 0,23 C 5,23 9,27 9,36 Z" fill="url(#goldMetal)"/>
-            <circle cx="0" cy="36" r="2.5" fill="url(#marigoldGrad)"/>
-            <circle cx="0" cy="43" r="4" fill="url(#pearlGrad)"/>
-          </g>
-
-          <g transform="translate(400, 54)" class="toran-bell-anim">
-            <line x1="0" y1="0" x2="0" y2="20" stroke="url(#goldMetal)" stroke-width="2.5"/>
-            <circle cx="0" cy="10" r="4" fill="url(#pearlGrad)"/>
-            <path d="M -12,35 C -12,23 -6,19 0,19 C 6,19 12,23 12,35 Z" fill="url(#goldMetal)"/>
-            <circle cx="0" cy="35" r="3" fill="url(#marigoldGrad)"/>
-            <circle cx="0" cy="43" r="4.5" fill="url(#pearlGrad)"/>
-          </g>
-
-          <g transform="translate(533, 22)" class="toran-bell-anim">
-            <circle cx="0" cy="6" r="6" fill="url(#marigoldGrad)"/>
-            <line x1="0" y1="6" x2="0" y2="24" stroke="url(#goldMetal)" stroke-width="2"/>
-            <path d="M -9,36 C -9,27 -5,23 0,23 C 5,23 9,27 9,36 Z" fill="url(#goldMetal)"/>
-            <circle cx="0" cy="36" r="2.5" fill="url(#marigoldGrad)"/>
-            <circle cx="0" cy="43" r="4" fill="url(#pearlGrad)"/>
-          </g>
-
-          <g transform="translate(666, 44)" class="toran-bell-anim">
-            <line x1="0" y1="0" x2="0" y2="16" stroke="url(#goldMetal)" stroke-width="2"/>
-            <circle cx="0" cy="8" r="3.5" fill="url(#pearlGrad)"/>
-            <path d="M -9,28 C -9,20 -5,16 0,16 C 5,16 9,20 9,28 Z" fill="url(#goldMetal)"/>
-            <circle cx="0" cy="28" r="2.5" fill="url(#marigoldGrad)"/>
-            <circle cx="0" cy="35" r="3.5" fill="url(#pearlGrad)"/>
-          </g>
-
-          <!-- Blooming Royal Lotuses -->
-          <g transform="translate(266, 18) scale(0.7)">
-            <path d="M 0,0 C -15,-20 -25,-5 0,15 C 25,-5 15,-20 0,0" fill="url(#lotusPink)"/>
-            <path d="M 0,5 C -25,-12 -35,5 -8,22 C 2,15 0,10 0,5" fill="url(#lotusPink)"/>
-            <path d="M 0,5 C 25,-12 35,5 8,22 C -2,15 0,10 0,5" fill="url(#lotusPink)"/>
-            <circle cx="0" cy="10" r="5" fill="url(#goldMetal)"/>
-          </g>
-
-          <!-- Center Grand Auspicious Lotus Crest at x=400 -->
-          <g transform="translate(400, 26)">
-            <circle cx="0" cy="6" r="23" fill="#FFFBF0" opacity="0.95"/>
-            <circle cx="0" cy="6" r="21" fill="none" stroke="url(#goldMetal)" stroke-width="1.8" stroke-dasharray="3,2"/>
-            <path d="M 0,-18 C -18,-5 -12,18 0,24 C 12,18 18,-5 0,-18 Z" fill="url(#lotusPink)"/>
-            <path d="M 0,4 C -28,-6 -34,14 -8,24 C -2,22 0,16 0,4 Z" fill="url(#lotusPink)"/>
-            <path d="M 0,4 C 28,-6 34,14 8,24 C 2,22 0,16 0,4 Z" fill="url(#lotusPink)"/>
-            <path d="M 0,10 C -38,5 -38,22 -14,26 C -4,25 0,18 0,10 Z" fill="url(#lotusPink)" opacity="0.92"/>
-            <path d="M 0,10 C 38,5 38,22 14,26 C 4,25 0,18 0,10 Z" fill="url(#lotusPink)" opacity="0.92"/>
-            <circle cx="0" cy="12" r="6" fill="url(#goldMetal)"/>
-            <circle cx="0" cy="12" r="3" fill="#7A141A"/>
-          </g>
-
-          <g transform="translate(533, 18) scale(0.7)">
-            <path d="M 0,0 C -15,-20 -25,-5 0,15 C 25,-5 15,-20 0,0" fill="url(#lotusPink)"/>
-            <path d="M 0,5 C -25,-12 -35,5 -8,22 C 2,15 0,10 0,5" fill="url(#lotusPink)"/>
-            <path d="M 0,5 C 25,-12 35,5 8,22 C -2,15 0,10 0,5" fill="url(#lotusPink)"/>
-            <circle cx="0" cy="10" r="5" fill="url(#goldMetal)"/>
-          </g>
-
-          <!-- Corner Royal Gold Scrolls for seamless edge transition -->
-          <g transform="translate(0, 14)">
-            <path d="M0,0 Q 28,2 48,24 Q 20,26 0,12 Z" fill="url(#goldMetal)"/>
-            <circle cx="8" cy="18" r="4.5" fill="url(#marigoldGrad)"/>
-            <circle cx="26" cy="24" r="3.5" fill="url(#pearlGrad)"/>
-          </g>
-          <g transform="translate(800, 14) scale(-1, 1)">
-            <path d="M0,0 Q 28,2 48,24 Q 20,26 0,12 Z" fill="url(#goldMetal)"/>
-            <circle cx="8" cy="18" r="4.5" fill="url(#marigoldGrad)"/>
-            <circle cx="26" cy="24" r="3.5" fill="url(#pearlGrad)"/>
-          </g>
-        </g>
-      </svg>
-    </div>
-
-    <!-- ── 2I. Auspicious Royal Closing Pavilion (Exact Match to User Image 2, Full Width to End) ── -->
+    <!-- ── 2I. Auspicious Royal Closing Pavilion (Exact Match to User Reference) ── -->
     <footer class="royal-arch-footer anim-footer scroll-reveal">
       <div class="royal-arch-footer-wrap">
-        <img src="/media/footer_exact_royal.webp?v=2" alt="Save The Date · 11 · 12 · 2026 · With Love &amp; Warm Blessings · The Chandalia &amp; Garg Families · Crafted with Love by The Corporate Pot" class="royal-arch-footer-img" />
+        <img src="/media/footer_exact_royal.webp?v=9"
+          alt="Save The Date · 11th and 12th December 2026 · With Love &amp; Warm Blessings · Chandalia &amp; Garg Families · Crafted with Love by The Corporate Pot"
+          class="royal-arch-footer-img" />
         <!-- Interactive Back to Top Overlay Button directly over graphic button -->
         <a href="#landing-section" class="footer-btn-top-overlay" id="btn-back-to-top" aria-label="Back to Top"></a>
       </div>
@@ -400,6 +393,7 @@
   </main>
 
   <!-- Interactive JavaScript Engine -->
-  <script type="module" src="/js/framer-app.js?v=11"></script>
+  <script type="module" src="/js/framer-app.js?v=20"></script>
 </body>
+
 </html>
