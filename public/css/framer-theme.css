@@ -123,10 +123,14 @@ body.is-envelope-closed {
   justify-content: center;
   padding: 0 !important;
   margin: 0 !important;
-  z-index: 100;
-  background-color: transparent;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  z-index: 9999;
+  background-color: #FAF2EC !important;
+  transition: opacity 1.8s ease, visibility 1.8s ease;
   overflow: hidden;
+}
+
+body.is-envelope-closed .main-card-layout {
+  pointer-events: none !important;
 }
 
 .envelope-wrapper.is-hidden {
@@ -147,8 +151,9 @@ body.is-envelope-closed {
   border: none !important;
   box-shadow: none !important;
   overflow: hidden;
-  background: #FAF2EC url('/media/envelope_closed_wax_seal.jpg?v=5') center / cover no-repeat;
+  background: #FAF2EC url('/media/envelope_closed_wax_seal.jpg?v=7') center / cover no-repeat;
   cursor: pointer;
+  perspective: 1200px;
 }
 
 @media (min-width: 521px) {
@@ -160,15 +165,6 @@ body.is-envelope-closed {
   }
 }
 
-/* Video element for glowing burst */
-.envelope-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  background-color: transparent;
-}
-
 /* Pre-tap Envelope Cover overlay */
 .envelope-cover-overlay {
   position: absolute;
@@ -178,7 +174,12 @@ body.is-envelope-closed {
   align-items: center;
   justify-content: center;
   z-index: 5;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.12s ease;
+}
+
+.envelope-wrapper.is-playing-video .envelope-cover-overlay {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .envelope-still-bg {
@@ -192,9 +193,12 @@ body.is-envelope-closed {
   z-index: 1;
 }
 
-.envelope-wrapper.is-playing-video .envelope-cover-overlay {
-  opacity: 0;
-  pointer-events: none;
+.envelope-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: transparent;
 }
 
 /* Center Wax Seal Button — Mathematically Aligned to Seal Medallion */
@@ -292,8 +296,7 @@ body.is-envelope-closed {
   display: flex;
   flex-direction: column;
   gap: 28px;
-  opacity: 0;
-  transition: opacity 0.8s ease;
+  opacity: 1 !important;
   overflow: visible;
 }
 
@@ -444,17 +447,12 @@ body.is-envelope-closed {
   min-height: 100dvh !important;
   min-height: 100vh !important;
   margin: 0 !important;
-  margin-top: 0 !important;
-  margin-bottom: 20px !important;
   padding: 0 !important;
-  padding-top: 0 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-start !important;
   align-items: center !important;
   overflow: hidden !important;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 22px), transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 22px), transparent 100%);
 }
 
 #cover-card .page-fullwidth-img {
@@ -485,8 +483,8 @@ body.is-envelope-closed {
 /* Brilliant white-gold star flare on the top-right curve of the ring (Exact Match) */
 .gk-ring-star-flare {
   position: absolute;
-  top: 20.5%;
-  left: 67.5%;
+  top: 29.79%;
+  left: 64.41%;
   width: clamp(26px, 6.5vw, 38px);
   height: clamp(26px, 6.5vw, 38px);
   transform: translate(-50%, -50%);
@@ -523,22 +521,33 @@ body.is-envelope-closed {
 .ganesh-card-section {
   width: 100% !important;
   max-width: 100% !important;
-  margin: 12px 0 16px !important;
-  display: flex !important;
-  justify-content: center !important;
+  margin: -28px 0 -28px !important;
+  padding: 0 !important;
+  display: block !important;
   position: relative;
   z-index: 10;
   box-sizing: border-box;
+  line-height: 0;
+}
+
+.ganesh-wooden-scene-bg {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  pointer-events: none;
+  user-select: none;
 }
 
 .ganesh-card-container {
-  position: relative;
-  width: min(440px, calc(100% - 24px));
-  max-width: 440px;
-  margin: 0 auto;
-  border-radius: 20px;
+  position: absolute;
+  top: 28.32%;
+  left: 7.12%;
+  width: 85.04%;
+  max-width: none;
+  margin: 0;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 14px 40px rgba(60, 20, 25, 0.12), 0 2px 10px rgba(197, 160, 89, 0.22);
+  box-shadow: 0 12px 34px rgba(60, 20, 25, 0.14);
   line-height: 0;
 }
 
@@ -546,7 +555,7 @@ body.is-envelope-closed {
   width: 100% !important;
   height: auto !important;
   display: block;
-  border-radius: 20px;
+  border-radius: 18px;
 }
 
 .ganesh-card-content {
@@ -678,26 +687,9 @@ body.is-envelope-closed {
   transform: translateY(0) scale(1);
 }
 
-.branching-floral-p1 {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-top: -45px !important;
-  margin-bottom: -18px !important;
-  position: relative;
-  z-index: 6;
-  line-height: 0;
-  pointer-events: none;
-}
-
+.branching-floral-p1,
 .branching-floral-p2 {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-top: -18px !important;
-  margin-bottom: -45px !important;
-  position: relative;
-  z-index: 6;
-  line-height: 0;
-  pointer-events: none;
+  display: none !important;
 }
 
 .branching-floral-footer {
@@ -795,8 +787,8 @@ body.is-envelope-closed {
 
 @keyframes coverRoyalZoom {
   0% {
-    opacity: 0;
-    transform: scale(1.04);
+    opacity: 1;
+    transform: scale(1.015);
   }
 
   100% {
@@ -2253,9 +2245,9 @@ body.at-footer .royal-scroll-prompt {
 /* G&K monogram: golden breathing shine on ring + letters only */
 .gk-gold-shine {
   position: absolute;
-  left: 24.69%;
-  top: 19.53%;
-  width: 50.42%;
+  left: 20.83%;
+  top: 24.22%;
+  width: 58.68%;
   height: auto;
   pointer-events: none;
   mix-blend-mode: normal;
@@ -2596,4 +2588,12 @@ body.at-footer .royal-scroll-prompt {
   letter-spacing: 0.03em !important;
   margin-left: 1px !important;
   font-weight: 600 !important;
+}
+
+/* Living cover canvas (ambient motion layer, sits exactly over the cover image) */
+.cover-life-canvas {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  pointer-events: none;
 }

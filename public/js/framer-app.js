@@ -2,10 +2,9 @@
 // Everdezign Framer Exact Replica Engine
 // ═══════════════════════════════════════════════════════════
 import { CONFIG, photo } from './config.js';
+import { initCoverLife } from './cover-life.js?v=47';
 
-
-
-// ───────── Falling Red Rose Petals Canvas ─────────
+// ───────── Falling Red Rose Petals Canvas (Subtle & Organic) ─────────
 function initPetals() {
   const canvas = document.getElementById('petals-canvas');
   if (!canvas) return;
@@ -18,72 +17,106 @@ function initPetals() {
     height = canvas.height = window.innerHeight;
   });
 
-  const petals = [];
-  // Reduced quantity: gentle, elegant royal shower
-  const COUNT = 14;
+  // 7 petals for a serene, graceful ambient drift
+  const COUNT = 7;
 
   const ROSE_SHADES = [
-    { fill: 'rgba(182, 24, 39, 0.82)', dark: 'rgba(120, 12, 22, 0.45)' },
-    { fill: 'rgba(158, 16, 28, 0.86)', dark: 'rgba(98, 8, 16, 0.50)' },
-    { fill: 'rgba(196, 32, 48, 0.78)', dark: 'rgba(132, 16, 26, 0.42)' },
-    { fill: 'rgba(142, 14, 24, 0.84)', dark: 'rgba(85, 6, 14, 0.52)' }
+    { fill: 'rgba(178, 22, 38, 0.85)', dark: 'rgba(110, 10, 20, 0.45)' },
+    { fill: 'rgba(155, 14, 26, 0.88)', dark: 'rgba(92, 8, 15, 0.50)' },
+    { fill: 'rgba(192, 30, 46, 0.80)', dark: 'rgba(125, 14, 24, 0.42)' },
+    { fill: 'rgba(140, 12, 22, 0.85)', dark: 'rgba(80, 6, 12, 0.52)' }
   ];
 
-  for (let i = 0; i < COUNT; i++) {
+  const petals = [];
+
+  function resetPetal(p, initial, idx = 0) {
     const shade = ROSE_SHADES[Math.floor(Math.random() * ROSE_SHADES.length)];
-    petals.push({
-      x: Math.random() * width,
-      y: Math.random() * height - height,
-      r: 8 + Math.random() * 7,
-      dx: -0.3 + Math.random() * 0.6,
-      dy: 0.85 + Math.random() * 0.95,
-      rot: Math.random() * 360,
-      rotSpeed: -0.8 + Math.random() * 1.6,
-      tilt: Math.random() * 360,
-      tiltSpeed: 1.2 + Math.random() * 1.8,
-      color: shade.fill,
-      darkColor: shade.dark
-    });
+    p.r = 8.5 + Math.random() * 5.0; // natural petal size
+    p.x = Math.random() * width;
+    p.y = initial ? (Math.random() * height) : -25;
+    
+    // Gentle slow descent
+    p.dy = 0.65 + Math.random() * 0.45;
+    p.wind = -0.20 + Math.random() * 0.40;
+    
+    // Natural horizontal air sway
+    p.swayPhase = Math.random() * Math.PI * 2;
+    p.swaySpeed = 0.015 + Math.random() * 0.015;
+    p.swayAmp = 0.75 + Math.random() * 0.6;
+    
+    // 3D air tumble
+    p.rot = Math.random() * Math.PI * 2;
+    p.rotSpeed = -0.015 + Math.random() * 0.030;
+    p.tilt = Math.random() * Math.PI * 2;
+    p.tiltSpeed = 0.022 + Math.random() * 0.028;
+    
+    p.fill = shade.fill;
+    p.dark = shade.dark;
+    p.wait = initial ? idx * 30 : Math.floor(Math.random() * 60);
+  }
+
+  for (let i = 0; i < COUNT; i++) {
+    const p = {};
+    resetPetal(p, true, i);
+    petals.push(p);
+  }
+
+  function drawPetal(p) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    
+    // 3D perspective foreshortening as the petal gently flips in the breeze
+    const flip = Math.cos(p.tilt);
+    const squish = Math.sin(p.tilt * 0.7) * 0.25 + 0.75;
+    ctx.scale(flip, squish);
+
+    // Elegant organic teardrop rose petal geometry
+    const r = p.r;
+    ctx.beginPath();
+    ctx.moveTo(0, -r * 1.1);
+    ctx.bezierCurveTo(r * 0.85, -r * 1.05, r * 1.0, r * 0.45, 0, r * 1.15);
+    ctx.bezierCurveTo(-r * 1.0, r * 0.45, -r * 0.85, -r * 1.05, 0, -r * 1.1);
+    ctx.closePath();
+    ctx.fillStyle = p.fill;
+    ctx.fill();
+
+    // Delicate inner shadow / vein line
+    ctx.beginPath();
+    ctx.moveTo(0, -r * 0.75);
+    ctx.quadraticCurveTo(r * 0.2, 0, 0, r * 0.75);
+    ctx.strokeStyle = p.dark;
+    ctx.lineWidth = 0.6;
+    ctx.stroke();
+
+    ctx.restore();
   }
 
   function render() {
     ctx.clearRect(0, 0, width, height);
-    petals.forEach((p) => {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate((p.rot * Math.PI) / 180);
-      // Realistic 3D flutter tumbling in wind:
-      ctx.scale(Math.cos((p.tilt * Math.PI) / 180), 1);
+    for (let i = 0; i < petals.length; i++) {
+      const p = petals[i];
+      if (p.wait > 0) {
+        p.wait--;
+        continue;
+      }
 
-      // Authentic botanical curved rose petal shape
-      ctx.beginPath();
-      ctx.moveTo(0, -p.r * 1.15);
-      ctx.bezierCurveTo(p.r * 0.95, -p.r * 1.1, p.r * 1.05, p.r * 0.45, 0, p.r * 1.15);
-      ctx.bezierCurveTo(-p.r * 1.05, p.r * 0.45, -p.r * 0.95, -p.r * 1.1, 0, -p.r * 1.15);
-      ctx.closePath();
-      ctx.fillStyle = p.color;
-      ctx.fill();
+      drawPetal(p);
 
-      // Subtle inner depth vein
-      ctx.beginPath();
-      ctx.moveTo(0, -p.r * 0.85);
-      ctx.quadraticCurveTo(p.r * 0.28, 0, 0, p.r * 0.85);
-      ctx.strokeStyle = p.darkColor;
-      ctx.lineWidth = 0.7;
-      ctx.stroke();
-
-      ctx.restore();
-
+      // Smooth subtle floating physics
       p.y += p.dy;
-      p.x += Math.sin((p.y * Math.PI) / 180) * 0.65 + p.dx;
+      p.swayPhase += p.swaySpeed;
+      p.x += Math.sin(p.swayPhase) * p.swayAmp + p.wind;
       p.rot += p.rotSpeed;
       p.tilt += p.tiltSpeed;
 
-      if (p.y > height + 25) {
-        p.y = -25;
-        p.x = Math.random() * width;
+      // Wrap around seamlessly when drifting off the bottom or sides
+      if (p.y > height + 30) {
+        resetPetal(p, false);
       }
-    });
+      if (p.x < -30) p.x = width + 20;
+      if (p.x > width + 30) p.x = -20;
+    }
     requestAnimationFrame(render);
   }
   requestAnimationFrame(render);
@@ -373,15 +406,15 @@ function initScratchCard() {
 function initGkGlow() {
   const coverImg = document.querySelector('#cover-card .page-fullwidth-img');
   const flare = document.querySelector('.gk-ring-star-flare');
-  if (!coverImg || !flare) return;
+  const shine = document.querySelector('.gk-gold-shine');
+  if (!coverImg) return;
 
   function update() {
     const rect = coverImg.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
 
-    // Canva Page 1 natural: 2025 x 3600
-    // Flare position on golden ring: X = 67.5%, Y = 20.5%
-    const naturalRatio = 2025 / 3600;
+    // Cover natural dimensions: 1152 x 2048
+    const naturalRatio = 1152 / 2048;
     const currentRatio = rect.width / rect.height;
 
     let renderedW, renderedH;
@@ -393,17 +426,12 @@ function initGkGlow() {
       renderedW = rect.height * naturalRatio;
     }
 
-    const flareX = (rect.width / 2) + (renderedW * (0.675 - 0.5));
-    const flareY = renderedH * 0.205;
+    const offsetX = (rect.width - renderedW) / 2;
+    const offsetY = 0;
 
-    flare.style.left = `${flareX}px`;
-    flare.style.top = `${flareY}px`;
-
-    const shine = document.querySelector('.gk-gold-shine');
-    if (shine) {
-      shine.style.left = `${(rect.width / 2) + renderedW * (0.24691 - 0.5)}px`;
-      shine.style.top = `${renderedH * 0.19528}px`;
-      shine.style.width = `${renderedW * 0.50420}px`;
+    if (flare) {
+      flare.style.left = `${offsetX + renderedW * 0.6426}px`;
+      flare.style.top = `${offsetY + renderedH * 0.2985}px`;
     }
   }
 
@@ -425,10 +453,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollObserver();
   initScratchCard();
   initGkGlow();
+  initCoverLife();
 
   const envelopeWrapper = document.getElementById('envelope-wrapper');
   const envelopeVideo = document.getElementById('envelope-video');
   const envelopeContainer = document.getElementById('envelope-container');
+  const waxSealBtn = document.getElementById('wax-seal-btn');
   const mainCard = document.getElementById('main-card-layout');
   const coverVideo = document.getElementById('cover-video');
   const weddingAudio = document.getElementById('wedding-audio');
@@ -457,51 +487,75 @@ document.addEventListener('DOMContentLoaded', () => {
       weddingAudio.play().then(updateMusicState).catch(() => {});
     }
 
-    // 2. Hide the wax seal button and play the envelope opening + radiant light burst video
-    if (envelopeWrapper) {
-      envelopeWrapper.classList.add('is-playing-video');
-    }
-    if (envelopeVideo) {
-      envelopeVideo.currentTime = 0;
-      envelopeVideo.play().catch(() => {});
-    }
-
-    // 3. At t = 3.1s (peak of the radiant golden light burst), crossfade to the landing page
-    setTimeout(() => {
+    let revealed = false;
+    function revealLandingPage() {
+      if (revealed) return;
+      revealed = true;
       document.body.classList.remove('is-envelope-closed');
       if (mainCard) mainCard.classList.add('is-revealed');
       if (envelopeWrapper) envelopeWrapper.classList.add('is-hidden');
 
-      // Start the page slightly scrolled down to begin directly at the brown arch beam
-      const cardWidth = Math.min(window.innerWidth || 400, 480);
-      const brownOffset = Math.round(cardWidth * 0.058);
-      window.scrollTo(0, brownOffset);
-      document.documentElement.scrollTop = brownOffset;
-      document.body.scrollTop = brownOffset;
+      window.dispatchEvent(new Event('resize'));
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
 
       if (window.__refreshScratchCanvas) {
         window.__refreshScratchCanvas();
       }
 
-      if (coverVideo) {
-        coverVideo.currentTime = 3.6;
-        coverVideo.play().catch(() => {});
-        coverVideo.addEventListener('timeupdate', () => {
-          if (coverVideo.currentTime >= 14.8) {
-            coverVideo.currentTime = 3.8;
-          }
-        });
-      }
-
-      // Clean up envelope video after fade completes
+      // Complete cleanup after slow 1.8s CSS fade completes
       setTimeout(() => {
         if (envelopeWrapper) envelopeWrapper.style.display = 'none';
         if (envelopeVideo) envelopeVideo.pause();
+        window.dispatchEvent(new Event('resize'));
         if (window.__refreshScratchCanvas) {
           window.__refreshScratchCanvas();
         }
-      }, 800);
-    }, 3100);
+      }, 1850);
+    }
+
+    // 2. Play authentic glowing video and sync reveal to actual video progress (buffer-safe on live mobile networks)
+    if (envelopeVideo) {
+      envelopeVideo.muted = true;
+      envelopeVideo.defaultMuted = true;
+      envelopeVideo.currentTime = 0;
+
+      const onTimeUpdate = () => {
+        if (envelopeVideo.currentTime > 0.02 && envelopeWrapper) {
+          envelopeWrapper.classList.add('is-playing-video');
+        }
+        if (envelopeVideo.currentTime >= 4.35) {
+          envelopeVideo.removeEventListener('timeupdate', onTimeUpdate);
+          revealLandingPage();
+        }
+      };
+      envelopeVideo.addEventListener('timeupdate', onTimeUpdate);
+      envelopeVideo.addEventListener('ended', revealLandingPage, { once: true });
+
+      const playPromise = envelopeVideo.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+          if (envelopeWrapper) envelopeWrapper.classList.add('is-playing-video');
+        }).catch(() => {
+          revealLandingPage();
+        });
+      } else if (envelopeWrapper) {
+        envelopeWrapper.classList.add('is-playing-video');
+      }
+
+      // Safety fallback in case mobile network stalls or Low Power Mode pauses video
+      setTimeout(revealLandingPage, 6500);
+    } else {
+      revealLandingPage();
+    }
+  }
+
+  if (waxSealBtn) {
+    waxSealBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      triggerOpen();
+    });
   }
 
   if (envelopeContainer) {

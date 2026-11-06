@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Everdezign Framer Theme CSS -->
-  <link rel="stylesheet" href="/css/framer-theme.css?v=73" />
+  <link rel="stylesheet" href="/css/framer-theme.css?v=87" />
 </head>
 
 <body class="is-envelope-closed">
@@ -46,16 +46,15 @@
        ═══════════════════════════════════════════════════════════ -->
   <section id="envelope-wrapper" class="envelope-wrapper" aria-label="Wedding Invitation Envelope">
     <div id="envelope-container" class="envelope-card-container">
-      <!-- Envelope Opening Video with Radiant Glow Burst -->
-      <video id="envelope-video" class="envelope-video" src="/media/envelope_open_glow.mp4" playsinline muted
-        preload="auto"></video>
+      <!-- Original Envelope Opening Video with Radiant Glow Burst (2.0s Master with New Card) -->
+      <video id="envelope-video" class="envelope-video" src="/media/envelope_open_glow.mp4?v=16" playsinline webkit-playsinline muted
+        preload="auto" type="video/mp4"></video>
 
-      <!-- Pre-Tap Wax Seal Overlay -->
+      <!-- Pre-Tap Wax Seal Overlay (Instant static render on mobile) -->
       <div class="envelope-cover-overlay">
-        <img src="/media/envelope_closed_wax_seal.jpg?v=5" alt="" class="envelope-still-bg" aria-hidden="true" />
+        <img src="/media/envelope_closed_wax_seal.jpg?v=7" alt="Wedding Invitation Envelope" class="envelope-still-bg" aria-hidden="true" />
         <div class="wax-seal-wrapper">
           <button id="wax-seal-btn" class="wax-seal-button" type="button" aria-label="Tap to open invitation"></button>
-          <div class="wax-seal-hint">Tap wax seal to open</div>
         </div>
       </div>
     </div>
@@ -82,13 +81,12 @@
         <audio id="wedding-audio" src="/media/music.mp3" preload="none" loop></audio>
       </div>
 
-      <img src="/media/canva_page_1.webp?v=10"
+      <img src="/media/cover_ghat.webp?v=10"
         alt="Kaavya &amp; Garv · #kaarvinlove · Sher Bengal River Resort, Kolaghat, West Bengal"
         class="page-fullwidth-img" />
 
       <!-- Monogram Gold Star Flare (Exact Match to User Reference) -->
       <div class="gk-logo-glow-wrap" aria-hidden="true">
-        <img src="/media/gk_gold_overlay.png?v=1" alt="" class="gk-gold-shine" />
         <img src="/media/gold_sparkle_flare.svg?v=2" alt="" class="gk-ring-star-flare" />
       </div>
 
@@ -101,6 +99,7 @@
 
     <!-- ── Sacred Ganesh Mandap Frame Section between Page 1 & Page 2 ── -->
     <section class="ganesh-card-section scroll-reveal" aria-label="Shree Ganesh Invocation">
+      <img src="/media/ganesh_wooden_mandap_bg.webp?v=1" alt="" class="ganesh-wooden-scene-bg" aria-hidden="true" />
       <div class="ganesh-card-container">
         <img src="/media/ganesh_canva_arch_clean.webp?v=3" alt="" class="ganesh-mandap-bg" />
         <div class="ganesh-card-content">
@@ -393,7 +392,7 @@
   </main>
 
   <!-- Interactive JavaScript Engine -->
-  <script type="module" src="/js/framer-app.js?v=20"></script>
+  <script type="module" src="/js/framer-app.js?v=50"></script>
 </body>
 
 </html>
