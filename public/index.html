@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Everdezign Framer Theme CSS -->
-  <link rel="stylesheet" href="/css/framer-theme.css?v=97" />
+  <link rel="stylesheet" href="/css/framer-theme.css?v=120" />
 </head>
 
 <body class="is-envelope-closed">
@@ -133,10 +133,67 @@
       <img src="/media/branching_floral_lush.svg?v=1" alt="" class="branching-floral-svg is-mirrored" />
     </div>
 
-    <!-- ── 2B. Page 2: Sacred Blessings & Formal Invitation (Full Width Edge-to-Edge with Grand 3D Unfold Animation) ── -->
-    <article id="page-2-invitation" class="page-fullwidth page-two-reveal scroll-reveal">
-      <img src="/media/canva_page_2.webp?v=8" alt="Wedding Invitation · Chandalia Family · Kaavya Weds Garv"
-        class="page-fullwidth-img" />
+    <!-- ── 2B. Page 2: Sacred Blessings & Formal Invitation (This Weds This) ── -->
+    <article id="page-2-invitation" class="formal-invite-card scroll-reveal">
+      <div class="formal-invite-inner">
+        <!-- Bride Name: Kaavya -->
+        <div class="invite-name-wrap zoom-reveal">
+          <img src="/media/kaavya_name_ref.png?v=1" alt="Kaavya" class="invite-script-name invite-name-kaavya" />
+        </div>
+
+        <!-- Top Lotus Ornament -->
+        <div class="invite-lotus-wrap zoom-reveal" aria-hidden="true">
+          <img src="/media/lotus_divider_ref.png?v=1" alt="" class="invite-lotus-divider" />
+        </div>
+
+        <!-- Bride Family Details -->
+        <div class="invite-family-block zoom-reveal">
+          <p class="invite-relation-label">Grand daughter of</p>
+          <p class="invite-elder-names">Lt. Laxmipat Singh &ndash; Lt. Bhiki Devi Chandalia</p>
+          
+          <div class="invite-diamond-divider" aria-hidden="true">
+            <img src="/media/diamond_rule_ref.png?v=1" alt="" class="invite-divider-img" />
+          </div>
+
+          <p class="invite-relation-label">Daughter of</p>
+          <p class="invite-parent-names">Rakesh &ndash; Sunita Chandalia</p>
+          <p class="invite-city-name">(Rajaldesar, Kolkata)</p>
+        </div>
+
+        <!-- Center Weds Badge -->
+        <div class="invite-weds-wrap zoom-reveal">
+          <img src="/media/weds_badge_ref.png?v=1" alt="Weds" class="invite-weds-badge" />
+        </div>
+
+        <!-- Groom Name: Garv -->
+        <div class="invite-name-wrap zoom-reveal">
+          <img src="/media/garv_name_ref.png?v=1" alt="Garv" class="invite-script-name invite-name-garv" />
+        </div>
+
+        <!-- Mid Lotus Ornament -->
+        <div class="invite-lotus-wrap zoom-reveal" aria-hidden="true">
+          <img src="/media/lotus_divider_ref.png?v=1" alt="" class="invite-lotus-divider" />
+        </div>
+
+        <!-- Groom Family Details -->
+        <div class="invite-family-block zoom-reveal">
+          <p class="invite-relation-label">Grandson of</p>
+          <p class="invite-elder-names">Shri Shyamlal ji &ndash; Smt. Munni Devi ji Agarwal</p>
+          
+          <div class="invite-diamond-divider" aria-hidden="true">
+            <img src="/media/diamond_rule_ref.png?v=1" alt="" class="invite-divider-img" />
+          </div>
+
+          <p class="invite-relation-label">Son of</p>
+          <p class="invite-parent-names">Shri Sanjay ji &ndash; Smt. Kavita ji Garg</p>
+          <p class="invite-city-name">(Guwahati)</p>
+        </div>
+
+        <!-- Bottom Lotus Ornament -->
+        <div class="invite-lotus-wrap invite-bottom-lotus-wrap zoom-reveal" aria-hidden="true">
+          <img src="/media/lotus_divider_ref.png?v=1" alt="" class="invite-lotus-divider" />
+        </div>
+      </div>
     </article>
 
     <!-- ── 2C. Save The Date & Interactive Scratch Card (Exact Framer Match) ── -->
@@ -147,15 +204,19 @@
       </div>
 
       <!-- Scratch Card Interactive Box -->
-      <div id="scratch-widget" class="scratch-widget-container zoom-reveal">
-        <!-- Revealed Base Layer (The Date Underneath) -->
-        <div class="scratch-underlay">
-          <img src="/media/scratch_revealed_garv_kaavya.png?v=8" alt="Wedding Date: 11 - 12 December, 2026"
-            class="scratch-underlay-img" />
-        </div>
+      <div class="scratch-widget-wrap zoom-reveal">
+        <div id="scratch-widget" class="scratch-widget-container">
+          <!-- Revealed Base Layer (The Date Underneath) -->
+          <div class="scratch-underlay">
+            <img src="/media/scratch_revealed_garv_kaavya.png?v=8" alt="Wedding Date: 11 - 12 December, 2026"
+              class="scratch-underlay-img" />
+          </div>
 
-        <!-- Scratch Canvas (Foreground erasing layer) -->
-        <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+          <!-- Scratch Canvas (Foreground erasing layer) -->
+          <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+        </div>
+        <!-- Fireworks Celebration Canvas -->
+        <canvas id="scratch-fireworks-canvas" class="scratch-fireworks-canvas" aria-hidden="true"></canvas>
       </div>
 
       <div id="scratch-hint" class="scratch-instruction-hint">Scratch the gold card above to reveal the auspicious
@@ -201,7 +262,7 @@
           <span class="countdown-label">Seconds</span>
         </div>
       </div>
-      <p class="countdown-target-date">11<sup class="ord-sup">th</sup> &amp; 12<sup class="ord-sup">th</sup> December 2026</p>
+      <p class="countdown-target-date">When the forever begins&hellip;</p>
     </article>
 
     <!-- ── 2E. Special Moments (Slow Continuous Marquee Match to Reference Site) ── -->
@@ -225,7 +286,78 @@
       <span class="divider-line"></span>
     </div>
 
-    <!-- ── 2F. Events Schedule (Replicated Exactly from PDF / Canva Pages 3, 4, 5, 6) ── -->
+    <!-- ── 2F. Two Hearts, One Beautiful Journey (Our Story Section) ── -->
+    <section id="two-hearts-section" class="two-hearts-story-section scroll-reveal" aria-label="Our Love Story">
+      <div class="two-hearts-inner">
+        <!-- Top Lotus Ornament -->
+        <div class="two-hearts-top-lotus zoom-reveal">
+          <img src="/media/two_hearts_lotus.png" alt="" class="two-hearts-lotus-img" />
+        </div>
+
+        <!-- Heading -->
+        <h2 class="two-hearts-title zoom-reveal">
+          <span class="two-hearts-line-1">Two Hearts,</span>
+          <span class="two-hearts-line-2">
+            One Beautiful Journey
+            <svg class="heart-outline-svg" viewBox="0 0 24 24" fill="none" stroke="#A47834" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </span>
+          <img src="/media/two_hearts_head_flourish.png" alt="" class="two-hearts-head-flourish" />
+        </h2>
+
+        <!-- Gold Floral Rule Divider -->
+        <div class="two-hearts-rule-wrap zoom-reveal" aria-hidden="true">
+          <img src="/media/two_hearts_divider.png" alt="" class="two-hearts-rule-img" />
+        </div>
+
+        <!-- Story Message -->
+        <div class="two-hearts-body zoom-reveal">
+          <p class="two-hearts-para">
+            And just like that, two lives became one beautiful story.<br />
+            Filled with laughter, little moments, endless love and<br />
+            dreams of a lifetime together.
+          </p>
+          <p class="two-hearts-para">
+            Every moment has brought us closer to this special day,<br />
+            where a new chapter begins and forever feels a little<br />
+            more magical.
+          </p>
+          <p class="two-hearts-para">
+            Here&rsquo;s to love, togetherness and a lifetime of<br />
+            happily ever after!
+          </p>
+        </div>
+
+        <!-- Gold Floral Rule Divider -->
+        <div class="two-hearts-rule-wrap zoom-reveal" aria-hidden="true">
+          <img src="/media/two_hearts_divider.png" alt="" class="two-hearts-rule-img" />
+        </div>
+
+        <!-- Signature -->
+        <div class="two-hearts-signature zoom-reveal">
+          <span class="two-hearts-with-love">With love,</span>
+          <div class="two-hearts-names-wrap">
+            <div class="two-hearts-names-row">
+              <span class="two-hearts-names">Kaavya &amp; Garv</span>
+              <svg class="heart-outline-svg heart-script-svg" viewBox="0 0 24 24" fill="none" stroke="#781D22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <img src="/media/two_hearts_names_flourish.png" alt="" class="two-hearts-names-flourish" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Golden Diamond Divider into Events Schedule -->
+    <div class="framer-gold-divider scroll-reveal">
+      <span class="divider-line"></span>
+      <span class="divider-diamond">◆</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- ── 2G. Events Schedule (Replicated Exactly from PDF / Canva Pages 3, 4, 5, 6) ── -->
     <section class="events-main-section">
       <h2 class="section-script-title zoom-reveal">Events Schedule</h2>
       <p class="section-script-subtitle scroll-reveal">
@@ -385,118 +517,225 @@
       <span class="divider-line"></span>
     </div>
 
-    <!-- ── 2H. Wardrobe Planner Section (Vertical Scene-by-Scene Closet Choreography) ── -->
+    <!-- ── 2H. Wardrobe Planner Section (Horizontal Layered Carousel - Exact Match to User Reference) ── -->
     <section class="wardrobe-planner-section" id="wardrobe-section" aria-label="Wardrobe Planner">
       <h2 class="section-script-title zoom-reveal">Wardrobe Planner</h2>
-      <p class="section-script-subtitle scroll-reveal">
-        Dress to impress for every celebration
-      </p>
+      <p class="section-script-subtitle scroll-reveal">Dress to impress for every celebration</p>
 
-      <div class="wardrobe-list">
+      <!-- Dynamic Event Heading (Script Font matching Events, No Sideways Lines) -->
+      <div class="wardrobe-carousel-header scroll-reveal">
+        <div class="wardrobe-event-title-line">
+          <h3 id="wardrobe-event-heading" class="wardrobe-event-heading">Mayra</h3>
+        </div>
+      </div>
 
-        <!-- 1. Mayra Wardrobe: Beero Bhaat Bharan Ne Aayo -->
-        <div class="wardrobe-scene-wrap wardrobe-scene-mayra scroll-reveal">
-          <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=5" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-title" src="/media/wardrobe/mayra_title.webp?v=5"
-            style="left:1.67%;top:4.38%;width:96.67%;height:12.19%;" alt="Beero Bhaat Bharan Ne Aayo (Mayra)" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-l" src="/media/wardrobe/mayra_outfit2.webp?v=2"
-            style="left:14.86%;top:20.39%;width:35.42%;height:37.73%;" alt="Mayra Her Anarkali Outfit" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-r" src="/media/wardrobe/mayra_outfit3.webp?v=2"
-            style="left:48.19%;top:22.11%;width:28.19%;height:34.69%;" alt="Mayra Him Nehru Jacket Outfit" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-l" src="/media/wardrobe/mayra_outfit1.webp?v=2"
-            style="left:0.42%;top:20.71%;width:28.33%;height:34.3%;" alt="Mayra Her Maroon Anarkali" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-r" src="/media/wardrobe/mayra_outfit4.webp?v=2"
-            style="left:73.75%;top:22.58%;width:26.25%;height:33.59%;" alt="Mayra Him Floral Jacket Kurta" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-1" src="/media/wardrobe/mayra_acc1.webp?v=2"
-            style="left:46.39%;top:57.03%;width:12.5%;height:4.69%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-2" src="/media/wardrobe/mayra_acc2.webp?v=2"
-            style="left:87.22%;top:58.13%;width:6.81%;height:3.98%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-her" src="/media/wardrobe/mayra_shoe_her.webp?v=2"
-            style="left:14.31%;top:71.41%;width:16.39%;height:6.72%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-him" src="/media/wardrobe/mayra_shoe_him.webp?v=2"
-            style="left:78.06%;top:70.94%;width:14.03%;height:7.19%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-footer" src="/media/wardrobe/mayra_footer.webp?v=2"
-            style="left:8.33%;top:78.5%;width:83.33%;height:13.28%;"
-            alt="11th December 2026 · For Her - Gown, Saree, Anarkali · For Him - Kurta Set, Anything Traditional" decoding="async" />
+      <!-- Horizontal Layered 3D Carousel Stage -->
+      <div class="wardrobe-carousel-container" id="wardrobe-carousel-container">
+        <!-- Navigation Arrows -->
+        <button class="wardrobe-nav-btn wardrobe-nav-prev" id="wardrobe-prev-btn" aria-label="Previous Outfit" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="wardrobe-nav-btn wardrobe-nav-next" id="wardrobe-next-btn" aria-label="Next Outfit" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Carousel Track -->
+        <div class="wardrobe-carousel-track" id="wardrobe-carousel-track">
+
+          <!-- 1. Mayra Wardrobe Slide -->
+          <div class="wardrobe-card-slide is-active" data-index="0" data-event-name="Mayra" data-default-color="Royal Maroon">
+            <div class="wardrobe-framed-card">
+              <div class="wardrobe-card-gold-frame">
+                <div class="wardrobe-scene-wrap wardrobe-scene-mayra is-in-view">
+                  <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=30" alt="" aria-hidden="true" decoding="async" />
+                  
+                  <!-- Exactly 2 Garments (1 Women's, 1 Men's) -->
+                  <img class="wardrobe-item wardrobe-outfit-her" src="/media/wardrobe/mayra_outfit2.webp?v=2"
+                    alt="Mayra Her Anarkali" decoding="async" />
+                  <img class="wardrobe-item wardrobe-outfit-him" src="/media/wardrobe/mayra_outfit3.webp?v=2"
+                    alt="Mayra Him Kurta Set" decoding="async" />
+
+                  <!-- Integrated Lower Info & Swatches Plate -->
+                  <div class="wardrobe-card-info-plate">
+                    <div class="wardrobe-card-date">11th December 2026</div>
+                    <div class="wardrobe-card-dresscode">
+                      <div class="dresscode-line"><span class="dresscode-label">HER:</span> <span class="dresscode-val">GOWN, SAREE, ANARKALI</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">HIM:</span> <span class="dresscode-val">KURTA SET, ANYTHING TRADITIONAL</span></div>
+                    </div>
+
+                    <div class="wardrobe-info-divider" aria-hidden="true">
+                      <span class="wardrobe-divider-wing"></span>
+                      <span class="wardrobe-divider-gem">&#10070;</span>
+                      <span class="wardrobe-divider-wing"></span>
+                    </div>
+
+                    <!-- Colour Palette inside card -->
+                    <div class="wardrobe-swatches-wrap">
+                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
+                      <div class="wardrobe-swatches" role="radiogroup" aria-label="Mayra Color Palette">
+                        <button class="wardrobe-swatch is-active" style="--swatch-color: #6B1D22;" data-color="Royal Maroon" aria-label="Royal Maroon" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #D4AF37;" data-color="Mustard Gold" aria-label="Mustard Gold" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #2E5A44;" data-color="Emerald Green" aria-label="Emerald Green" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #E08369;" data-color="Coral Peach" aria-label="Coral Peach" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #F5EFEB;" data-color="Raw Silk Ivory" aria-label="Raw Silk Ivory" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Sangeet Wardrobe Slide -->
+          <div class="wardrobe-card-slide is-next" data-index="1" data-event-name="Sangeet" data-default-color="Midnight Blue">
+            <div class="wardrobe-framed-card">
+              <div class="wardrobe-card-gold-frame">
+                <div class="wardrobe-scene-wrap wardrobe-scene-sangeet">
+                  <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=30" alt="" aria-hidden="true" decoding="async" />
+                  
+                  <!-- Exactly 2 Garments (1 Women's, 1 Men's) -->
+                  <img class="wardrobe-item wardrobe-outfit-her" src="/media/wardrobe/sangeet_outfit2.webp?v=2"
+                    alt="Sangeet Her Indo-Western Gown" decoding="async" />
+                  <img class="wardrobe-item wardrobe-outfit-him" src="/media/wardrobe/sangeet_outfit3.webp?v=2"
+                    alt="Sangeet Him Tuxedo" decoding="async" />
+
+                  <!-- Integrated Lower Info & Swatches Plate -->
+                  <div class="wardrobe-card-info-plate">
+                    <div class="wardrobe-card-date">11th December 2026</div>
+                    <div class="wardrobe-card-dresscode">
+                      <div class="dresscode-line"><span class="dresscode-label">HER:</span> <span class="dresscode-val">INDO-WESTERN GOWN, DRAPE SAREE</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">HIM:</span> <span class="dresscode-val">TUXEDO, INDO-WESTERN SET</span></div>
+                    </div>
+
+                    <div class="wardrobe-info-divider" aria-hidden="true">
+                      <span class="wardrobe-divider-wing"></span>
+                      <span class="wardrobe-divider-gem">&#10070;</span>
+                      <span class="wardrobe-divider-wing"></span>
+                    </div>
+
+                    <!-- Colour Palette inside card -->
+                    <div class="wardrobe-swatches-wrap">
+                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
+                      <div class="wardrobe-swatches" role="radiogroup" aria-label="Sangeet Color Palette">
+                        <button class="wardrobe-swatch is-active" style="--swatch-color: #1B263B;" data-color="Midnight Blue" aria-label="Midnight Blue" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #C5A059;" data-color="Champagne Gold" aria-label="Champagne Gold" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #541212;" data-color="Deep Wine" aria-label="Deep Wine" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #212121;" data-color="Classic Black" aria-label="Classic Black" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #D6D6D6;" data-color="Starlight Silver" aria-label="Starlight Silver" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Haldi Carnival Wardrobe Slide -->
+          <div class="wardrobe-card-slide is-hidden" data-index="2" data-event-name="Carnival Haldi" data-default-color="Marigold Yellow">
+            <div class="wardrobe-framed-card">
+              <div class="wardrobe-card-gold-frame">
+                <div class="wardrobe-scene-wrap wardrobe-scene-haldi">
+                  <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=30" alt="" aria-hidden="true" decoding="async" />
+                  
+                  <!-- Exactly 2 Garments (1 Women's, 1 Men's) -->
+                  <img class="wardrobe-item wardrobe-outfit-her" src="/media/wardrobe/haldi_outfit2.webp?v=2"
+                    alt="Haldi Her Pastel Dress" decoding="async" />
+                  <img class="wardrobe-item wardrobe-outfit-him" src="/media/wardrobe/haldi_outfit4.webp?v=2"
+                    alt="Haldi Him Pastel Kurta Set" decoding="async" />
+
+                  <!-- Integrated Lower Info & Swatches Plate -->
+                  <div class="wardrobe-card-info-plate">
+                    <div class="wardrobe-card-date">12th December 2026</div>
+                    <div class="wardrobe-card-dresscode">
+                      <div class="dresscode-line"><span class="dresscode-label">HER:</span> <span class="dresscode-val">INDO-WESTERN, DRESSES, CO-ORD SET</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">HIM:</span> <span class="dresscode-val">BREEZY OUTFITS, CO-ORD SET</span></div>
+                    </div>
+
+                    <div class="wardrobe-info-divider" aria-hidden="true">
+                      <span class="wardrobe-divider-wing"></span>
+                      <span class="wardrobe-divider-gem">&#10070;</span>
+                      <span class="wardrobe-divider-wing"></span>
+                    </div>
+
+                    <!-- Colour Palette inside card -->
+                    <div class="wardrobe-swatches-wrap">
+                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
+                      <div class="wardrobe-swatches" role="radiogroup" aria-label="Carnival Haldi Color Palette">
+                        <button class="wardrobe-swatch is-active" style="--swatch-color: #E5A93B;" data-color="Marigold Yellow" aria-label="Marigold Yellow" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #A8D5BA;" data-color="Pastel Mint" aria-label="Pastel Mint" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #F7B299;" data-color="Peach Blush" aria-label="Peach Blush" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #A2D2FF;" data-color="Breezy Sky" aria-label="Breezy Sky" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #FFFDF8;" data-color="Pearl White" aria-label="Pearl White" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Wedding Wardrobe Slide -->
+          <div class="wardrobe-card-slide is-prev" data-index="3" data-event-name="Varmala &amp; Phere" data-default-color="Sindoor Crimson">
+            <div class="wardrobe-framed-card">
+              <div class="wardrobe-card-gold-frame">
+                <div class="wardrobe-scene-wrap wardrobe-scene-wedding">
+                  <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=30" alt="" aria-hidden="true" decoding="async" />
+                  
+                  <!-- Exactly 2 Garments (1 Women's, 1 Men's) -->
+                  <img class="wardrobe-item wardrobe-outfit-her" src="/media/wardrobe/wedding_outfit2.webp?v=2"
+                    alt="Wedding Her Maroon Lehenga" decoding="async" />
+                  <img class="wardrobe-item wardrobe-outfit-him" src="/media/wardrobe/wedding_outfit3.webp?v=2"
+                    alt="Wedding Him Bandhgala" decoding="async" />
+
+                  <!-- Integrated Lower Info & Swatches Plate -->
+                  <div class="wardrobe-card-info-plate">
+                    <div class="wardrobe-card-date">12th December 2026</div>
+                    <div class="wardrobe-card-dresscode">
+                      <div class="dresscode-line"><span class="dresscode-label">HER:</span> <span class="dresscode-val">LEHENGA, SAREE</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">HIM:</span> <span class="dresscode-val">BANDHGALA, THREE PIECE SUIT</span></div>
+                    </div>
+
+                    <div class="wardrobe-info-divider" aria-hidden="true">
+                      <span class="wardrobe-divider-wing"></span>
+                      <span class="wardrobe-divider-gem">&#10070;</span>
+                      <span class="wardrobe-divider-wing"></span>
+                    </div>
+
+                    <!-- Colour Palette inside card -->
+                    <div class="wardrobe-swatches-wrap">
+                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
+                      <div class="wardrobe-swatches" role="radiogroup" aria-label="Varmala &amp; Phere Color Palette">
+                        <button class="wardrobe-swatch is-active" style="--swatch-color: #8B1E22;" data-color="Sindoor Crimson" aria-label="Sindoor Crimson" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #C89B3C;" data-color="Antique Zari Gold" aria-label="Antique Zari Gold" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #FAF3E0;" data-color="Royal Ivory" aria-label="Royal Ivory" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #4A121A;" data-color="Deep Maroon" aria-label="Deep Maroon" type="button"></button>
+                        <button class="wardrobe-swatch" style="--swatch-color: #D8C3A5;" data-color="Heritage Beige" aria-label="Heritage Beige" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- 2. Sangeet Wardrobe: Glitz & Glam -->
-        <div class="wardrobe-scene-wrap wardrobe-scene-sangeet scroll-reveal">
-          <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=5" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-title" src="/media/wardrobe/sangeet_title.webp?v=5"
-            style="left:1.67%;top:4.38%;width:96.67%;height:12.19%;" alt="Glitz & Glam (SANGEET)" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-l" src="/media/wardrobe/sangeet_outfit2.webp?v=2"
-            style="left:19.44%;top:20.24%;width:31.81%;height:37.42%;" alt="Sangeet Her Gown" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-r" src="/media/wardrobe/sangeet_outfit3.webp?v=2"
-            style="left:50.0%;top:22.42%;width:24.31%;height:34.84%;" alt="Sangeet Him Tuxedo" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-l" src="/media/wardrobe/sangeet_outfit1.webp?v=2"
-            style="left:6.39%;top:20.24%;width:25.28%;height:38.2%;" alt="Sangeet Her Drape Saree" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-r" src="/media/wardrobe/sangeet_outfit4.webp?v=2"
-            style="left:69.58%;top:21.96%;width:30.42%;height:34.22%;" alt="Sangeet Him Indo-Western Set" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-1" src="/media/wardrobe/sangeet_acc1.webp?v=2"
-            style="left:46.94%;top:57.03%;width:11.25%;height:4.38%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-2" src="/media/wardrobe/sangeet_acc2.webp?v=2"
-            style="left:87.64%;top:54.92%;width:7.5%;height:6.72%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-her" src="/media/wardrobe/sangeet_shoe_her.webp?v=2"
-            style="left:20.69%;top:70.55%;width:17.22%;height:7.89%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-him" src="/media/wardrobe/sangeet_shoe_him.webp?v=2"
-            style="left:71.39%;top:71.41%;width:17.78%;height:6.88%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-footer" src="/media/wardrobe/sangeet_footer.webp?v=2"
-            style="left:8.33%;top:78.5%;width:83.33%;height:13.28%;"
-            alt="11th December 2026 · For Her - Indo-Western Gown, Drape Saree · For Him - Tuxedo, Indo-Western Set" decoding="async" />
+        <!-- Carousel Indicators (4 dots) -->
+        <div class="wardrobe-carousel-dots" id="wardrobe-carousel-dots" role="tablist" aria-label="Select Event">
+          <button class="wardrobe-dot is-active" data-index="0" aria-label="Go to Mayra" role="tab" aria-selected="true" type="button"></button>
+          <button class="wardrobe-dot" data-index="1" aria-label="Go to Sangeet" role="tab" aria-selected="false" type="button"></button>
+          <button class="wardrobe-dot" data-index="2" aria-label="Go to Carnival Haldi" role="tab" aria-selected="false" type="button"></button>
+          <button class="wardrobe-dot" data-index="3" aria-label="Go to Varmala &amp; Phere" role="tab" aria-selected="false" type="button"></button>
         </div>
-
-        <!-- 3. Haldi Carnival Wardrobe: Pastel Paradise -->
-        <div class="wardrobe-scene-wrap wardrobe-scene-haldi scroll-reveal">
-          <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=5" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-title" src="/media/wardrobe/haldi_title.webp?v=5"
-            style="left:1.67%;top:4.38%;width:96.67%;height:12.19%;" alt="Pastel Paradise (Haldi Carnival)" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-l" src="/media/wardrobe/haldi_outfit2.webp?v=2"
-            style="left:25.69%;top:20.55%;width:21.39%;height:37.66%;" alt="Haldi Her Pastel Dress" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-r" src="/media/wardrobe/haldi_outfit3.webp?v=2"
-            style="left:47.5%;top:22.11%;width:25.83%;height:31.95%;" alt="Haldi Him Breezy Co-Ord Set" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-l" src="/media/wardrobe/haldi_outfit1.webp?v=2"
-            style="left:4.03%;top:20.71%;width:19.03%;height:37.34%;" alt="Haldi Her Pastel Saree" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-r" src="/media/wardrobe/haldi_outfit4.webp?v=2"
-            style="left:75.42%;top:20.55%;width:23.61%;height:36.09%;" alt="Haldi Him Pastel Kurta Set" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-1" src="/media/wardrobe/haldi_acc1.webp?v=2"
-            style="left:49.72%;top:59.38%;width:9.44%;height:2.5%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-2" src="/media/wardrobe/haldi_acc2.webp?v=2"
-            style="left:62.64%;top:57.89%;width:5.0%;height:4.22%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-her" src="/media/wardrobe/haldi_shoe_her.webp?v=2"
-            style="left:15.0%;top:72.97%;width:18.75%;height:5.16%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-him" src="/media/wardrobe/haldi_shoe_him.webp?v=2"
-            style="left:65.42%;top:72.97%;width:18.61%;height:5.55%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-footer" src="/media/wardrobe/haldi_footer.webp?v=2"
-            style="left:8.33%;top:78.5%;width:83.33%;height:13.28%;"
-            alt="12th December 2026 · For Her - Indo-Western, Dresses, Co-Ord Set · For Him - Breezy Outfits, Co-Ord Set" decoding="async" />
-        </div>
-
-        <!-- 4. Wedding Wardrobe: Regal Opulence -->
-        <div class="wardrobe-scene-wrap wardrobe-scene-wedding scroll-reveal">
-          <img class="wardrobe-closet-bg" src="/media/wardrobe/closet_bg.webp?v=5" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-title" src="/media/wardrobe/wedding_title.webp?v=5"
-            style="left:1.67%;top:4.38%;width:96.67%;height:12.19%;" alt="Regal Opulence (Wedding)" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-l" src="/media/wardrobe/wedding_outfit2.webp?v=2"
-            style="left:14.44%;top:22.11%;width:43.06%;height:36.33%;" alt="Wedding Her Maroon Lehenga" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-inner-r" src="/media/wardrobe/wedding_outfit3.webp?v=2"
-            style="left:45.28%;top:22.11%;width:28.61%;height:26.02%;" alt="Wedding Him Bandhgala" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-l" src="/media/wardrobe/wedding_outfit1.webp?v=2"
-            style="left:0.69%;top:20.55%;width:33.75%;height:37.89%;" alt="Wedding Her Red Saree" decoding="async" />
-          <img class="wardrobe-item wardrobe-outfit-outer-r" src="/media/wardrobe/wedding_outfit4.webp?v=2"
-            style="left:72.64%;top:21.02%;width:27.36%;height:24.3%;" alt="Wedding Him Three Piece Suit" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-1" src="/media/wardrobe/wedding_acc1.webp?v=2"
-            style="left:58.75%;top:56.17%;width:14.86%;height:5.08%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-acc-2" src="/media/wardrobe/wedding_acc2.webp?v=2"
-            style="left:84.86%;top:56.33%;width:12.22%;height:5.62%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-her" src="/media/wardrobe/wedding_shoe_her.webp?v=2"
-            style="left:17.5%;top:71.56%;width:15.56%;height:7.58%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-shoe-him" src="/media/wardrobe/wedding_shoe_him.webp?v=2"
-            style="left:70.83%;top:69.85%;width:16.94%;height:9.3%;" alt="" aria-hidden="true" decoding="async" />
-          <img class="wardrobe-item wardrobe-footer" src="/media/wardrobe/wedding_footer.webp?v=2"
-            style="left:8.33%;top:78.5%;width:83.33%;height:13.28%;"
-            alt="12th December 2026 · For Her - Lehenga, Saree · For Him - Bandhgala, Three Piece Suit" decoding="async" />
-        </div>
+      </div>
 
         <!-- 5. Wardrobe Closing Scene: Weather Forecast & Brass Luggage Cart -->
         <div class="wardrobe-scene-wrap wardrobe-scene-closing scroll-reveal">
@@ -517,15 +756,6 @@
           <img class="wardrobe-item wardrobe-luggage-cart" src="/media/wardrobe/closing_cart.webp?v=8"
             style="left:16.39%;top:57.05%;width:66.39%;height:40.15%;" alt="Royal Luggage Cart" decoding="async" />
         </div>
-
-        <!-- 6. Two Hearts, One Beautiful Journey Bridge (Between Wardrobe Curvy Ending & Royal Arch Footer) -->
-        <div class="wardrobe-two-hearts-bridge">
-          <img src="/media/wardrobe/two_hearts_bridge.webp?v=9"
-            alt="Two Hearts, One Beautiful Journey · With love, Kaavya &amp; Garv"
-            class="wardrobe-two-hearts-img" decoding="async" />
-        </div>
-
-      </div>
     </section>
 
     <!-- ── 2I. Auspicious Royal Closing Pavilion (Exact Match to User Reference) ── -->
@@ -542,7 +772,7 @@
   </main>
 
   <!-- Interactive JavaScript Engine -->
-  <script type="module" src="/js/framer-app.js?v=52"></script>
+  <script type="module" src="/js/framer-app.js?v=57"></script>
 </body>
 
 </html>

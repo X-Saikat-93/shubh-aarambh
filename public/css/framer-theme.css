@@ -3,7 +3,7 @@
    Everdezign Framer Exact Replica Styling
    ═══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;500;600&family=Beau+Rivage&family=Cinzel:wght@400;500;600;700&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Martel:wght@600;700&family=Pinyon+Script&family=Public+Sans:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;500;600&family=Alex+Brush&family=Beau+Rivage&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Martel:wght@600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Public+Sans:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap');
 
 :root {
   --framer-burgundy: #642020;
@@ -775,6 +775,184 @@ body.is-envelope-closed .main-card-layout {
   filter: blur(0);
 }
 
+/* ───────── Page 2: Formal Invitation (This Weds This) ───────── */
+.formal-invite-card {
+  position: relative;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 18px auto 26px !important;
+  padding: 16px 14px 24px !important;
+  box-sizing: border-box;
+  text-align: center;
+  background: transparent !important;
+}
+
+.formal-invite-card.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.formal-invite-card.scroll-reveal.is-in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.formal-invite-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* Bride / Groom Script Names */
+.invite-name-wrap {
+  width: 100%;
+  max-width: 310px;
+  margin: 2px auto 0;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invite-script-name {
+  width: auto;
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 8px rgba(100, 20, 25, 0.08));
+}
+
+.invite-name-kaavya {
+  max-height: 74px;
+}
+
+.invite-name-garv {
+  max-height: 82px;
+}
+
+/* Lotus Dividers */
+.invite-lotus-wrap {
+  width: 100%;
+  max-width: 270px;
+  margin: 2px auto 6px;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invite-bottom-lotus-wrap {
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.invite-lotus-divider {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Family Typography Blocks */
+.invite-family-block {
+  margin: 2px auto 6px;
+  width: 100%;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.invite-relation-label {
+  font-family: 'Times New Roman', Times, 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(0.96rem, 2.5vw, 1.05rem);
+  color: #7A4B1A;
+  margin: 0 0 3px 0;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.invite-elder-names {
+  font-family: 'Times New Roman', Times, 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(0.98rem, 2.6vw, 1.08rem);
+  color: #5C1217;
+  margin: 0 0 4px 0;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.invite-parent-names {
+  font-family: 'Times New Roman', Times, 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.08rem, 2.9vw, 1.2rem);
+  color: #5C1217;
+  margin: 0 0 2px 0;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.invite-city-name {
+  font-family: 'Times New Roman', Times, 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(0.92rem, 2.4vw, 1.02rem);
+  color: #5C1217;
+  margin: 1px 0 0 0;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+/* Diamond Divider between elders and parents */
+.invite-diamond-divider {
+  width: 100%;
+  max-width: 160px;
+  margin: 4px auto 5px;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invite-divider-img {
+  width: 100%;
+  max-width: 155px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Center Weds Badge */
+.invite-weds-wrap {
+  width: 100%;
+  max-width: 320px;
+  margin: 6px auto 4px;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invite-weds-badge {
+  width: 100%;
+  max-width: 310px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 8px rgba(92, 18, 23, 0.12));
+}
+
+/* Branching floral divider margin reduction to remove void */
+.branching-floral-p2 {
+  margin: -10px auto -6px !important;
+  padding: 0 !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    UNIQUE SIGNATURE SECTION ANIMATIONS (AUTHENTIC ROYAL WEDDING)
    ═══════════════════════════════════════════════════════════════ */
@@ -1040,6 +1218,17 @@ body.is-envelope-closed .main-card-layout {
   margin-bottom: 22px;
 }
 
+.scratch-widget-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 14px;
+}
+
+.scratch-widget-wrap .scratch-widget-container {
+  margin: 0 auto;
+}
+
 .scratch-widget-container {
   position: relative;
   width: 100%;
@@ -1053,6 +1242,21 @@ body.is-envelope-closed .main-card-layout {
   -webkit-user-select: none;
   touch-action: none;
   background-color: #FFF9F5;
+  transition: box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scratch-widget-container.is-revealed-glow {
+  box-shadow: 0 0 32px rgba(228, 184, 106, 0.6), 0 12px 30px rgba(107, 29, 34, 0.2);
+}
+
+.scratch-fireworks-canvas {
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  pointer-events: none;
+  z-index: 25;
 }
 
 .scratch-underlay {
@@ -1409,6 +1613,184 @@ body.is-envelope-closed .main-card-layout {
 .framer-gold-divider .divider-diamond {
   font-size: 0.65rem;
   color: var(--framer-gold);
+}
+
+/* ───────── Section: Two Hearts, One Beautiful Journey ───────── */
+.two-hearts-story-section {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 10px auto 18px;
+  padding: 6px 14px 14px;
+  box-sizing: border-box;
+  text-align: center;
+  background: transparent;
+}
+
+.two-hearts-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.two-hearts-top-lotus {
+  width: 100%;
+  max-width: 44px;
+  margin: 0 auto 6px;
+  line-height: 0;
+}
+
+.two-hearts-lotus-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 5px rgba(160, 110, 40, 0.15));
+}
+
+.two-hearts-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 2px 0;
+  width: 100%;
+}
+
+.two-hearts-line-1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1.95rem, 5.5vw, 2.35rem);
+  color: #781D22;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+.two-hearts-line-2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 5vw, 2.15rem);
+  color: #A47834;
+  letter-spacing: 0.015em;
+  line-height: 1.18;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-outline-svg {
+  display: inline-block;
+  width: 0.82em;
+  height: 0.82em;
+  vertical-align: middle;
+  margin-left: 6px;
+  stroke: currentColor;
+  fill: none;
+  transform: rotate(12deg);
+}
+
+.two-hearts-head-flourish {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  display: block;
+  margin: 2px auto 2px;
+}
+
+.two-hearts-rule-wrap {
+  width: 100%;
+  max-width: 210px;
+  margin: 8px auto 10px;
+  line-height: 0;
+}
+
+.two-hearts-rule-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.two-hearts-body {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.two-hearts-body .two-hearts-para {
+  font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(1.08rem, 3.2vw, 1.2rem);
+  line-height: 1.38;
+  color: #2D1C1D;
+  letter-spacing: 0.012em;
+  margin: 0;
+  padding: 0;
+  text-wrap: balance;
+}
+
+.two-hearts-signature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.two-hearts-with-love {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.12rem;
+  color: #781D22;
+  letter-spacing: 0.02em;
+  margin-bottom: 0px;
+}
+
+.two-hearts-names-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.two-hearts-names-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.two-hearts-names {
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(2.4rem, 7.2vw, 3rem);
+  font-weight: 400;
+  color: #781D22;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+.heart-script-svg {
+  width: 0.72em;
+  height: 0.72em;
+  margin-left: 6px;
+  stroke: #781D22;
+  transform: rotate(10deg);
+}
+
+.two-hearts-names-flourish {
+  width: 100%;
+  max-width: 185px;
+  height: auto;
+  display: block;
+  margin: 2px auto 0;
 }
 
 /* ───────── Section 5: Events Schedule with Floral Template (Image 3 Match) ───────── */
@@ -2645,6 +3027,406 @@ body.at-footer .royal-scroll-prompt {
   margin-bottom: 14px !important;
 }
 
+/* ── Carousel Header & Typography (Reference Inspiration) ── */
+.wardrobe-carousel-header {
+  margin: 4px auto 14px;
+  text-align: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  max-width: 94%;
+}
+
+.wardrobe-event-title-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.wardrobe-title-ornament {
+  display: inline-flex;
+  align-items: center;
+  flex: 1;
+  max-width: 110px;
+  position: relative;
+  color: #C59B40;
+}
+
+.wardrobe-title-ornament::before {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(197, 155, 64, 0), rgba(197, 155, 64, 0.9));
+}
+
+.wardrobe-title-ornament.is-right::before {
+  order: 2;
+  background: linear-gradient(90deg, rgba(197, 155, 64, 0.9), rgba(197, 155, 64, 0));
+}
+
+.wardrobe-title-ornament .ornament-diamond {
+  font-size: 0.78rem;
+  line-height: 1;
+  color: #C59B40;
+  padding: 0 4px;
+  text-shadow: 0 1px 2px rgba(197, 155, 64, 0.25);
+}
+
+.wardrobe-event-heading {
+  font-family: 'Great Vibes', 'Alex Brush', 'Pinyon Script', cursive !important;
+  font-style: normal !important;
+  text-transform: none !important;
+  font-size: clamp(2.5rem, 6.8vw, 3.25rem) !important;
+  font-weight: 400 !important;
+  color: #7A1C20 !important;
+  margin: 0 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+/* ── 3D Layered Carousel Stage ── */
+.wardrobe-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 6px 0 22px;
+  overflow: visible;
+  touch-action: pan-y pinch-zoom;
+  perspective: 1200px;
+}
+
+.wardrobe-carousel-track {
+  position: relative;
+  width: 100%;
+  height: clamp(595px, 82vh, 695px);
+  margin: 0 auto;
+}
+
+.wardrobe-card-slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: clamp(275px, 72vw, 340px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.52s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.52s ease,
+              filter 0.52s ease;
+  will-change: transform, opacity;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Layered 3D Depth states */
+.wardrobe-card-slide.is-active {
+  transform: translateX(-50%) translateZ(0) scale(1);
+  opacity: 1;
+  z-index: 10;
+  filter: none;
+  cursor: default;
+  pointer-events: auto;
+}
+
+.wardrobe-card-slide.is-prev {
+  transform: translateX(calc(-50% - clamp(88px, 23vw, 132px))) translateZ(-50px) scale(0.84);
+  opacity: 0.58;
+  z-index: 5;
+  filter: brightness(0.94) contrast(0.95);
+  pointer-events: auto;
+}
+
+.wardrobe-card-slide.is-next {
+  transform: translateX(calc(-50% + clamp(88px, 23vw, 132px))) translateZ(-50px) scale(0.84);
+  opacity: 0.58;
+  z-index: 5;
+  filter: brightness(0.94) contrast(0.95);
+  pointer-events: auto;
+}
+
+.wardrobe-card-slide.is-hidden {
+  transform: translateX(-50%) translateZ(-100px) scale(0.72);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Framed Gold Card (Matches Reference Image) ── */
+.wardrobe-framed-card {
+  position: relative;
+  width: 100%;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: 
+    0 22px 55px -6px rgba(45, 18, 10, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.14);
+  transition: box-shadow 0.35s ease;
+}
+
+.wardrobe-card-slide.is-active .wardrobe-framed-card {
+  box-shadow: 
+    0 26px 65px -6px rgba(45, 18, 10, 0.42),
+    0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.wardrobe-card-gold-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+  outline: none;
+  box-shadow: none;
+}
+
+.wardrobe-card-slide .wardrobe-scene-wrap {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 720 / 1424 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: transparent;
+}
+
+/* ── Integrated Lower Info & Swatches Plate (Exact Match to User Master Reference) ── */
+.wardrobe-card-info-plate {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 61.2%;
+  bottom: 8.5%;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 0 4px;
+  box-sizing: border-box;
+  pointer-events: auto;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.wardrobe-card-info-plate .wardrobe-card-date {
+  font-family: 'Cinzel', var(--font-serif, 'Playfair Display', serif);
+  font-size: clamp(0.90rem, 2.4vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #7E1C25; /* Rich Royal Crimson Burgundy from reference */
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  line-height: 1.15;
+}
+
+.wardrobe-card-info-plate .wardrobe-card-dresscode {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.wardrobe-card-info-plate .dresscode-line {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: clamp(0.62rem, 1.65vw, 0.72rem);
+  line-height: 1.35;
+  color: #3E3028; /* Crisp dark taupe-charcoal */
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.wardrobe-card-info-plate .dresscode-label {
+  font-weight: 700;
+  color: #3E3028;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 4px;
+}
+
+.wardrobe-card-info-plate .dresscode-val {
+  font-weight: 700;
+  color: #3E3028;
+  text-transform: uppercase;
+}
+
+/* Ornamental gold diamond divider between dress code and colour palette */
+.wardrobe-info-divider {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 4px auto 5px;
+  color: #C5A059;
+  width: 72%;
+}
+
+.wardrobe-info-divider .wardrobe-divider-wing {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.85), transparent);
+}
+
+.wardrobe-info-divider .wardrobe-divider-gem {
+  font-size: 0.68rem;
+  line-height: 1;
+  color: #B8892A;
+  transform: rotate(0deg);
+}
+
+.wardrobe-card-info-plate .wardrobe-swatches-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+.wardrobe-card-info-plate .wardrobe-swatches-title {
+  font-family: 'Cinzel', var(--font-serif, 'Playfair Display', serif);
+  font-size: clamp(0.60rem, 1.5vw, 0.70rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7A6D5E; /* Warm muted gold/taupe from reference */
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.wardrobe-card-info-plate .wardrobe-swatches {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.wardrobe-card-info-plate .wardrobe-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--swatch-color);
+  border: 1.5px solid #C8A261;
+  box-shadow: 0 2px 5px rgba(43, 24, 16, 0.22);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease;
+  position: relative;
+}
+
+.wardrobe-card-info-plate .wardrobe-swatch:hover {
+  transform: scale(1.18);
+  box-shadow: 0 3px 8px rgba(43, 24, 16, 0.3);
+}
+
+.wardrobe-card-info-plate .wardrobe-swatch.is-active {
+  transform: scale(1.18);
+  outline: 1.5px solid #7E1C25;
+  outline-offset: 2.5px;
+  box-shadow: 0 2px 7px rgba(126, 28, 37, 0.35);
+}
+
+.wardrobe-card-info-plate .wardrobe-swatch-name {
+  display: none !important;
+}
+
+/* ── Navigation Arrows ── */
+.wardrobe-nav-btn {
+  position: absolute;
+  top: 44%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(253, 249, 242, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1.2px solid #7A1C20;
+  color: #7A1C20;
+  box-shadow: 0 3px 10px rgba(60, 20, 10, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+}
+
+.wardrobe-nav-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.wardrobe-nav-btn:hover {
+  background: #FFFDF9;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 18px rgba(122, 27, 34, 0.25);
+  color: #541212;
+}
+
+.wardrobe-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.wardrobe-nav-prev {
+  left: 6px;
+}
+
+.wardrobe-nav-next {
+  right: 6px;
+}
+
+@media (min-width: 600px) {
+  .wardrobe-nav-prev {
+    left: -10px;
+  }
+  .wardrobe-nav-next {
+    right: -10px;
+  }
+}
+
+/* ── Carousel Dots ── */
+.wardrobe-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.wardrobe-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #D4AF37;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.wardrobe-dot.is-active {
+  background: #7A1B22;
+  border-color: #7A1B22;
+  transform: scale(1.3);
+  box-shadow: 0 1px 4px rgba(122, 27, 34, 0.4);
+}
+
+/* Legacy fallback container if needed */
 .wardrobe-list {
   display: flex;
   flex-direction: column;
@@ -2697,9 +3479,56 @@ body.at-footer .royal-scroll-prompt {
 }
 
 .wardrobe-outfit-inner-l,
-.wardrobe-outfit-inner-r {
-  z-index: 3;
+.wardrobe-outfit-inner-r,
+.wardrobe-outfit-her,
+.wardrobe-outfit-him {
+  z-index: 4;
   transform-origin: 50% 2%;
+}
+
+/* ── Exactly 2 Garments per Event (1 Her, 1 Him) ── */
+.wardrobe-outfit-her {
+  left: 17%;
+  top: 14.7%;
+  width: 32%;
+  height: 44%;
+  object-fit: contain;
+  object-position: center top;
+  filter: drop-shadow(0 6px 14px rgba(45, 18, 12, 0.16));
+}
+
+.wardrobe-outfit-him {
+  left: 51%;
+  top: 14.7%;
+  width: 32%;
+  height: 44%;
+  object-fit: contain;
+  object-position: center top;
+  filter: drop-shadow(0 6px 14px rgba(45, 18, 12, 0.16));
+}
+
+.wardrobe-scene-wrap .wardrobe-outfit-her {
+  opacity: 0;
+  transform: translateX(-24%) rotate(1.2deg);
+  transition: opacity 0.45s ease 0.08s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+
+.wardrobe-scene-wrap .wardrobe-outfit-him {
+  opacity: 0;
+  transform: translateX(24%) rotate(-1.2deg);
+  transition: opacity 0.45s ease 0.08s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-her {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+  animation: wardrobeHangerSway 4.8s ease-in-out 1.2s infinite;
+}
+
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-him {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+  animation: wardrobeHangerSway 5.2s ease-in-out 1.5s infinite reverse;
 }
 
 .wardrobe-outfit-outer-l,
@@ -2751,10 +3580,74 @@ body.at-footer .royal-scroll-prompt {
   transition: opacity 0.4s ease 0.54s, transform 0.98s cubic-bezier(0.22, 1, 0.36, 1) 0.54s;
 }
 
-.wardrobe-scene-wrap .wardrobe-footer {
+.wardrobe-scene-wrap .wardrobe-footer,
+.wardrobe-scene-wrap .wardrobe-card-footer {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.75s ease 0.65s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.65s;
+}
+
+/* ── High-Legibility Editorial Typography for Him & Her inside Card ── */
+.wardrobe-card-footer {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  top: 76.5%;
+  width: 94%;
+  z-index: 6;
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: rgba(255, 253, 248, 0.75);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  padding: 6px 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 2px 8px rgba(60, 24, 12, 0.04);
+}
+
+.wardrobe-card-date {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: clamp(0.92rem, 2.5vw, 1.12rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #7A1B22; /* Royal Burgundy */
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.wardrobe-card-dresscode {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.dresscode-line {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: clamp(0.78rem, 2.2vw, 0.94rem);
+  line-height: 1.35;
+  color: #38181C;
+  letter-spacing: 0.02em;
+}
+
+.dresscode-label {
+  font-weight: 700;
+  color: #7A1B22;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.88em;
+  margin-right: 3px;
+}
+
+.dresscode-val {
+  font-weight: 600;
+  color: #2D1418;
 }
 
 .wardrobe-scene-wrap .wardrobe-shoe-her {
@@ -2784,6 +3677,7 @@ body.at-footer .royal-scroll-prompt {
 /* ── Active In-View State (.is-in-view) ── */
 .wardrobe-scene-wrap.is-in-view .wardrobe-title,
 .wardrobe-scene-wrap.is-in-view .wardrobe-footer,
+.wardrobe-scene-wrap.is-in-view .wardrobe-card-footer,
 .wardrobe-scene-wrap.is-in-view .wardrobe-shoe-her,
 .wardrobe-scene-wrap.is-in-view .wardrobe-shoe-him,
 .wardrobe-scene-wrap.is-in-view .wardrobe-acc-1,

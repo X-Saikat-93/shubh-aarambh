@@ -378,6 +378,8 @@ function initScratchCard() {
         hint.style.color = '#6B1D22';
         hint.style.fontWeight = '600';
       }
+      widget.classList.add('is-revealed-glow');
+      triggerScratchFireworks();
     }
   }
 
@@ -437,6 +439,146 @@ function initScratchCard() {
   canvas.addEventListener('touchend', handleEnd);
 }
 
+// ───────── Scratch Reveal Celebration Fireworks Animation ─────────
+function triggerScratchFireworks() {
+  const fwCanvas = document.getElementById('scratch-fireworks-canvas');
+  if (!fwCanvas) return;
+  const ctx = fwCanvas.getContext('2d');
+  if (!ctx) return;
+
+  const rect = fwCanvas.getBoundingClientRect();
+  const dpr = Math.max(window.devicePixelRatio || 1, 2);
+  const w = rect.width > 50 ? rect.width : 460;
+  const h = rect.height > 50 ? rect.height : 320;
+  fwCanvas.width = Math.round(w * dpr);
+  fwCanvas.height = Math.round(h * dpr);
+
+  const colors = [
+    '#FFF59D', // Lemon soft gold
+    '#FFD54F', // Warm rich gold
+    '#FFCA28', // Royal amber
+    '#FFB300', // Deep gold
+    '#FFFFFF', // Pure sparkle white
+    '#FF8A80', // Coral festive blush
+    '#FF5252', // Ruby sparkler
+    '#FF4081'  // Rose petal
+  ];
+
+  let particles = [];
+  let animId = null;
+  let activeBursts = 0;
+
+  function createBurst(cx, cy, count, baseColor) {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 1.2 + Math.random() * 5.0;
+      const color = Math.random() < 0.65 ? (baseColor || colors[Math.floor(Math.random() * colors.length)]) : colors[Math.floor(Math.random() * colors.length)];
+      particles.push({
+        x: cx * dpr,
+        y: cy * dpr,
+        vx: Math.cos(angle) * speed * dpr,
+        vy: Math.sin(angle) * speed * dpr,
+        color: color,
+        alpha: 1,
+        decay: 0.012 + Math.random() * 0.014,
+        size: (2.0 + Math.random() * 2.8) * dpr,
+        isStar: Math.random() < 0.35,
+        rotation: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.18
+      });
+    }
+  }
+
+  function drawSparkleStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
+    let rot = (Math.PI / 2) * 3;
+    let x = cx;
+    let y = cy;
+    const step = Math.PI / spikes;
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius);
+    for (let i = 0; i < spikes; i++) {
+      x = cx + Math.cos(rot) * outerRadius;
+      y = cy + Math.sin(rot) * outerRadius;
+      ctx.lineTo(x, y);
+      rot += step;
+
+      x = cx + Math.cos(rot) * innerRadius;
+      y = cy + Math.sin(rot) * innerRadius;
+      ctx.lineTo(x, y);
+      rot += step;
+    }
+    ctx.lineTo(cx, cy - outerRadius);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Staggered celebratory bursts centered over the revealed date card
+  const burstConfigs = [
+    { delay: 0,   cx: w * 0.35, cy: h * 0.46, count: 42, color: '#FFD700' },
+    { delay: 170, cx: w * 0.65, cy: h * 0.42, count: 40, color: '#FFCA28' },
+    { delay: 350, cx: w * 0.50, cy: h * 0.34, count: 48, color: '#FFF59D' },
+    { delay: 520, cx: w * 0.38, cy: h * 0.56, count: 36, color: '#FF8A80' },
+    { delay: 700, cx: w * 0.62, cy: h * 0.54, count: 40, color: '#FFD54F' }
+  ];
+
+  activeBursts = burstConfigs.length;
+
+  burstConfigs.forEach(b => {
+    setTimeout(() => {
+      createBurst(b.cx, b.cy, b.count, b.color);
+      activeBursts--;
+    }, b.delay);
+  });
+
+  function render() {
+    ctx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.96;
+      p.vy = p.vy * 0.96 + 0.08 * dpr; // subtle gravitational fall
+      p.alpha -= p.decay;
+      p.rotation += p.rotSpeed;
+
+      if (p.alpha <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
+      ctx.fillStyle = p.color;
+      ctx.shadowColor = p.color;
+      ctx.shadowBlur = 6 * dpr;
+
+      if (p.isStar) {
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        drawSparkleStar(ctx, 0, 0, 4, p.size * 1.6, p.size * 0.5);
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    if (particles.length > 0 || activeBursts > 0) {
+      animId = requestAnimationFrame(render);
+    } else {
+      ctx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+      if (animId) cancelAnimationFrame(animId);
+    }
+  }
+
+  animId = requestAnimationFrame(render);
+}
+window.__triggerScratchFireworks = triggerScratchFireworks;
+
 // ───────── Page 1 Monogram Star Flare Alignment ─────────
 function initGkGlow() {
   const coverImg = document.querySelector('#cover-card .page-fullwidth-img');
@@ -479,6 +621,182 @@ function initGkGlow() {
   window.addEventListener('resize', update, { passive: true });
 }
 
+// ───────── Horizontal Layered Wardrobe Carousel ─────────
+function initWardrobeCarousel() {
+  const container = document.getElementById('wardrobe-carousel-container');
+  if (!container) return;
+
+  const slides = Array.from(container.querySelectorAll('.wardrobe-card-slide'));
+  if (!slides.length) return;
+
+  const headingEl = document.getElementById('wardrobe-event-heading');
+  const prevBtn = document.getElementById('wardrobe-prev-btn');
+  const nextBtn = document.getElementById('wardrobe-next-btn');
+  const dots = Array.from(document.querySelectorAll('.wardrobe-dot'));
+
+  let activeIndex = 0;
+  const total = slides.length;
+
+  function updateCarousel(targetIdx) {
+    activeIndex = ((targetIdx % total) + total) % total;
+
+    slides.forEach((slide, i) => {
+      let diff = i - activeIndex;
+      // Handle cyclical wrapping for 4 items
+      if (diff === 3) diff = -1;
+      if (diff === -3) diff = 1;
+      if (diff > 1) diff = 2;
+      if (diff < -1) diff = -2;
+
+      slide.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
+      const innerScene = slide.querySelector('.wardrobe-scene-wrap');
+
+      if (diff === 0) {
+        slide.classList.add('is-active');
+        if (innerScene) {
+          innerScene.classList.add('is-in-view');
+        }
+      } else if (diff === -1) {
+        slide.classList.add('is-prev');
+      } else if (diff === 1) {
+        slide.classList.add('is-next');
+      } else {
+        slide.classList.add('is-hidden');
+      }
+    });
+
+    // Dynamic Heading crossfade (Event name only)
+    const activeSlide = slides[activeIndex];
+    if (activeSlide && headingEl) {
+      const eventName = activeSlide.getAttribute('data-event-name') || '';
+
+      headingEl.style.opacity = '0';
+      headingEl.style.transform = 'translateY(-4px)';
+
+      setTimeout(() => {
+        headingEl.innerHTML = eventName;
+        headingEl.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+        headingEl.style.opacity = '1';
+        headingEl.style.transform = 'translateY(0)';
+      }, 140);
+    }
+
+    // Carousel Dots
+    dots.forEach((dot, idx) => {
+      const isSel = idx === activeIndex;
+      dot.classList.toggle('is-active', isSel);
+      dot.setAttribute('aria-selected', isSel ? 'true' : 'false');
+    });
+  }
+
+  // Previous & Next navigation arrows
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateCarousel(activeIndex - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateCarousel(activeIndex + 1);
+    });
+  }
+
+  // Click on peek cards to select them
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', (e) => {
+      if (e.target.closest('.wardrobe-swatches-wrap')) return;
+      if (slide.classList.contains('is-prev') || slide.classList.contains('is-next')) {
+        updateCarousel(i);
+      }
+    });
+  });
+
+  // Dots navigation
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => updateCarousel(i));
+  });
+
+  // Swatch interaction (Hover + Click)
+  slides.forEach((slide) => {
+    const swatches = Array.from(slide.querySelectorAll('.wardrobe-swatch'));
+    const nameEl = slide.querySelector('.wardrobe-swatch-name');
+    swatches.forEach((swatch) => {
+      function selectSwatch() {
+        swatches.forEach((s) => s.classList.remove('is-active'));
+        swatch.classList.add('is-active');
+        const colorName = swatch.getAttribute('data-color');
+        if (nameEl && colorName) {
+          nameEl.textContent = colorName;
+        }
+      }
+      swatch.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectSwatch();
+      });
+      swatch.addEventListener('mouseenter', () => {
+        const colorName = swatch.getAttribute('data-color');
+        if (nameEl && colorName) {
+          nameEl.textContent = colorName;
+        }
+      });
+      swatch.addEventListener('mouseleave', () => {
+        const activeSwatch = slide.querySelector('.wardrobe-swatch.is-active');
+        if (nameEl && activeSwatch) {
+          nameEl.textContent = activeSwatch.getAttribute('data-color') || '';
+        }
+      });
+    });
+  });
+
+  // Mobile Touch Gestures (Swipe left / right)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    if (!touchStartX) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    const duration = Date.now() - touchStartTime;
+
+    // Detect horizontal swipe
+    if (Math.abs(diffX) > 38 && Math.abs(diffX) > Math.abs(diffY) * 1.2 && duration < 600) {
+      if (diffX < 0) {
+        updateCarousel(activeIndex + 1); // Swipe left -> Next
+      } else {
+        updateCarousel(activeIndex - 1); // Swipe right -> Prev
+      }
+    }
+    touchStartX = 0;
+    touchStartY = 0;
+  }, { passive: true });
+
+  // Keyboard navigation support
+  container.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      updateCarousel(activeIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      updateCarousel(activeIndex + 1);
+    }
+  });
+
+  // Initial state setup
+  updateCarousel(0);
+}
+
 // ───────── Master Boot & Video Opening Flow ─────────
 document.addEventListener('DOMContentLoaded', () => {
   initPetals();
@@ -489,6 +807,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScratchCard();
   initGkGlow();
   initCoverLife();
+  initWardrobeCarousel();
 
   const envelopeWrapper = document.getElementById('envelope-wrapper');
   const envelopeVideo = document.getElementById('envelope-video');
