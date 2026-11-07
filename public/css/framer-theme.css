@@ -2050,7 +2050,7 @@ body.is-envelope-closed .main-card-layout {
 .royal-arch-footer {
   width: 100% !important;
   max-width: 100% !important;
-  margin: -16px 0 0 0 !important;
+  margin: -1px 0 0 0 !important;
   padding: 0 !important;
   display: block !important;
   position: relative;
@@ -2062,16 +2062,10 @@ body.is-envelope-closed .main-card-layout {
   line-height: 0;
 }
 
-.royal-arch-footer.anim-footer.scroll-reveal {
-  opacity: 0;
-  transform: translateY(35px) scale(0.97);
-  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
+.royal-arch-footer.anim-footer.scroll-reveal,
 .royal-arch-footer.anim-footer.scroll-reveal.is-in-view {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .royal-arch-footer-wrap {
@@ -2086,8 +2080,8 @@ body.is-envelope-closed .main-card-layout {
   background: transparent !important;
   margin: 0 !important;
   padding: 0 !important;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 70px, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 70px, #000 100%);
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
 }
 
 .event-scene-wrap.event-scene-wedding {
@@ -2561,23 +2555,60 @@ body.at-footer .royal-scroll-prompt {
   margin: 0 auto !important;
 }
 
-/* Fix "11TH" rendering as "IITH" in Cinzel by using Cormorant Garamond lining numerals */
-.event-date-big {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-variant-numeric: lining-nums !important;
-  font-feature-settings: "lnum" 1 !important;
-  font-size: 17px !important;
-  font-weight: 700 !important;
-  letter-spacing: 1.3px !important;
+/* ═══ ITC Souvenir Typography — Scoped Strictly to Events Section Boxes ═══ */
+@font-face {
+  font-family: 'ITC Souvenir';
+  src: url('/media/SouvenirStd-Light.ttf?v=2') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.woff2') format('woff2'),
+       url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-.event-date-sub {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+@font-face {
+  font-family: 'ITC Souvenir';
+  src: url('/media/SouvenirStd-Light.ttf?v=2') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.woff2') format('woff2'),
+       url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+#events-container .event-framed-card .event-info-body,
+#events-container .event-framed-card .event-caption-desc,
+#events-container .event-framed-card .event-venue-label,
+#events-container .event-framed-card .event-venue-name,
+#events-container .event-framed-card .event-directions-pill {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
+}
+
+#events-container .event-framed-card .event-date-big {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
   font-variant-numeric: lining-nums !important;
   font-feature-settings: "lnum" 1 !important;
-  font-size: 11.5px !important;
+  font-size: 16.5px !important;
   font-weight: 700 !important;
-  letter-spacing: 1.0px !important;
+  font-synthesis: weight !important;
+  -webkit-text-stroke: 0.35px currentColor;
+  letter-spacing: 0.4px !important;
+  text-transform: none !important;
+  color: #5A1A1E !important;
+  line-height: 1.3 !important;
+}
+
+#events-container .event-framed-card .event-date-sub {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
+  font-variant-numeric: lining-nums !important;
+  font-feature-settings: "lnum" 1 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.25px !important;
+  text-transform: none !important;
+  color: #6A2A2A !important;
+  margin-top: 6px !important;
+  line-height: 1.5 !important;
 }
 
 .ord-sup {
@@ -2596,4 +2627,288 @@ body.at-footer .royal-scroll-prompt {
   z-index: 1;
   display: block;
   pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   WARDROBE PLANNER SECTION — Vertical Scene-by-Scene Closet & Clothes Motion
+   ═══════════════════════════════════════════════════════════════════════════ */
+.wardrobe-planner-section {
+  position: relative;
+  width: 100%;
+  margin: 0 0 -28px 0 !important;
+  padding: 10px 0 0 !important;
+  text-align: center;
+  background: transparent !important;
+}
+
+.wardrobe-planner-section .section-script-subtitle {
+  margin-bottom: 14px !important;
+}
+
+.wardrobe-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.wardrobe-scene-wrap {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 720 / 1280 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #F4E9DC;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.wardrobe-closet-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wardrobe-item {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+/* Z-index layering matching reference video depth order */
+.wardrobe-title {
+  z-index: 2;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.wardrobe-footer {
+  z-index: 2;
+}
+
+.wardrobe-outfit-inner-l,
+.wardrobe-outfit-inner-r {
+  z-index: 3;
+  transform-origin: 50% 2%;
+}
+
+.wardrobe-outfit-outer-l,
+.wardrobe-outfit-outer-r {
+  z-index: 4;
+  transform-origin: 50% 2%;
+}
+
+.wardrobe-acc-1,
+.wardrobe-acc-2 {
+  z-index: 5;
+  transform-origin: 50% 85%;
+}
+
+.wardrobe-shoe-her,
+.wardrobe-shoe-him {
+  z-index: 5;
+  transform-origin: 50% 90%;
+}
+
+/* ── Initial Pre-Scroll State (Before .is-in-view) ── */
+.wardrobe-scene-wrap .wardrobe-title {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.75s ease 0.08s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+}
+
+.wardrobe-scene-wrap .wardrobe-outfit-inner-l {
+  opacity: 0;
+  transform: translateX(-34%) rotate(1.6deg);
+  transition: opacity 0.45s ease 0.08s, transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+
+.wardrobe-scene-wrap .wardrobe-outfit-inner-r {
+  opacity: 0;
+  transform: translateX(34%) rotate(-1.6deg);
+  transition: opacity 0.45s ease 0.08s, transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+
+.wardrobe-scene-wrap .wardrobe-outfit-outer-l {
+  opacity: 0;
+  transform: translateX(-115%) rotate(2.4deg);
+  transition: opacity 0.4s ease 0.48s, transform 0.98s cubic-bezier(0.22, 1, 0.36, 1) 0.48s;
+}
+
+.wardrobe-scene-wrap .wardrobe-outfit-outer-r {
+  opacity: 0;
+  transform: translateX(115%) rotate(-2.4deg);
+  transition: opacity 0.4s ease 0.54s, transform 0.98s cubic-bezier(0.22, 1, 0.36, 1) 0.54s;
+}
+
+.wardrobe-scene-wrap .wardrobe-footer {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.75s ease 0.65s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.65s;
+}
+
+.wardrobe-scene-wrap .wardrobe-shoe-her {
+  opacity: 0;
+  transform: translateY(-44px);
+  transition: opacity 0.55s ease 1.25s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.25s;
+}
+
+.wardrobe-scene-wrap .wardrobe-shoe-him {
+  opacity: 0;
+  transform: translateY(-44px);
+  transition: opacity 0.55s ease 1.35s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.35s;
+}
+
+.wardrobe-scene-wrap .wardrobe-acc-1 {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.84);
+  transition: opacity 0.6s ease 1.80s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 1.80s;
+}
+
+.wardrobe-scene-wrap .wardrobe-acc-2 {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.84);
+  transition: opacity 0.6s ease 1.98s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 1.98s;
+}
+
+/* ── Active In-View State (.is-in-view) ── */
+.wardrobe-scene-wrap.is-in-view .wardrobe-title,
+.wardrobe-scene-wrap.is-in-view .wardrobe-footer,
+.wardrobe-scene-wrap.is-in-view .wardrobe-shoe-her,
+.wardrobe-scene-wrap.is-in-view .wardrobe-shoe-him,
+.wardrobe-scene-wrap.is-in-view .wardrobe-acc-1,
+.wardrobe-scene-wrap.is-in-view .wardrobe-acc-2 {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-inner-l,
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-inner-r,
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-outer-l,
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-outer-r {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+@keyframes wardrobeHangerSway {
+  0%, 100% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 0.55deg;
+  }
+}
+
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-inner-l {
+  animation: wardrobeHangerSway 4.8s ease-in-out 1.2s infinite;
+}
+
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-inner-r {
+  animation: wardrobeHangerSway 5.2s ease-in-out 1.5s infinite reverse;
+}
+
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-outer-l {
+  animation: wardrobeHangerSway 4.6s ease-in-out 1.7s infinite reverse;
+}
+
+.wardrobe-scene-wrap.is-in-view .wardrobe-outfit-outer-r {
+  animation: wardrobeHangerSway 5.0s ease-in-out 1.9s infinite;
+}
+
+/* ── 5th Closing Scene (Pillars, Chandeliers, Monogram, Weather & Luggage Cart) ── */
+.wardrobe-pillar-l,
+.wardrobe-pillar-r {
+  z-index: 3;
+}
+
+.wardrobe-chand-l,
+.wardrobe-chand-r {
+  z-index: 3;
+  transform-origin: 50% 0%;
+}
+
+.wardrobe-monogram,
+.wardrobe-closing-text {
+  z-index: 3;
+}
+
+.wardrobe-luggage-cart {
+  z-index: 5;
+}
+
+.wardrobe-scene-closing .wardrobe-pillar-l,
+.wardrobe-scene-closing .wardrobe-pillar-r {
+  opacity: 0;
+  transform: translateY(-35%);
+  transition: opacity 0.65s ease 0.08s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+}
+
+.wardrobe-scene-closing .wardrobe-chand-l,
+.wardrobe-scene-closing .wardrobe-chand-r {
+  opacity: 0;
+  transform: translateY(-60%);
+  transition: opacity 0.65s ease 0.22s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
+}
+
+.wardrobe-scene-closing .wardrobe-monogram {
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  transition: opacity 0.75s ease 0.50s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.50s;
+}
+
+.wardrobe-scene-closing .wardrobe-closing-text {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease 0.85s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.85s;
+}
+
+.wardrobe-scene-closing .wardrobe-luggage-cart {
+  opacity: 0;
+  transform: translateX(-120%);
+  transition: opacity 0.45s ease 0.65s, transform 1.25s cubic-bezier(0.22, 1, 0.36, 1) 0.65s;
+}
+
+.wardrobe-scene-closing {
+  aspect-ratio: 720 / 1320 !important;
+  background: transparent !important;
+  margin-bottom: -17.36% !important;
+  z-index: 2 !important;
+}
+
+.wardrobe-two-hearts-bridge {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 720 / 1060;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.wardrobe-two-hearts-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+}
+
+.wardrobe-scene-closing.is-in-view .wardrobe-pillar-l,
+.wardrobe-scene-closing.is-in-view .wardrobe-pillar-r,
+.wardrobe-scene-closing.is-in-view .wardrobe-chand-l,
+.wardrobe-scene-closing.is-in-view .wardrobe-chand-r,
+.wardrobe-scene-closing.is-in-view .wardrobe-monogram,
+.wardrobe-scene-closing.is-in-view .wardrobe-closing-text,
+.wardrobe-scene-closing.is-in-view .wardrobe-luggage-cart {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
 }

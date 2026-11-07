@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════
 // Everdezign Framer Exact Replica Engine
 // ═══════════════════════════════════════════════════════════
-import { CONFIG, photo } from './config.js';
+import { CONFIG, photo } from './config.js?v=52';
 import { initCoverLife } from './cover-life.js?v=47';
 
 // ───────── Falling Red Rose Petals Canvas (Subtle & Organic) ─────────
@@ -175,16 +175,51 @@ function initMomentsMarquee() {
 
 // ───────── Scroll Zoom-In & Appearing Animations ─────────
 function initScrollObserver() {
-  const targets = document.querySelectorAll('.scroll-reveal, .zoom-reveal, .framer-card, .event-scene-wrap');
+  const targets = document.querySelectorAll('.scroll-reveal, .zoom-reveal, .framer-card, .event-scene-wrap, .wardrobe-scene-wrap');
+
+  // Ensure all images inside a wardrobe scene are decoded before triggering slide-in animations on live mobile networks
+  function revealWardrobeSceneWhenReady(sceneEl) {
+    sceneEl.dataset.inViewport = '1';
+    const imgs = Array.from(sceneEl.querySelectorAll('img'));
+    const pending = imgs.filter((img) => !img.complete || img.naturalWidth === 0);
+    if (pending.length === 0) {
+      sceneEl.classList.add('is-in-view');
+      return;
+    }
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      if (sceneEl.dataset.inViewport === '1') {
+        sceneEl.classList.add('is-in-view');
+      }
+    };
+    Promise.all(
+      pending.map((img) => new Promise((res) => {
+        img.addEventListener('load', res, { once: true });
+        img.addEventListener('error', res, { once: true });
+      }))
+    ).then(finish);
+    setTimeout(finish, 900);
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-in-view');
+        if (entry.target.classList.contains('wardrobe-scene-wrap')) {
+          revealWardrobeSceneWhenReady(entry.target);
+        } else {
+          entry.target.classList.add('is-in-view');
+        }
+      } else if (entry.target.classList.contains('wardrobe-scene-wrap')) {
+        // Re-trigger wardrobe clothes animation smoothly whenever user scrolls back into view
+        entry.target.dataset.inViewport = '0';
+        entry.target.classList.remove('is-in-view');
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.18,
+    rootMargin: '0px 0px -30px 0px'
   });
 
   targets.forEach((el) => observer.observe(el));

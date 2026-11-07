@@ -30,7 +30,7 @@ export const CONFIG = {
     name: 'Sher Bengal River Resort',
     place: 'Kolaghat',
     city: 'Kolaghat, West Bengal',
-    address: 'Kolaghat, Purba Medinipur, West Bengal',
+    address: 'Kolaghat, Bagnan, West Bengal',
     map: 'https://share.google/ondJkXiFkBXDm8Jhc',
   },
 
