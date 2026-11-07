@@ -1,12 +1,14 @@
 # Deploy to Cloudflare Pages
 
-Live: https://shubh-aarambh.pages.dev (account thecorporatepotfiles@gmail.com)
+Live: https://kaavyaandgarvwedding.online (Pages project `kaavya-garv-wedding`, account thecorporatepotfiles@gmail.com)
+
+Auto-deploy: every push to `ayush` runs `.github/workflows/deploy.yml` (needs repo secrets `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`). Manual run: GitHub → Actions → Deploy → Run workflow.
 
 Manual deploy from the project root (picks up `public/`, `functions/` and the KV binding in `wrangler.toml`):
 
 ```bash
 npx wrangler login        # once
-npx wrangler pages deploy --branch=main
+npx wrangler pages deploy --project-name=kaavya-garv-wedding --branch=ayush
 ```
 
 `wrangler.toml` binds the KV namespace `wedding-rsvp` (id `ab57e49849fc489d892a8f8980f07a5a`) as `RSVP`,
