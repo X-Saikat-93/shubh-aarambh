@@ -383,7 +383,115 @@ function initScratchCard() {
     }
   }
 
-  function scratch(x, y) {
+  let scratchSparks = null;
+  function getSparksEngine() {
+    if (!scratchSparks) {
+      const fwCanvas = document.getElementById('scratch-fireworks-canvas');
+      if (!fwCanvas) return null;
+      const fctx = fwCanvas.getContext('2d');
+      if (!fctx) return null;
+
+      let sparks = [];
+      let sparkAnimId = null;
+
+      function ensureFwSize() {
+        const rect = fwCanvas.getBoundingClientRect();
+        const curDpr = Math.max(window.devicePixelRatio || 1, 2);
+        const w = rect.width > 50 ? rect.width : 540;
+        const h = rect.height > 50 ? rect.height : 420;
+        if (fwCanvas.width !== Math.round(w * curDpr) || fwCanvas.height !== Math.round(h * curDpr)) {
+          fwCanvas.width = Math.round(w * curDpr);
+          fwCanvas.height = Math.round(h * curDpr);
+        }
+        return { curDpr, rect };
+      }
+
+      function emit(clientX, clientY, count = 4) {
+        if (window.__fireworksRunning) return;
+        const { curDpr, rect } = ensureFwSize();
+        const sx = (clientX - rect.left) * curDpr;
+        const sy = (clientY - rect.top) * curDpr;
+        const goldColors = ['#FFFFFF', '#FFF9C4', '#FFE082', '#FFD54F', '#FFCA28', '#FF9800', '#FF8F00'];
+
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = (1.8 + Math.random() * 4.2) * curDpr;
+          sparks.push({
+            x: sx + (Math.random() - 0.5) * 6 * curDpr,
+            y: sy + (Math.random() - 0.5) * 6 * curDpr,
+            prevX: sx,
+            prevY: sy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.4 * curDpr,
+            color: goldColors[Math.floor(Math.random() * goldColors.length)],
+            alpha: 1.0,
+            decay: 0.038 + Math.random() * 0.040,
+            gravity: 0.14 * curDpr,
+            size: (1.2 + Math.random() * 1.8) * curDpr
+          });
+        }
+
+        if (!sparkAnimId) sparkAnimId = requestAnimationFrame(renderSparks);
+      }
+
+      function renderSparks() {
+        if (window.__fireworksRunning) {
+          sparks = [];
+          sparkAnimId = null;
+          return;
+        }
+
+        fctx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+        fctx.save();
+        fctx.globalCompositeOperation = 'lighter';
+
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const p = sparks[i];
+          p.prevX = p.x;
+          p.prevY = p.y;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.93;
+          p.vy = p.vy * 0.93 + p.gravity;
+          p.alpha -= p.decay;
+
+          if (p.alpha <= 0) {
+            sparks.splice(i, 1);
+            continue;
+          }
+
+          fctx.beginPath();
+          fctx.moveTo(p.prevX, p.prevY);
+          fctx.lineTo(p.x, p.y);
+          fctx.strokeStyle = p.color;
+          fctx.lineWidth = p.size;
+          fctx.lineCap = 'round';
+          fctx.globalAlpha = p.alpha;
+          fctx.stroke();
+
+          fctx.fillStyle = '#FFFFFF';
+          fctx.globalAlpha = Math.min(1, p.alpha * 1.4);
+          fctx.beginPath();
+          fctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+          fctx.fill();
+        }
+
+        fctx.restore();
+
+        if (sparks.length > 0) {
+          sparkAnimId = requestAnimationFrame(renderSparks);
+        } else {
+          fctx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+          sparkAnimId = null;
+        }
+      }
+
+      scratchSparks = { emit };
+    }
+    return scratchSparks;
+  }
+
+  function scratch(x, y, clientX, clientY) {
     const brushRadius = 22 * dpr;
     ctx.save();
     ctx.globalCompositeOperation = 'destination-out';
@@ -403,6 +511,12 @@ function initScratchCard() {
     }
     ctx.restore();
     lastPos = { x, y };
+
+    if (clientX !== undefined && clientY !== undefined) {
+      const se = getSparksEngine();
+      if (se) se.emit(clientX, clientY, 4);
+    }
+
     checkProgress();
   }
 
@@ -412,7 +526,7 @@ function initScratchCard() {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     const pos = getPos(clientX, clientY);
-    scratch(pos.x, pos.y);
+    scratch(pos.x, pos.y, clientX, clientY);
   }
 
   function handleMove(e) {
@@ -421,7 +535,7 @@ function initScratchCard() {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     const pos = getPos(clientX, clientY);
-    scratch(pos.x, pos.y);
+    scratch(pos.x, pos.y, clientX, clientY);
   }
 
   function handleEnd() {
@@ -439,94 +553,117 @@ function initScratchCard() {
   canvas.addEventListener('touchend', handleEnd);
 }
 
-// ───────── Scratch Reveal Celebration Fireworks Animation ─────────
+// ───────── Scratch Reveal Celebration Fireworks Animation (Realistic & Rich) ─────────
 function triggerScratchFireworks() {
   const fwCanvas = document.getElementById('scratch-fireworks-canvas');
   if (!fwCanvas) return;
   const ctx = fwCanvas.getContext('2d');
   if (!ctx) return;
 
+  window.__fireworksRunning = true;
+
   const rect = fwCanvas.getBoundingClientRect();
   const dpr = Math.max(window.devicePixelRatio || 1, 2);
-  const w = rect.width > 50 ? rect.width : 460;
-  const h = rect.height > 50 ? rect.height : 320;
+  const w = rect.width > 50 ? rect.width : 540;
+  const h = rect.height > 50 ? rect.height : 420;
   fwCanvas.width = Math.round(w * dpr);
   fwCanvas.height = Math.round(h * dpr);
 
-  const colors = [
-    '#FFF59D', // Lemon soft gold
-    '#FFD54F', // Warm rich gold
-    '#FFCA28', // Royal amber
-    '#FFB300', // Deep gold
-    '#FFFFFF', // Pure sparkle white
-    '#FF8A80', // Coral festive blush
-    '#FF5252', // Ruby sparkler
-    '#FF4081'  // Rose petal
+  // Imperial 24K Royal Wedding Palette: Champagne Diamond, Brilliant Gold, Rose Ember
+  const goldPalette = [
+    '#FFFFFF', // Incandescent diamond white core
+    '#FFFDE7', // Radiant starlight diamond
+    '#FFF59D', // Shimmering champagne
+    '#FFD700', // Pure 24K imperial gold
+    '#FFCA28', // Radiant royal amber
+    '#FFC107', // Rich warm gold
+    '#FFA000', // Deep golden spark
+    '#FF8F00', // Saffron golden ember
+    '#FFB74D', // Rose champagne
+    '#FFE082'  // Pale gold shimmer
   ];
 
   let particles = [];
+  let flashes = [];
+  let crackles = [];
   let animId = null;
   let activeBursts = 0;
 
-  function createBurst(cx, cy, count, baseColor) {
+  function createFlash(cx, cy, maxRadius, color) {
+    flashes.push({
+      x: cx * dpr,
+      y: cy * dpr,
+      radius: 8 * dpr,
+      maxRadius: maxRadius * dpr,
+      color: color || '#FFD700',
+      alpha: 1.0,
+      decay: 0.048
+    });
+  }
+
+  function createBurst(cx, cy, count, baseColor, type) {
+    createFlash(cx, cy, type === 'grand' ? 68 : 48, baseColor);
+
+    const isWillow = type === 'willow';
+    const isRing = type === 'ring';
+    const isGrand = type === 'grand';
+
     for (let i = 0; i < count; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = 1.2 + Math.random() * 5.0;
-      const color = Math.random() < 0.65 ? (baseColor || colors[Math.floor(Math.random() * colors.length)]) : colors[Math.floor(Math.random() * colors.length)];
+      let angle, speed;
+      if (isRing) {
+        angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.18;
+        speed = (3.5 + Math.random() * 1.6) * dpr;
+      } else {
+        angle = Math.random() * Math.PI * 2;
+        speed = (1.8 + Math.random() * (isWillow ? 4.8 : 6.6)) * dpr;
+      }
+
+      const color = Math.random() < 0.65
+        ? (baseColor || goldPalette[Math.floor(Math.random() * goldPalette.length)])
+        : goldPalette[Math.floor(Math.random() * goldPalette.length)];
+      const startX = cx * dpr;
+      const startY = cy * dpr;
+
       particles.push({
-        x: cx * dpr,
-        y: cy * dpr,
-        vx: Math.cos(angle) * speed * dpr,
-        vy: Math.sin(angle) * speed * dpr,
+        x: startX,
+        y: startY,
+        prevX: startX,
+        prevY: startY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
         color: color,
-        alpha: 1,
-        decay: 0.012 + Math.random() * 0.014,
-        size: (2.0 + Math.random() * 2.8) * dpr,
-        isStar: Math.random() < 0.35,
-        rotation: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.18
+        alpha: 1.0,
+        decay: isWillow ? (0.007 + Math.random() * 0.006) : (0.010 + Math.random() * 0.012),
+        drag: isWillow ? 0.952 : 0.942,
+        gravity: (isWillow ? 0.095 : 0.070) * dpr,
+        size: (1.8 + Math.random() * (isWillow ? 2.8 : 2.4)) * dpr,
+        isGlint: Math.random() < 0.55,
+        twinkleRate: 0.15 + Math.random() * 0.25,
+        age: 0,
+        canCrackle: isGrand && Math.random() < 0.35,
+        trail: isWillow ? [] : null,
+        maxTrail: 7
       });
     }
   }
 
-  function drawSparkleStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
-    let rot = (Math.PI / 2) * 3;
-    let x = cx;
-    let y = cy;
-    const step = Math.PI / spikes;
-
-    ctx.beginPath();
-    ctx.moveTo(cx, cy - outerRadius);
-    for (let i = 0; i < spikes; i++) {
-      x = cx + Math.cos(rot) * outerRadius;
-      y = cy + Math.sin(rot) * outerRadius;
-      ctx.lineTo(x, y);
-      rot += step;
-
-      x = cx + Math.cos(rot) * innerRadius;
-      y = cy + Math.sin(rot) * innerRadius;
-      ctx.lineTo(x, y);
-      rot += step;
-    }
-    ctx.lineTo(cx, cy - outerRadius);
-    ctx.closePath();
-    ctx.fill();
-  }
-
-  // Staggered celebratory bursts centered over the revealed date card
+  // Staggered regal fireworks show centered over the revealed date card
   const burstConfigs = [
-    { delay: 0,   cx: w * 0.35, cy: h * 0.46, count: 42, color: '#FFD700' },
-    { delay: 170, cx: w * 0.65, cy: h * 0.42, count: 40, color: '#FFCA28' },
-    { delay: 350, cx: w * 0.50, cy: h * 0.34, count: 48, color: '#FFF59D' },
-    { delay: 520, cx: w * 0.38, cy: h * 0.56, count: 36, color: '#FF8A80' },
-    { delay: 700, cx: w * 0.62, cy: h * 0.54, count: 40, color: '#FFD54F' }
+    { delay: 0,    cx: w * 0.35, cy: h * 0.44, count: 75, color: '#FFD700', type: 'willow' },
+    { delay: 180,  cx: w * 0.65, cy: h * 0.38, count: 68, color: '#FFF59D', type: 'ring' },
+    { delay: 380,  cx: w * 0.50, cy: h * 0.32, count: 96, color: '#FFCA28', type: 'grand' },
+    { delay: 620,  cx: w * 0.30, cy: h * 0.50, count: 65, color: '#FFFFFF', type: 'willow' },
+    { delay: 820,  cx: w * 0.70, cy: h * 0.46, count: 70, color: '#FFC107', type: 'willow' },
+    { delay: 1080, cx: w * 0.40, cy: h * 0.35, count: 85, color: '#FFD700', type: 'grand' },
+    { delay: 1140, cx: w * 0.60, cy: h * 0.35, count: 85, color: '#FFFDE7', type: 'grand' },
+    { delay: 1420, cx: w * 0.50, cy: h * 0.40, count: 110, color: '#FFE082', type: 'grand' }
   ];
 
   activeBursts = burstConfigs.length;
 
   burstConfigs.forEach(b => {
     setTimeout(() => {
-      createBurst(b.cx, b.cy, b.count, b.color);
+      createBurst(b.cx, b.cy, b.count, b.color, b.type);
       activeBursts--;
     }, b.delay);
   });
@@ -534,43 +671,165 @@ function triggerScratchFireworks() {
   function render() {
     ctx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
 
+    // 1. Explosive Flashes & Shockwave Rings
+    for (let i = flashes.length - 1; i >= 0; i--) {
+      const f = flashes[i];
+      f.radius += (f.maxRadius - f.radius) * 0.26;
+      f.alpha -= f.decay;
+
+      if (f.alpha <= 0) {
+        flashes.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+
+      const grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.radius);
+      grad.addColorStop(0, `rgba(255, 255, 255, ${f.alpha * 0.90})`);
+      grad.addColorStop(0.35, `rgba(255, 225, 120, ${f.alpha * 0.50})`);
+      grad.addColorStop(1, 'rgba(255, 215, 0, 0)');
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = `rgba(255, 240, 180, ${f.alpha * 0.70})`;
+      ctx.lineWidth = 1.8 * dpr;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.radius * 0.82, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // 2. Secondary Crackles
+    for (let i = crackles.length - 1; i >= 0; i--) {
+      const c = crackles[i];
+      c.x += c.vx;
+      c.y += c.vy;
+      c.vy += 0.08 * dpr;
+      c.alpha -= c.decay;
+
+      if (c.alpha <= 0) {
+        crackles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.fillStyle = c.color;
+      ctx.globalAlpha = c.alpha;
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // 3. Pyrotechnic Spark Particles with Realistic Motion Streaks & Twinkle
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
 
+      p.prevX = p.x;
+      p.prevY = p.y;
+
       p.x += p.vx;
       p.y += p.vy;
-      p.vx *= 0.96;
-      p.vy = p.vy * 0.96 + 0.08 * dpr; // subtle gravitational fall
+      p.vx *= p.drag;
+      p.vy = p.vy * p.drag + p.gravity;
       p.alpha -= p.decay;
-      p.rotation += p.rotSpeed;
+      p.age++;
+
+      // Trigger secondary crackle burst as particle slows down
+      if (p.canCrackle && p.alpha < 0.45 && Math.hypot(p.vx, p.vy) < 1.2 * dpr) {
+        p.canCrackle = false;
+        for (let k = 0; k < 5; k++) {
+          const cAngle = Math.random() * Math.PI * 2;
+          const cSpeed = (0.8 + Math.random() * 2.2) * dpr;
+          crackles.push({
+            x: p.x,
+            y: p.y,
+            vx: Math.cos(cAngle) * cSpeed,
+            vy: Math.sin(cAngle) * cSpeed,
+            color: '#FFFFFF',
+            alpha: 1.0,
+            decay: 0.045 + Math.random() * 0.035,
+            size: (0.9 + Math.random() * 1.3) * dpr
+          });
+        }
+      }
 
       if (p.alpha <= 0) {
         particles.splice(i, 1);
         continue;
       }
 
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
-      ctx.fillStyle = p.color;
-      ctx.shadowColor = p.color;
-      ctx.shadowBlur = 6 * dpr;
-
-      if (p.isStar) {
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation);
-        drawSparkleStar(ctx, 0, 0, 4, p.size * 1.6, p.size * 0.5);
-      } else {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
+      if (p.trail) {
+        p.trail.unshift({ x: p.prevX, y: p.prevY, alpha: p.alpha });
+        if (p.trail.length > p.maxTrail) p.trail.pop();
       }
-      ctx.restore();
+
+      // Shimmering pyrotechnic twinkle factor
+      const twinkle = p.isGlint ? (0.75 + 0.25 * Math.sin(p.age * p.twinkleRate)) : 1.0;
+      const currentAlpha = Math.max(0, Math.min(1, p.alpha * twinkle));
+
+      // Brocade Willow Trail
+      if (p.trail && p.trail.length > 1) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        for (let t = 0; t < p.trail.length; t++) {
+          const pt = p.trail[t];
+          ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = p.size * 0.85;
+        ctx.lineCap = 'round';
+        ctx.globalAlpha = currentAlpha * 0.48;
+        ctx.stroke();
+      }
+
+      // Main High-Speed Firework Motion Streak (Velocity Tail)
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x - p.vx * 2.5, p.y - p.vy * 2.5);
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = p.size;
+      ctx.lineCap = 'round';
+      ctx.globalAlpha = currentAlpha;
+      ctx.stroke();
+
+      // Incandescent Diamond Spark Head
+      ctx.fillStyle = '#FFFFFF';
+      ctx.globalAlpha = Math.min(1, currentAlpha * 1.4);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 0.68, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Four-Point Diamond Glint
+      if (p.isGlint && currentAlpha > 0.40 && Math.sin(p.age * p.twinkleRate) > 0.6) {
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 1.2 * dpr;
+        const glintLen = p.size * 2.8;
+        ctx.beginPath();
+        ctx.moveTo(p.x - glintLen, p.y);
+        ctx.lineTo(p.x + glintLen, p.y);
+        ctx.moveTo(p.x, p.y - glintLen);
+        ctx.lineTo(p.x, p.y + glintLen);
+        ctx.stroke();
+      }
     }
 
-    if (particles.length > 0 || activeBursts > 0) {
+    ctx.restore();
+
+    if (particles.length > 0 || flashes.length > 0 || crackles.length > 0 || activeBursts > 0) {
       animId = requestAnimationFrame(render);
     } else {
       ctx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+      window.__fireworksRunning = false;
       if (animId) cancelAnimationFrame(animId);
     }
   }
@@ -636,8 +895,15 @@ function initWardrobeCarousel() {
 
   let activeIndex = 0;
   const total = slides.length;
+  let isThrottled = false;
+  let lastNavActionTime = 0;
 
   function updateCarousel(targetIdx) {
+    if (isThrottled) return;
+    isThrottled = true;
+    lastNavActionTime = Date.now();
+    setTimeout(() => { isThrottled = false; }, 260);
+
     activeIndex = ((targetIdx % total) + total) % total;
 
     slides.forEach((slide, i) => {
@@ -689,34 +955,53 @@ function initWardrobeCarousel() {
     });
   }
 
+  function goNext(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    updateCarousel(activeIndex + 1);
+  }
+
+  function goPrev(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    updateCarousel(activeIndex - 1);
+  }
+
   // Previous & Next navigation arrows
   if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      updateCarousel(activeIndex - 1);
-    });
+    prevBtn.addEventListener('click', goPrev);
   }
 
   if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      updateCarousel(activeIndex + 1);
-    });
+    nextBtn.addEventListener('click', goNext);
   }
 
-  // Click on peek cards to select them
-  slides.forEach((slide, i) => {
+  // Click on peek cards to select them (with debounce and active-card protection)
+  slides.forEach((slide) => {
     slide.addEventListener('click', (e) => {
-      if (e.target.closest('.wardrobe-swatches-wrap')) return;
-      if (slide.classList.contains('is-prev') || slide.classList.contains('is-next')) {
-        updateCarousel(i);
+      if (Date.now() - lastNavActionTime < 380) return;
+      if (e.target.closest('.wardrobe-swatches-wrap, .wardrobe-nav-btn')) return;
+      if (slide.classList.contains('is-active')) return;
+
+      if (slide.classList.contains('is-prev')) {
+        goPrev(e);
+      } else if (slide.classList.contains('is-next')) {
+        goNext(e);
       }
     });
   });
 
   // Dots navigation
   dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => updateCarousel(i));
+    dot.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      updateCarousel(i);
+    });
   });
 
   // Swatch interaction (Hover + Click)
@@ -757,6 +1042,11 @@ function initWardrobeCarousel() {
   let touchStartTime = 0;
 
   container.addEventListener('touchstart', (e) => {
+    // Ignore touch starting on nav buttons, swatches, or dots to prevent accidental swipes
+    if (e.target.closest('.wardrobe-nav-btn, .wardrobe-swatches-wrap, .wardrobe-dot')) {
+      touchStartX = 0;
+      return;
+    }
     if (e.touches && e.touches.length === 1) {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
@@ -773,11 +1063,11 @@ function initWardrobeCarousel() {
     const duration = Date.now() - touchStartTime;
 
     // Detect horizontal swipe
-    if (Math.abs(diffX) > 38 && Math.abs(diffX) > Math.abs(diffY) * 1.2 && duration < 600) {
+    if (Math.abs(diffX) > 42 && Math.abs(diffX) > Math.abs(diffY) * 1.4 && duration < 550) {
       if (diffX < 0) {
-        updateCarousel(activeIndex + 1); // Swipe left -> Next
+        goNext(); // Swipe left -> Next
       } else {
-        updateCarousel(activeIndex - 1); // Swipe right -> Prev
+        goPrev(); // Swipe right -> Prev
       }
     }
     touchStartX = 0;
@@ -787,9 +1077,9 @@ function initWardrobeCarousel() {
   // Keyboard navigation support
   container.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
-      updateCarousel(activeIndex - 1);
+      goPrev();
     } else if (e.key === 'ArrowRight') {
-      updateCarousel(activeIndex + 1);
+      goNext();
     }
   });
 

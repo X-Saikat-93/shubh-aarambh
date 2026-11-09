@@ -37,6 +37,20 @@
   padding: 0;
 }
 
+.sr-only {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 *,
 *::before,
 *::after {
@@ -76,14 +90,15 @@ body.is-envelope-closed {
   height: 100vh;
 }
 
-/* Falling Rose Petals Canvas */
+/* Falling Rose Petals Canvas (Atmospheric ambient background layer) */
 #petals-canvas {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 100;
+  z-index: 1;
+  opacity: 0.65;
 }
 
 /* Background Atmosphere - Auspicious Royal Ivory Damask Silk (Subtle, non-distracting) */
@@ -780,8 +795,8 @@ body.is-envelope-closed .main-card-layout {
   position: relative;
   width: 100% !important;
   max-width: 100% !important;
-  margin: 18px auto 26px !important;
-  padding: 16px 14px 24px !important;
+  margin: 22px auto 26px !important;
+  padding: 4px 8px 12px !important;
   box-sizing: border-box;
   text-align: center;
   background: transparent !important;
@@ -806,6 +821,15 @@ body.is-envelope-closed .main-card-layout {
   width: 100%;
   max-width: 440px;
   margin: 0 auto;
+}
+
+.formal-invite-main-img {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 16px rgba(90, 20, 25, 0.06));
 }
 
 /* Bride / Groom Script Names */
@@ -1251,10 +1275,10 @@ body.is-envelope-closed .main-card-layout {
 
 .scratch-fireworks-canvas {
   position: absolute;
-  top: -60px;
-  left: -60px;
-  width: calc(100% + 120px);
-  height: calc(100% + 120px);
+  top: -120px;
+  left: -80px;
+  width: calc(100% + 160px);
+  height: calc(100% + 200px);
   pointer-events: none;
   z-index: 25;
 }
@@ -1600,7 +1624,7 @@ body.is-envelope-closed .main-card-layout {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin: 28px auto 10px;
+  margin: 14px auto 10px;
   width: 220px;
 }
 
@@ -1620,8 +1644,8 @@ body.is-envelope-closed .main-card-layout {
   position: relative;
   width: 100%;
   max-width: 480px;
-  margin: 10px auto 18px;
-  padding: 6px 14px 14px;
+  margin: 4px auto 10px;
+  padding: 0 14px 10px;
   box-sizing: border-box;
   text-align: center;
   background: transparent;
@@ -1639,7 +1663,7 @@ body.is-envelope-closed .main-card-layout {
 .two-hearts-top-lotus {
   width: 100%;
   max-width: 44px;
-  margin: 0 auto 6px;
+  margin: -8px auto 4px;
   line-height: 0;
 }
 
@@ -1655,7 +1679,7 @@ body.is-envelope-closed .main-card-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 0 2px 0;
+  margin: -4px 0 2px 0;
   width: 100%;
 }
 
@@ -1704,8 +1728,12 @@ body.is-envelope-closed .main-card-layout {
 .two-hearts-rule-wrap {
   width: 100%;
   max-width: 210px;
-  margin: 8px auto 10px;
+  margin: 6px auto 14px;
   line-height: 0;
+}
+
+.two-hearts-body+.two-hearts-rule-wrap {
+  margin: 14px auto 10px;
 }
 
 .two-hearts-rule-img {
@@ -1718,10 +1746,10 @@ body.is-envelope-closed .main-card-layout {
 .two-hearts-body {
   width: 100%;
   max-width: 440px;
-  margin: 0 auto;
+  margin: 20px auto 0;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 12px;
 }
 
 .two-hearts-body .two-hearts-para {
@@ -1729,7 +1757,7 @@ body.is-envelope-closed .main-card-layout {
   font-style: normal;
   font-weight: 500;
   font-size: clamp(1.08rem, 3.2vw, 1.2rem);
-  line-height: 1.38;
+  line-height: 1.44;
   color: #2D1C1D;
   letter-spacing: 0.012em;
   margin: 0;
@@ -1741,7 +1769,8 @@ body.is-envelope-closed .main-card-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 4px;
+  margin-top: 32px;
+  margin-bottom: 6px;
   width: 100%;
 }
 
@@ -1749,10 +1778,10 @@ body.is-envelope-closed .main-card-layout {
   font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 1.12rem;
+  font-size: 1.14rem;
   color: #781D22;
   letter-spacing: 0.02em;
-  margin-bottom: 0px;
+  margin-bottom: 2px;
 }
 
 .two-hearts-names-wrap {
@@ -2432,7 +2461,7 @@ body.is-envelope-closed .main-card-layout {
 .royal-arch-footer {
   width: 100% !important;
   max-width: 100% !important;
-  margin: -1px 0 0 0 !important;
+  margin: -42px 0 0 0 !important;
   padding: 0 !important;
   display: block !important;
   position: relative;
@@ -2498,6 +2527,25 @@ body.is-envelope-closed .main-card-layout {
 .footer-btn-top-overlay:focus-visible {
   background: rgba(255, 255, 255, 0.18);
   box-shadow: 0 0 24px rgba(255, 215, 100, 0.6);
+}
+
+.footer-phone-overlay {
+  position: absolute;
+  top: 87.2%;
+  left: 33%;
+  width: 34%;
+  height: 2.2%;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 5;
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.001);
+}
+
+.footer-phone-overlay:hover,
+.footer-phone-overlay:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 16px rgba(255, 215, 100, 0.5);
 }
 
 /* Ganesh invocation - live Devanagari text matching reference */
@@ -2729,7 +2777,7 @@ body.at-footer .royal-scroll-prompt {
 .event-date-big {
   font-family: 'Cinzel', serif;
   font-size: 15.5px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 1.4px;
   color: #5A1A1E;
   line-height: 1.3;
@@ -2738,7 +2786,7 @@ body.at-footer .royal-scroll-prompt {
 .event-date-sub {
   font-family: 'Cinzel', serif;
   font-size: 10.5px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 1.1px;
   color: #6A2A2A;
   margin-top: 8px;
@@ -2753,13 +2801,14 @@ body.at-footer .royal-scroll-prompt {
 .event-venue-label {
   color: #A8802E;
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 1.6px;
 }
 
 .event-venue-name {
   font-size: 13px;
   color: #2E1A1A;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .event-directions-pill {
@@ -2937,12 +2986,12 @@ body.at-footer .royal-scroll-prompt {
   margin: 0 auto !important;
 }
 
-/* ═══ ITC Souvenir Typography — Scoped Strictly to Events Section Boxes ═══ */
+/* ═══ ITC Souvenir Typography — Scoped Strictly to Events Section Boxes & Wardrobe ═══ */
 @font-face {
   font-family: 'ITC Souvenir';
   src: url('/media/SouvenirStd-Light.ttf?v=2') format('truetype'),
-       url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.woff2') format('woff2'),
-       url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.ttf') format('truetype');
+    url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.woff2') format('woff2'),
+    url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -2950,10 +2999,20 @@ body.at-footer .royal-scroll-prompt {
 
 @font-face {
   font-family: 'ITC Souvenir';
-  src: url('/media/SouvenirStd-Light.ttf?v=2') format('truetype'),
-       url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.woff2') format('woff2'),
-       url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.ttf') format('truetype');
+  src: url('/media/SouvenirStd-Medium.ttf?v=2') format('truetype'),
+    url('/media/SouvenirStd-Light.ttf?v=2') format('truetype'),
+    url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.woff2') format('woff2'),
+    url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.ttf') format('truetype');
   font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ITC Souvenir';
+  src: url('/media/SouvenirStd-Medium.ttf?v=2') format('truetype'),
+    url('/media/SouvenirStd-Light.ttf?v=2') format('truetype');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -2966,14 +3025,24 @@ body.at-footer .royal-scroll-prompt {
   font-family: 'ITC Souvenir', Georgia, serif !important;
 }
 
+#events-container .event-framed-card .event-venue-label {
+  font-weight: 700 !important;
+  font-synthesis: weight !important;
+  -webkit-text-stroke: 0.35px currentColor;
+}
+
+#events-container .event-framed-card .event-venue-name {
+  font-weight: 700 !important;
+  font-synthesis: weight !important;
+  -webkit-text-stroke: 0.35px currentColor;
+}
+
 #events-container .event-framed-card .event-date-big {
   font-family: 'ITC Souvenir', Georgia, serif !important;
   font-variant-numeric: lining-nums !important;
   font-feature-settings: "lnum" 1 !important;
   font-size: 16.5px !important;
-  font-weight: 700 !important;
-  font-synthesis: weight !important;
-  -webkit-text-stroke: 0.35px currentColor;
+  font-weight: 400 !important;
   letter-spacing: 0.4px !important;
   text-transform: none !important;
   color: #5A1A1E !important;
@@ -3000,7 +3069,7 @@ body.at-footer .royal-scroll-prompt {
   text-transform: lowercase !important;
   letter-spacing: 0.03em !important;
   margin-left: 1px !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
 }
 
 /* Living cover canvas (ambient motion layer, sits exactly over the cover image) */
@@ -3017,19 +3086,148 @@ body.at-footer .royal-scroll-prompt {
 .wardrobe-planner-section {
   position: relative;
   width: 100%;
-  margin: 0 0 -28px 0 !important;
-  padding: 10px 0 0 !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
   text-align: center;
   background: transparent !important;
 }
 
+/* ═══ Wardrobe Introduction Card (Exact Edge Branches & Generous Non-Clashing Spacing) ═══ */
+.wardrobe-intro-exact-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: -14px auto clamp(46px, 10vw, 64px);
+  padding: 0 12px;
+  text-align: center;
+  box-sizing: border-box;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible;
+}
+
+/* Top Corner Branches (Matching Watercolor Fill on Left & Right) */
+.intro-branch-left {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: clamp(52px, 13.5vw, 68px);
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.intro-branch-right {
+  position: absolute;
+  top: -12px;
+  right: 0;
+  width: clamp(52px, 13.5vw, 68px);
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 2-Line Body Text (Shifted Further Down Clear of Edge Leaves, Uniform Regular Weight, No Bold) */
+.intro-exact-text {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(1.24rem, 3.8vw, 1.52rem) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  color: #2D141E !important;
+  line-height: 1.52;
+  margin: 0 auto clamp(14px, 3.5vw, 18px);
+  padding: clamp(68px, 17vw, 92px) clamp(16px, 4vw, 28px) 0;
+  max-width: 480px;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Center Botanical Flourish (Clean, Isolated, Zero Box Noise, Watercolor + Burgundy Lines) */
+.intro-exact-flourish-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto clamp(16px, 4vw, 22px);
+  position: relative;
+  z-index: 2;
+}
+
+.intro-exact-flourish-img {
+  width: clamp(76px, 20vw, 102px);
+  height: auto;
+  display: block;
+}
+
+/* Pill Badge: 📅 Awaiting your presence as the celebration unfolds. */
+.intro-exact-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 246, 242, 0.96);
+  border: 1.2px solid #C48E94;
+  border-radius: 999px;
+  padding: 9px 22px;
+  margin: 0 auto;
+  max-width: 98%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(120, 60, 60, 0.06);
+}
+
+.intro-exact-pill-cal {
+  width: 19px;
+  height: 19px;
+  color: #7A1B22;
+  flex-shrink: 0;
+}
+
+.intro-exact-pill-text {
+  font-family: 'ITC Souvenir', 'Book Antiqua', 'Palatino Linotype', Georgia, serif !important;
+  font-size: clamp(0.92rem, 2.7vw, 1.05rem) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: #6E1822 !important;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 420px) {
+  .intro-exact-pill {
+    padding: 8px 14px;
+    gap: 8px;
+  }
+
+  .intro-exact-pill-text {
+    font-size: 0.84rem !important;
+    white-space: normal;
+  }
+
+  .intro-exact-pill-cal {
+    width: 17px;
+    height: 17px;
+  }
+}
+
 .wardrobe-planner-section .section-script-subtitle {
-  margin-bottom: 14px !important;
+  margin-bottom: 22px !important;
 }
 
 /* ── Carousel Header & Typography (Reference Inspiration) ── */
 .wardrobe-carousel-header {
-  margin: 4px auto 14px;
+  margin: 12px auto 14px !important;
+  padding-top: 6px;
   text-align: center;
   transition: opacity 0.35s ease, transform 0.35s ease;
   max-width: 94%;
@@ -3093,7 +3291,7 @@ body.at-footer .royal-scroll-prompt {
   width: 100%;
   max-width: 540px;
   margin: 0 auto;
-  padding: 6px 0 22px;
+  padding: 6px 0 0 !important;
   overflow: visible;
   touch-action: pan-y pinch-zoom;
   perspective: 1200px;
@@ -3102,7 +3300,7 @@ body.at-footer .royal-scroll-prompt {
 .wardrobe-carousel-track {
   position: relative;
   width: 100%;
-  height: clamp(595px, 82vh, 695px);
+  height: clamp(543px, calc(clamp(275px, 72vw, 340px) * 1.975), 672px) !important;
   margin: 0 auto;
 }
 
@@ -3115,8 +3313,8 @@ body.at-footer .royal-scroll-prompt {
   flex-direction: column;
   align-items: center;
   transition: transform 0.52s cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 0.52s ease,
-              filter 0.52s ease;
+    opacity 0.52s ease,
+    filter 0.52s ease;
   will-change: transform, opacity;
   cursor: pointer;
   user-select: none;
@@ -3152,33 +3350,31 @@ body.at-footer .royal-scroll-prompt {
 .wardrobe-card-slide.is-hidden {
   transform: translateX(-50%) translateZ(-100px) scale(0.72);
   opacity: 0;
+  visibility: hidden;
   z-index: 1;
   pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 /* ── Framed Gold Card (Matches Reference Image) ── */
 .wardrobe-framed-card {
   position: relative;
   width: 100%;
-  border-radius: 0;
+  border-radius: 44px;
   padding: 0;
   background: transparent;
-  box-shadow: 
-    0 22px 55px -6px rgba(45, 18, 10, 0.35),
-    0 8px 24px rgba(0, 0, 0, 0.14);
-  transition: box-shadow 0.35s ease;
+  filter: drop-shadow(0 20px 48px rgba(45, 18, 10, 0.30));
+  transition: filter 0.35s ease;
 }
 
 .wardrobe-card-slide.is-active .wardrobe-framed-card {
-  box-shadow: 
-    0 26px 65px -6px rgba(45, 18, 10, 0.42),
-    0 10px 28px rgba(0, 0, 0, 0.18);
+  filter: drop-shadow(0 24px 58px rgba(45, 18, 10, 0.38));
 }
 
 .wardrobe-card-gold-frame {
   position: relative;
   width: 100%;
-  border-radius: 0;
+  border-radius: 44px;
   background: transparent;
   overflow: visible;
   outline: none;
@@ -3188,27 +3384,28 @@ body.at-footer .royal-scroll-prompt {
 .wardrobe-card-slide .wardrobe-scene-wrap {
   position: relative !important;
   width: 100% !important;
-  aspect-ratio: 720 / 1424 !important;
+  aspect-ratio: 720 / 1422 !important;
   margin: 0 !important;
   padding: 0 !important;
   overflow: hidden !important;
-  background: transparent;
+  border-radius: 44px !important;
+  background: transparent !important;
 }
 
 /* ── Integrated Lower Info & Swatches Plate (Exact Match to User Master Reference) ── */
 .wardrobe-card-info-plate {
   position: absolute;
-  left: 12%;
-  right: 12%;
+  left: 8%;
+  right: 8%;
+  bottom: 7.2%;
   top: 61.2%;
-  bottom: 8.5%;
   z-index: 6;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   text-align: center;
-  padding: 0 4px;
+  padding: 2px 4px 4px;
   box-sizing: border-box;
   pointer-events: auto;
   background: transparent !important;
@@ -3217,13 +3414,15 @@ body.at-footer .royal-scroll-prompt {
 }
 
 .wardrobe-card-info-plate .wardrobe-card-date {
-  font-family: 'Cinzel', var(--font-serif, 'Playfair Display', serif);
-  font-size: clamp(0.90rem, 2.4vw, 1.05rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #7E1C25; /* Rich Royal Crimson Burgundy from reference */
+  font-family: 'ITC Souvenir', Georgia, serif !important;
+  font-variant-numeric: lining-nums !important;
+  font-feature-settings: "lnum" 1 !important;
+  font-size: clamp(1.0rem, 2.75vw, 1.18rem);
+  font-weight: 400 !important;
+  letter-spacing: 0.05em;
+  color: #6E1418;
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin: 0;
   line-height: 1.15;
 }
 
@@ -3231,49 +3430,56 @@ body.at-footer .royal-scroll-prompt {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  width: 100%;
-  margin-bottom: 4px;
+  width: fit-content;
+  max-width: 96%;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .wardrobe-card-info-plate .dresscode-line {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 6px;
+  align-items: baseline;
+  text-align: left;
   font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
-  font-size: clamp(0.62rem, 1.65vw, 0.72rem);
+  font-size: clamp(0.65rem, 1.75vw, 0.75rem);
   line-height: 1.35;
-  color: #3E3028; /* Crisp dark taupe-charcoal */
-  letter-spacing: 0.04em;
+  color: #3B1F1E;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .wardrobe-card-info-plate .dresscode-label {
-  font-weight: 700;
-  color: #3E3028;
+  font-weight: 700 !important;
+  color: #6E1418;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-right: 4px;
+  white-space: nowrap;
 }
 
 .wardrobe-card-info-plate .dresscode-val {
-  font-weight: 700;
-  color: #3E3028;
+  font-weight: 700 !important;
+  color: #3B1F1E;
   text-transform: uppercase;
 }
 
-/* Ornamental gold diamond divider between dress code and colour palette */
+/* Ornamental gold diamond divider inside scalloped plate */
 .wardrobe-info-divider {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin: 4px auto 5px;
-  color: #C5A059;
+  margin: 1px auto;
+  color: #C59B40;
   width: 72%;
 }
 
 .wardrobe-info-divider .wardrobe-divider-wing {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.85), transparent);
+  background: linear-gradient(90deg, transparent, rgba(197, 155, 64, 0.9), transparent);
 }
 
 .wardrobe-info-divider .wardrobe-divider-gem {
@@ -3287,25 +3493,25 @@ body.at-footer .royal-scroll-prompt {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 5px;
   width: 100%;
 }
 
 .wardrobe-card-info-plate .wardrobe-swatches-title {
   font-family: 'Cinzel', var(--font-serif, 'Playfair Display', serif);
-  font-size: clamp(0.60rem, 1.5vw, 0.70rem);
+  font-size: clamp(0.66rem, 1.75vw, 0.76rem);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #7A6D5E; /* Warm muted gold/taupe from reference */
+  color: #5A2A27;
   font-weight: 600;
-  margin-bottom: 7px;
+  margin: 0;
 }
 
 .wardrobe-card-info-plate .wardrobe-swatches {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 11px;
+  gap: 10px;
   padding: 0;
   background: transparent;
   border: none;
@@ -3313,8 +3519,8 @@ body.at-footer .royal-scroll-prompt {
 }
 
 .wardrobe-card-info-plate .wardrobe-swatch {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background-color: var(--swatch-color);
   border: 1.5px solid #C8A261;
@@ -3323,20 +3529,20 @@ body.at-footer .royal-scroll-prompt {
   padding: 0;
   margin: 0;
   outline: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
 }
 
 .wardrobe-card-info-plate .wardrobe-swatch:hover {
-  transform: scale(1.18);
+  transform: scale(1.12);
   box-shadow: 0 3px 8px rgba(43, 24, 16, 0.3);
 }
 
 .wardrobe-card-info-plate .wardrobe-swatch.is-active {
-  transform: scale(1.18);
-  outline: 1.5px solid #7E1C25;
-  outline-offset: 2.5px;
-  box-shadow: 0 2px 7px rgba(126, 28, 37, 0.35);
+  transform: scale(1.08);
+  border: 2px solid #5A1818;
+  outline: none;
+  box-shadow: 0 2px 7px rgba(90, 24, 24, 0.35);
 }
 
 .wardrobe-card-info-plate .wardrobe-swatch-name {
@@ -3348,27 +3554,40 @@ body.at-footer .royal-scroll-prompt {
   position: absolute;
   top: 44%;
   transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(253, 249, 242, 0.92);
+  background: rgba(253, 249, 242, 0.94);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1.2px solid #7A1C20;
+  border: 1.5px solid #7A1C20;
   color: #7A1C20;
-  box-shadow: 0 3px 10px rgba(60, 20, 10, 0.12);
+  box-shadow: 0 4px 12px rgba(60, 20, 10, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 25;
+  z-index: 60 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   padding: 0;
 }
 
+.wardrobe-nav-btn::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: transparent;
+}
+
 .wardrobe-nav-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
 }
 
 .wardrobe-nav-btn:hover {
@@ -3394,35 +3613,42 @@ body.at-footer .royal-scroll-prompt {
   .wardrobe-nav-prev {
     left: -10px;
   }
+
   .wardrobe-nav-next {
     right: -10px;
   }
 }
 
-/* ── Carousel Dots ── */
+/* ── Carousel Dots (Close to Cards, Capsule Active Dot Matching Reference) ── */
 .wardrobe-carousel-dots {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 14px;
+  margin-top: 8px !important;
+  margin-bottom: 6px !important;
+  z-index: 15;
+  position: relative;
 }
 
 .wardrobe-dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  border: 1px solid #D4AF37;
+  border: 1.5px solid #C8A452;
   background: transparent;
   padding: 0;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .wardrobe-dot.is-active {
+  width: 18px;
+  height: 9px;
+  border-radius: 5px;
   background: #7A1B22;
   border-color: #7A1B22;
-  transform: scale(1.3);
+  transform: none !important;
   box-shadow: 0 1px 4px rgba(122, 27, 34, 0.4);
 }
 
@@ -3443,7 +3669,8 @@ body.at-footer .royal-scroll-prompt {
   margin: 0 !important;
   padding: 0 !important;
   overflow: hidden !important;
-  background: #F4E9DC;
+  border-radius: 44px !important;
+  background: transparent !important;
   opacity: 1 !important;
   transform: none !important;
 }
@@ -3488,10 +3715,10 @@ body.at-footer .royal-scroll-prompt {
 
 /* ── Exactly 2 Garments per Event (1 Her, 1 Him) ── */
 .wardrobe-outfit-her {
-  left: 17%;
-  top: 14.7%;
-  width: 32%;
-  height: 44%;
+  left: 15%;
+  top: 14.0%;
+  width: 34%;
+  height: 37.5%;
   object-fit: contain;
   object-position: center top;
   filter: drop-shadow(0 6px 14px rgba(45, 18, 12, 0.16));
@@ -3499,12 +3726,26 @@ body.at-footer .royal-scroll-prompt {
 
 .wardrobe-outfit-him {
   left: 51%;
-  top: 14.7%;
-  width: 32%;
-  height: 44%;
+  top: 13.8%;
+  width: 34%;
+  height: 37.5%;
   object-fit: contain;
   object-position: center top;
   filter: drop-shadow(0 6px 14px rgba(45, 18, 12, 0.16));
+}
+
+.wardrobe-scene-wedding .wardrobe-outfit-her {
+  left: 12%;
+  width: 38%;
+  top: 14.0%;
+  height: 37.5%;
+}
+
+.wardrobe-scene-wedding .wardrobe-outfit-him {
+  left: 50%;
+  width: 35%;
+  top: 13.8%;
+  height: 37.5%;
 }
 
 .wardrobe-scene-wrap .wardrobe-outfit-her {
@@ -3612,11 +3853,14 @@ body.at-footer .royal-scroll-prompt {
 }
 
 .wardrobe-card-date {
-  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-family: 'ITC Souvenir', Georgia, serif !important;
+  font-variant-numeric: lining-nums !important;
+  font-feature-settings: "lnum" 1 !important;
   font-size: clamp(0.92rem, 2.5vw, 1.12rem);
-  font-weight: 700;
+  font-weight: 400 !important;
   letter-spacing: 0.08em;
-  color: #7A1B22; /* Royal Burgundy */
+  color: #7A1B22;
+  /* Royal Burgundy */
   text-transform: uppercase;
   line-height: 1.2;
 }
@@ -3624,29 +3868,38 @@ body.at-footer .royal-scroll-prompt {
 .wardrobe-card-dresscode {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  width: 100%;
+  gap: 3px;
+  width: fit-content;
+  max-width: 96%;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .dresscode-line {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 6px;
+  align-items: baseline;
+  text-align: left;
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: clamp(0.78rem, 2.2vw, 0.94rem);
   line-height: 1.35;
   color: #38181C;
   letter-spacing: 0.02em;
+  font-weight: 700 !important;
 }
 
 .dresscode-label {
-  font-weight: 700;
+  font-weight: 700 !important;
   color: #7A1B22;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.88em;
-  margin-right: 3px;
+  white-space: nowrap;
 }
 
 .dresscode-val {
-  font-weight: 600;
+  font-weight: 700 !important;
   color: #2D1418;
 }
 
@@ -3695,9 +3948,12 @@ body.at-footer .royal-scroll-prompt {
 }
 
 @keyframes wardrobeHangerSway {
-  0%, 100% {
+
+  0%,
+  100% {
     rotate: 0deg;
   }
+
   50% {
     rotate: 0.55deg;
   }
@@ -3719,90 +3975,76 @@ body.at-footer .royal-scroll-prompt {
   animation: wardrobeHangerSway 5.0s ease-in-out 1.9s infinite;
 }
 
-/* ── 5th Closing Scene (Pillars, Chandeliers, Monogram, Weather & Luggage Cart) ── */
-.wardrobe-pillar-l,
-.wardrobe-pillar-r {
-  z-index: 3;
-}
-
-.wardrobe-chand-l,
-.wardrobe-chand-r {
-  z-index: 3;
-  transform-origin: 50% 0%;
-}
-
-.wardrobe-monogram,
-.wardrobe-closing-text {
-  z-index: 3;
-}
-
-.wardrobe-luggage-cart {
-  z-index: 5;
-}
-
-.wardrobe-scene-closing .wardrobe-pillar-l,
-.wardrobe-scene-closing .wardrobe-pillar-r {
-  opacity: 0;
-  transform: translateY(-35%);
-  transition: opacity 0.65s ease 0.08s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
-}
-
-.wardrobe-scene-closing .wardrobe-chand-l,
-.wardrobe-scene-closing .wardrobe-chand-r {
-  opacity: 0;
-  transform: translateY(-60%);
-  transition: opacity 0.65s ease 0.22s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
-}
-
-.wardrobe-scene-closing .wardrobe-monogram {
-  opacity: 0;
-  transform: translateY(10px) scale(0.95);
-  transition: opacity 0.75s ease 0.50s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.50s;
-}
-
-.wardrobe-scene-closing .wardrobe-closing-text {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.8s ease 0.85s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.85s;
-}
-
-.wardrobe-scene-closing .wardrobe-luggage-cart {
-  opacity: 0;
-  transform: translateX(-120%);
-  transition: opacity 0.45s ease 0.65s, transform 1.25s cubic-bezier(0.22, 1, 0.36, 1) 0.65s;
-}
-
-.wardrobe-scene-closing {
-  aspect-ratio: 720 / 1320 !important;
-  background: transparent !important;
-  margin-bottom: -17.36% !important;
-  z-index: 2 !important;
-}
-
-.wardrobe-two-hearts-bridge {
+/* ═══════════════════════════════════════════════════════════════════════════
+   KOLAGHAT WEATHER FORECAST SECTION (Grand, Biggified & Luminous Royal Card)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.kolaghat-weather-section {
   position: relative;
-  width: 100%;
-  aspect-ratio: 720 / 1060;
-  margin: 0;
-  padding: 0;
-  z-index: 5;
-  pointer-events: none;
+  width: min(96vw, 720px) !important;
+  max-width: 720px !important;
+  margin: 16px auto 0 auto !important;
+  margin-left: calc((100% - min(96vw, 720px)) / 2) !important;
+  margin-right: calc((100% - min(96vw, 720px)) / 2) !important;
+  padding: 0 !important;
+  text-align: center;
+  background: transparent !important;
+  box-sizing: border-box;
+  z-index: 10;
+  overflow: visible;
 }
 
-.wardrobe-two-hearts-img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: fill;
+.kolaghat-weather-section.scroll-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.wardrobe-scene-closing.is-in-view .wardrobe-pillar-l,
-.wardrobe-scene-closing.is-in-view .wardrobe-pillar-r,
-.wardrobe-scene-closing.is-in-view .wardrobe-chand-l,
-.wardrobe-scene-closing.is-in-view .wardrobe-chand-r,
-.wardrobe-scene-closing.is-in-view .wardrobe-monogram,
-.wardrobe-scene-closing.is-in-view .wardrobe-closing-text,
-.wardrobe-scene-closing.is-in-view .wardrobe-luggage-cart {
+.kolaghat-weather-section.scroll-reveal.is-in-view {
   opacity: 1;
-  transform: translate(0, 0) scale(1);
+  transform: translateY(0);
+}
+
+.kolaghat-weather-wrap {
+  position: relative;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  background: transparent !important;
+  line-height: 0;
+}
+
+.kolaghat-weather-img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  object-fit: contain;
+  filter: none !important;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (max-width: 540px) {
+  .kolaghat-weather-section {
+    width: calc(100% + 28px) !important;
+    max-width: calc(100% + 28px) !important;
+    margin-left: -14px !important;
+    margin-right: -14px !important;
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .kolaghat-weather-wrap {
+    padding: 0 !important;
+  }
+
+  .kolaghat-weather-img {
+    width: 100% !important;
+  }
 }
