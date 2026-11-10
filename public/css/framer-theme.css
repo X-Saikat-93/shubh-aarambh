@@ -4716,8 +4716,8 @@ body.is-envelope-closed {
   top: 0;
   max-width: none;
   opacity: 0;
-  will-change: transform, opacity;
 }
+.env-floral { will-change: transform, opacity; }
 .env-floral {
   width: calc(250px * var(--env-s, 0.66));
   transform: translate(-50%, -50%) scale(0.8);
@@ -4728,7 +4728,10 @@ body.is-envelope-closed {
 }
 .env-logo {
   width: var(--env-logo-w, 82vw);
-  transform: translate(-50%, -50%) scale(0.1);
+  height: auto;
+  transform: translate(-50%, -50%);
+  /* fine warm shadow for definition (no light halo: that washed the thin gold lines out) */
+  filter: drop-shadow(0 1px 1.2px rgba(90, 45, 5, 0.45));
 }
 
 /* 1. Flaps parting: the red floral appears over the video's gold one and never stops moving:
@@ -4745,10 +4748,12 @@ body.is-envelope-closed {
 .envelope-wrapper.env-floral-on .env-logo {
   animation: envLogoGrow 1.7s cubic-bezier(0.3, 0.55, 0.45, 1) 1.55s forwards;
 }
+/* Grows by width (not transform: scale) so the browser redraws it sharp at every size;
+   scaling up a small rasterised layer is what made it look blurred on phones */
 @keyframes envLogoGrow {
-  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+  0%   { opacity: 0; width: calc(var(--env-logo-w, 82vw) * 0.1); }
   25%  { opacity: 1; }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 1; width: var(--env-logo-w, 82vw); }
 }
 
 /* 2. The glow settles into the calm envelope interior */
@@ -4760,8 +4765,10 @@ body.is-envelope-closed {
   animation: envLogoSpread 1.1s cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
 }
 @keyframes envLogoSpread {
-  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1);    filter: blur(0); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.45); filter: blur(4px); }
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1);
+         filter: drop-shadow(0 1px 1.2px rgba(90, 45, 5, 0.45)) blur(0); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.45);
+         filter: drop-shadow(0 1px 1.2px rgba(90, 45, 5, 0)) blur(4px); }
 }
 .env-glitter {
   position: fixed;
@@ -4774,3 +4781,49 @@ body.is-envelope-closed {
 
 /* 4. Slow, soft hand-over to the landing page */
 .envelope-wrapper.env-slow-fade { transition: opacity 2.2s ease-in-out, visibility 2.2s ease-in-out; }
+
+/* Event cards: venue name (Sher Bengal Lawn / Banquet Hall) in maroon, regular weight */
+#events-container .event-framed-card .event-venue-name {
+  color: #7A1A2A !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  font-synthesis: style !important;   /* allow the slant (Souvenir has no italic file), never fake bold */
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Landing page: crisp full-resolution G&K logo laid over the one painted into the cover */
+.cover-logo-sharp {
+  position: absolute;
+  left: 50%;
+  top: 40.4%;
+  width: 37.7%;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(90, 45, 5, 0.35));
+}
+
+/* Position the sharp cover logo purely in CSS (no JS timing → never shows doubled).
+   The cover art (1152x2048) is object-fit: cover, anchored top-centre, inside this same box. */
+.gk-logo-glow-wrap { container-type: size; }
+@supports (width: 1cqw) {
+  .cover-logo-sharp {
+    left: 50% !important;
+    top: calc(max(100cqh, 177.7778cqw) * 0.404297) !important;     /* 828 / 2048 */
+    width: calc(max(56.25cqh, 100cqw) * 0.376736) !important;      /* 434 / 1152 */
+  }
+}
+
+/* Landing-page logo: slow golden "breathing" shine (brightness swell + soft gold halo). */
+@keyframes coverLogoBreathe {
+  0%, 100% { filter: brightness(1)    contrast(1)    saturate(1)    drop-shadow(0 1px 1px rgba(90, 45, 5, 0.35)) drop-shadow(0 0 2px rgba(255, 214, 130, 0)); }
+  50%      { filter: brightness(1.22) contrast(1.06) saturate(1.08) drop-shadow(0 1px 1px rgba(90, 45, 5, 0.35)) drop-shadow(0 0 14px rgba(255, 214, 130, 0.65)); }
+}
+.cover-logo-sharp {
+  animation: coverLogoBreathe 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: filter;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover-logo-sharp { animation: none; }
+}

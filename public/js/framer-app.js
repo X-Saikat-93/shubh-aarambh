@@ -2,7 +2,7 @@
 // Everdezign Framer Exact Replica Engine
 // ═══════════════════════════════════════════════════════════
 import { CONFIG, photo } from './config.js?v=52';
-import { initCoverLife } from './cover-life.js?v=51';
+import { initCoverLife } from './cover-life.js?v=52';
 
 // ───────── Falling Red Rose Petals Canvas (Subtle & Organic) ─────────
 function initPetals() {
@@ -990,6 +990,7 @@ function initGkGlow() {
   const coverImg = document.querySelector('#cover-card .page-fullwidth-img');
   const flare = document.querySelector('.gk-ring-star-flare');
   const shine = document.querySelector('.gk-gold-shine');
+  const sharpLogo = document.querySelector('.cover-logo-sharp');
   if (!coverImg) return;
 
   function update() {
@@ -1015,6 +1016,12 @@ function initGkGlow() {
     if (flare) {
       flare.style.left = `${offsetX + renderedW * 0.6091}px`;
       flare.style.top = `${offsetY + renderedH * 0.3427}px`;
+    }
+    // Sharp logo overlay: the cover has the logo painted at centre (576, 828), 434px wide
+    if (sharpLogo && !(window.CSS && CSS.supports && CSS.supports('width', '1cqw'))) {   // fallback only
+      sharpLogo.style.left = `${offsetX + renderedW * (576 / 1152)}px`;
+      sharpLogo.style.top = `${offsetY + renderedH * (828 / 2048)}px`;
+      sharpLogo.style.width = `${renderedW * (434 / 1152)}px`;
     }
   }
 

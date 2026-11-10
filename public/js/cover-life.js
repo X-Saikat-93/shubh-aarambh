@@ -69,7 +69,7 @@ void main() {
     float goldBreathe = 0.5 + 0.5 * sin(t * 2.1);
     float lum = dot(col, vec3(0.299, 0.587, 0.114));
     // Boost warm gold/crimson highlights on the monogram & wreath in-place
-    col += vec3(0.22, 0.15, 0.04) * gkMask * goldBreathe * smoothstep(0.25, 0.85, lum);
+    col += vec3(0.07, 0.05, 0.012) * gkMask * goldBreathe * smoothstep(0.25, 0.85, lum);
   }
 
   // Subtle natural sunlight flutter through leaves
