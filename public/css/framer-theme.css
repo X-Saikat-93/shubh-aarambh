@@ -3,7 +3,7 @@
    Everdezign Framer Exact Replica Styling
    ═══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;500;600&family=Alex+Brush&family=Beau+Rivage&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Martel:wght@600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Public+Sans:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;500;600&family=Alex+Brush&family=Beau+Rivage&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Crimson+Pro:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Dancing+Script:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Martel:wght@600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Public+Sans:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap');
 
 :root {
   --framer-burgundy: #642020;
@@ -830,6 +830,87 @@ body.is-envelope-closed .main-card-layout {
   display: block;
   margin: 0 auto;
   filter: drop-shadow(0 4px 16px rgba(90, 20, 25, 0.06));
+}
+
+/* Formal invitation rebuilt as live text over cut-out ornaments.
+   Coordinates come from the 572 x 1024 reference artwork: --x/--y/--w/--fs
+   are reference pixels, converted to the card's width via cqw. */
+.fi-card {
+  --u: calc(100cqw / 572);
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  aspect-ratio: 572 / 1024;
+  container-type: inline-size;
+}
+.fi-card .fi-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+.fi-card .fi-art {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: auto;
+  display: block;
+  user-select: none;
+}
+.fi-card .fi-rel,
+.fi-card .fi-names,
+.fi-card .fi-place {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--y) * var(--u));
+  transform: translateY(-50%);
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1;
+  font-family: 'Crimson Pro', 'EB Garamond', Georgia, serif;
+  font-size: calc(var(--fs) * var(--u));
+  font-variant-numeric: lining-nums;
+}
+.fi-card .fi-rel {
+  font-style: italic;
+  font-weight: 600;
+  color: #946C2C;
+}
+.fi-card .fi-names {
+  font-weight: 700;
+  color: #6A161C;
+  -webkit-text-stroke: 0.25px currentColor;
+  letter-spacing: 0.002em;
+}
+.fi-card .fi-place {
+  font-style: italic;
+  font-weight: 500;
+  color: #5A1D22;
+}
+.fi-card .fi-rule {
+  position: absolute;
+  left: calc(195 * var(--u));
+  width: calc(182 * var(--u));
+  top: calc(var(--y) * var(--u));
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C49A4E 18%, #C49A4E 82%, transparent);
+}
+.fi-card .fi-rule::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(7 * var(--u));
+  height: calc(7 * var(--u));
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #B88A3C;
 }
 
 /* Bride / Groom Script Names */
@@ -1679,25 +1760,25 @@ body.is-envelope-closed .main-card-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: -4px 0 2px 0;
+  margin: 6px 0 2px 0;
   width: 100%;
 }
 
 .two-hearts-line-1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: normal;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
   font-weight: 700;
-  font-size: clamp(1.95rem, 5.5vw, 2.35rem);
+  font-size: clamp(2.05rem, 5.8vw, 2.5rem);
   color: #781D22;
   letter-spacing: 0.01em;
   line-height: 1.15;
 }
 
 .two-hearts-line-2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 5vw, 2.15rem);
+  font-weight: 500;
+  font-size: clamp(1.85rem, 5.2vw, 2.25rem);
   color: #A47834;
   letter-spacing: 0.015em;
   line-height: 1.18;
@@ -1753,11 +1834,11 @@ body.is-envelope-closed .main-card-layout {
 }
 
 .two-hearts-body .two-hearts-para {
-  font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  font-family: 'EB Garamond', Georgia, serif;
   font-style: normal;
-  font-weight: 500;
-  font-size: clamp(1.08rem, 3.2vw, 1.2rem);
-  line-height: 1.44;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 3.3vw, 1.25rem);
+  line-height: 1.48;
   color: #2D1C1D;
   letter-spacing: 0.012em;
   margin: 0;
@@ -1775,10 +1856,10 @@ body.is-envelope-closed .main-card-layout {
 }
 
 .two-hearts-with-love {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-weight: 400;
-  font-size: 1.14rem;
+  font-weight: 500;
+  font-size: 1.25rem;
   color: #781D22;
   letter-spacing: 0.02em;
   margin-bottom: 2px;
@@ -2548,6 +2629,45 @@ body.is-envelope-closed .main-card-layout {
   box-shadow: 0 0 16px rgba(255, 215, 100, 0.5);
 }
 
+/* Footer: live text over cleaned artwork (footer_clean.webp, 720 x 1150).
+   --y / --fs are pixels in that artwork, scaled to the rendered width. */
+.royal-arch-footer-wrap { container-type: inline-size; --fu: calc(100cqw / 720); }
+.ft-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--y) * var(--fu));
+  transform: translateY(-50%);
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.1;
+  font-size: calc(var(--fs) * var(--fu));
+  font-variant-numeric: lining-nums;
+  z-index: 4;
+}
+.ft-deva { font-family: 'Martel', 'Tiro Devanagari Hindi', serif; font-weight: 700; color: #5E1A1E; letter-spacing: 0.06em; }
+.ft-save { font-family: 'Cinzel', serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; color: #4A2224; padding-left: 0.3em; }
+.ft-date { font-family: 'Cinzel', serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; color: #6A1A22; }
+.ft-date span { font-size: 1em; }
+.ft-dec { font-family: 'Cinzel', serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #5A1A20; }
+.ft-love { font-family: 'Crimson Pro', Georgia, serif; font-style: italic; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #4E1D22; }
+.ft-fam { font-family: 'Crimson Pro', Georgia, serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #6A161C; padding-left: 0.14em; }
+.ft-craft { font-family: 'Cinzel', serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: #3D1C1D; padding-left: 0.16em; }
+a.ft-phone {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-weight: 500;
+  color: #6A161C;
+  text-decoration: none;
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -50%);
+  padding: 0.15em 0.5em;
+  border-radius: 6px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+a.ft-phone:hover, a.ft-phone:focus-visible { background: rgba(255, 255, 255, 0.4); box-shadow: 0 0 14px rgba(255, 215, 100, 0.45); }
+
 /* Ganesh invocation - live Devanagari text matching reference */
 .ganesh-card-content {
   padding: 14% 8% 11% 8%;
@@ -2986,37 +3106,22 @@ body.at-footer .royal-scroll-prompt {
   margin: 0 auto !important;
 }
 
+@font-face {
+  font-family: 'ITC Souvenir';
+  src: url('/media/fonts/Souvenir-Regular.ttf?v=1') format('truetype');
+  font-weight: 300 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ITC Souvenir';
+  src: url('/media/fonts/Souvenir-Demi.ttf?v=1') format('truetype');
+  font-weight: 600 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ═══ ITC Souvenir Typography — Scoped Strictly to Events Section Boxes & Wardrobe ═══ */
-@font-face {
-  font-family: 'ITC Souvenir';
-  src: url('/media/SouvenirStd-Light.ttf?v=2') format('truetype'),
-    url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.woff2') format('woff2'),
-    url('https://db.onlinewebfonts.com/t/f6db100b432aade1520975f792f93753.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ITC Souvenir';
-  src: url('/media/SouvenirStd-Medium.ttf?v=2') format('truetype'),
-    url('/media/SouvenirStd-Light.ttf?v=2') format('truetype'),
-    url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.woff2') format('woff2'),
-    url('https://db.onlinewebfonts.com/t/7b2e1f84b8737cbfc7cc58cffccfaaa9.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ITC Souvenir';
-  src: url('/media/SouvenirStd-Medium.ttf?v=2') format('truetype'),
-    url('/media/SouvenirStd-Light.ttf?v=2') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 #events-container .event-framed-card .event-info-body,
 #events-container .event-framed-card .event-caption-desc,
 #events-container .event-framed-card .event-venue-label,
@@ -3191,7 +3296,7 @@ body.at-footer .royal-scroll-prompt {
 }
 
 .intro-exact-pill-text {
-  font-family: 'ITC Souvenir', 'Book Antiqua', 'Palatino Linotype', Georgia, serif !important;
+  font-family: 'ITC Souvenir', Georgia, serif !important;
   font-size: clamp(0.92rem, 2.7vw, 1.05rem) !important;
   font-weight: 400 !important;
   font-style: normal !important;
@@ -3419,10 +3524,11 @@ body.at-footer .royal-scroll-prompt {
   font-feature-settings: "lnum" 1 !important;
   font-size: clamp(1.0rem, 2.75vw, 1.18rem);
   font-weight: 400 !important;
+  font-synthesis: none !important;
   letter-spacing: 0.05em;
   color: #6E1418;
   text-transform: uppercase;
-  margin: 0;
+  margin: 2px 0;
   line-height: 1.15;
 }
 
@@ -3442,17 +3548,20 @@ body.at-footer .royal-scroll-prompt {
   column-gap: 6px;
   align-items: baseline;
   text-align: left;
-  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
-  font-size: clamp(0.65rem, 1.75vw, 0.75rem);
+  font-family: 'ITC Souvenir', Georgia, serif !important;
+  font-size: clamp(0.68rem, 1.85vw, 0.78rem);
   line-height: 1.35;
   color: #3B1F1E;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   font-weight: 700 !important;
+  font-synthesis: none !important;
 }
 
 .wardrobe-card-info-plate .dresscode-label {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
   font-weight: 700 !important;
+  font-synthesis: none !important;
   color: #6E1418;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -3460,7 +3569,9 @@ body.at-footer .royal-scroll-prompt {
 }
 
 .wardrobe-card-info-plate .dresscode-val {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
   font-weight: 700 !important;
+  font-synthesis: none !important;
   color: #3B1F1E;
   text-transform: uppercase;
 }
@@ -3493,18 +3604,12 @@ body.at-footer .royal-scroll-prompt {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  margin-top: -3px;
   width: 100%;
 }
 
 .wardrobe-card-info-plate .wardrobe-swatches-title {
-  font-family: 'Cinzel', var(--font-serif, 'Playfair Display', serif);
-  font-size: clamp(0.66rem, 1.75vw, 0.76rem);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #5A2A27;
-  font-weight: 600;
-  margin: 0;
+  display: none !important;
 }
 
 .wardrobe-card-info-plate .wardrobe-swatches {
@@ -3513,6 +3618,7 @@ body.at-footer .royal-scroll-prompt {
   justify-content: center;
   gap: 10px;
   padding: 0;
+  margin-top: -3px;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -3858,6 +3964,7 @@ body.at-footer .royal-scroll-prompt {
   font-feature-settings: "lnum" 1 !important;
   font-size: clamp(0.92rem, 2.5vw, 1.12rem);
   font-weight: 400 !important;
+  font-synthesis: none !important;
   letter-spacing: 0.08em;
   color: #7A1B22;
   /* Royal Burgundy */
@@ -3881,16 +3988,19 @@ body.at-footer .royal-scroll-prompt {
   column-gap: 6px;
   align-items: baseline;
   text-align: left;
-  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-family: 'ITC Souvenir', Georgia, serif !important;
   font-size: clamp(0.78rem, 2.2vw, 0.94rem);
   line-height: 1.35;
   color: #38181C;
   letter-spacing: 0.02em;
   font-weight: 700 !important;
+  font-synthesis: none !important;
 }
 
 .dresscode-label {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
   font-weight: 700 !important;
+  font-synthesis: none !important;
   color: #7A1B22;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -3899,7 +4009,9 @@ body.at-footer .royal-scroll-prompt {
 }
 
 .dresscode-val {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
   font-weight: 700 !important;
+  font-synthesis: none !important;
   color: #2D1418;
 }
 
@@ -3976,21 +4088,22 @@ body.at-footer .royal-scroll-prompt {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   KOLAGHAT WEATHER FORECAST SECTION (Grand, Biggified & Luminous Royal Card)
+   KOLAGHAT WEATHER FORECAST SECTION — live HTML/CSS, transparent so the
+   universal ivory marble background shows through. Sizes use cqw (1cqw = 1%
+   of the section width) so it scales exactly like the reference artwork.
    ═══════════════════════════════════════════════════════════════════════════ */
 .kolaghat-weather-section {
   position: relative;
   width: min(96vw, 720px) !important;
   max-width: 720px !important;
   margin: 16px auto 0 auto !important;
-  margin-left: calc((100% - min(96vw, 720px)) / 2) !important;
-  margin-right: calc((100% - min(96vw, 720px)) / 2) !important;
   padding: 0 !important;
   text-align: center;
   background: transparent !important;
   box-sizing: border-box;
   z-index: 10;
   overflow: visible;
+  container-type: inline-size;
 }
 
 .kolaghat-weather-section.scroll-reveal {
@@ -4006,29 +4119,248 @@ body.at-footer .royal-scroll-prompt {
 
 .kolaghat-weather-wrap {
   position: relative;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
+  width: 100%;
+  margin: 0 auto;
+  padding: 7cqw 0 0;
   box-sizing: border-box;
-  background: transparent !important;
-  line-height: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.kolaghat-weather-img {
-  width: 100% !important;
-  height: auto !important;
-  display: block;
-  margin: 0 auto !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  object-fit: contain;
-  filter: none !important;
-  user-select: none;
-  -webkit-user-select: none;
+/* Header: weather emblem opens the section, title centred beneath it */
+.kw-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 4cqw;
+  box-sizing: border-box;
 }
+.kw-head-icon {
+  width: 21cqw;
+  height: auto;
+  margin-bottom: 0.6cqw;
+  filter: drop-shadow(0 1cqw 1.6cqw rgba(214, 150, 40, 0.18));
+  user-select: none;
+}
+.kw-title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2.8cqw;
+  white-space: nowrap;
+  line-height: 1;
+  font-weight: 400;
+}
+.kw-title-a {
+  font-family: 'Pinyon Script', 'Great Vibes', cursive;
+  font-size: 10.4cqw;
+  color: #8E1230;
+  letter-spacing: 0.005em;
+}
+.kw-title-b {
+  font-family: 'Pinyon Script', 'Great Vibes', cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10.4cqw;
+  letter-spacing: 0.005em;
+  background: linear-gradient(180deg, #B88A3C 0%, #8A5F22 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #9A6D2A;
+  padding-right: 0.08em;
+}
+
+.kw-sub {
+  margin: 2.6cqw 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 3.7cqw;
+  letter-spacing: 0.012em;
+  color: #8E1230;
+}
+
+.kw-divider { display: block; width: 66%; height: auto; margin: 3.6cqw 0 0; user-select: none; }
+
+/* One row: 11th (Day, Night) · 12th (Day, Night) — kept clear of the section edges */
+.kw-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  column-gap: 3cqw;
+  width: 86%;
+  margin-top: 8.5cqw;
+}
+.kw-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 0 1.4cqw 2.8cqw;
+  border-radius: 11cqw 11cqw 3cqw 3cqw;
+  /* ivory band between two gold hairlines */
+  border: 0.75cqw solid #FCF5E8;
+  background:
+    radial-gradient(ellipse 85% 42% at 50% 24%, rgba(255, 206, 140, 0.42), rgba(255, 220, 170, 0) 70%),
+    linear-gradient(180deg, #FDF4E4 0%, #FBF1DF 55%, #F9EBD3 100%);
+  background-clip: padding-box;
+  box-shadow:
+    0 0 0 1px #CFA862,
+    inset 0 0 0 1px rgba(201, 160, 88, 0.55),
+    0 1.4cqw 3.2cqw rgba(120, 80, 30, 0.18);
+  box-sizing: border-box;
+  text-align: center;
+}
+/* Night: dusky sky fading into cream, with a scatter of stars */
+.kw-card-night {
+  background:
+    linear-gradient(180deg, #5F6B8C 0%, #7C86A3 22%, #AFB3C3 40%, #DCD9D9 54%, #F3ECE1 66%, #F8EEDF 100%);
+  background-clip: padding-box;
+}
+.kw-card-night::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,0.95) 0 0.22cqw, transparent 0.42cqw),
+    radial-gradient(circle at 82% 12%, rgba(255,255,255,0.85) 0 0.18cqw, transparent 0.38cqw),
+    radial-gradient(circle at 26% 34%, rgba(255,255,255,0.75) 0 0.16cqw, transparent 0.34cqw),
+    radial-gradient(circle at 86% 30%, rgba(255,255,255,0.9) 0 0.22cqw, transparent 0.42cqw),
+    radial-gradient(circle at 70% 22%, rgba(255,255,255,0.7) 0 0.14cqw, transparent 0.3cqw),
+    radial-gradient(circle at 12% 27%, rgba(255,255,255,0.6) 0 0.13cqw, transparent 0.28cqw);
+}
+.kw-card > * { position: relative; }
+
+/* Date pill sitting on the arch apex */
+.kw-date {
+  order: 0;
+  position: relative;
+  z-index: 1;
+  margin-top: -1.8cqw;
+  padding: 0.55cqw 1.2cqw 0.45cqw;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #9A1B2E, #741020);
+  border: 1px solid #D2AA5E;
+  box-shadow: 0 0.5cqw 1.2cqw rgba(116, 16, 32, 0.22);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 2.2cqw;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: #F7E4BC;
+  white-space: nowrap;
+}
+.kw-date sup { font-size: 0.62em; vertical-align: 0.5em; line-height: 0; margin-left: 0.05em; }
+
+.kw-card-icon {
+  order: 1;
+  display: block;
+  height: 9.6cqw;
+  width: auto;
+  margin: 3.2cqw auto 1cqw;
+  user-select: none;
+}
+.kw-card-icon { filter: drop-shadow(0 0 1.6cqw rgba(255, 186, 70, 0.45)); }
+.kw-card-icon-moon {
+  height: 8cqw;
+  margin: 4cqw auto 1.8cqw;
+  filter: brightness(1.28) saturate(0.85) drop-shadow(0 0 1.4cqw rgba(235, 232, 255, 0.55));
+}
+
+.kw-when {
+  order: 2;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 4.2cqw;
+  line-height: 1.1;
+  color: #8E1230;
+}
+.kw-temp {
+  order: 3;
+  margin-top: 0.8cqw;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 7cqw;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
+  color: #8E1230;
+  white-space: nowrap;
+}
+.kw-temp i {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.46em;
+  vertical-align: 0.85em;
+  margin-left: 0.08em;
+  letter-spacing: 0.02em;
+  color: #9A6D2A;
+}
+
+.kw-card-foot {
+  order: 4;
+  position: relative;
+  align-self: stretch;
+  margin-top: 2.2cqw;
+  padding-top: 1.8cqw;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 2.6cqw;
+  line-height: 1.15;
+  color: #7A1B22;
+  white-space: nowrap;
+  padding-left: 0.4cqw;
+  padding-right: 0.4cqw;
+}
+.kw-card-foot::before {
+  content: "";
+  position: absolute;
+  left: 10%; right: 10%; top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A25A 18%, #C9A25A 82%, transparent);
+}
+.kw-card-foot::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: -0.45cqw;
+  width: 0.9cqw; height: 0.9cqw;
+  transform: translateX(-50%) rotate(45deg);
+  background: #C9A25A;
+}
+
+.kw-divider-2 { width: 61%; margin-top: 7cqw; }
+
+.kw-tip {
+  margin: 3.6cqw 0 0;
+  width: 84%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6cqw;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 4.1cqw;
+  color: #8E1230;
+  text-align: center;
+}
+.kw-tip-icon { width: 7.6cqw; height: auto; flex: none; user-select: none; }
+.kw-tip-text { line-height: 1.32; text-wrap: balance; }
+
+/* Riverbank skyline + bridge + royal ribbon, fading into the page background */
+.kw-skyline { display: block; width: 100%; height: auto; margin-top: 6cqw; user-select: none; }
 
 @media (max-width: 540px) {
   .kolaghat-weather-section {
@@ -4039,12 +4371,192 @@ body.at-footer .royal-scroll-prompt {
     margin-top: 8px !important;
     margin-bottom: 0 !important;
   }
+}
 
-  .kolaghat-weather-wrap {
-    padding: 0 !important;
-  }
+/* ═══ Wardrobe cards typography — matches the event cards: ITC Souvenir Regular, normal case ═══ */
+.wardrobe-card-info-plate .wardrobe-card-date,
+.wardrobe-card-date {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-variant-numeric: lining-nums !important;
+  font-size: clamp(1.02rem, 2.9vw, 1.12rem) !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  color: #5A1A1E !important;
+}
+.wardrobe-card-info-plate .dresscode-line,
+.dresscode-line,
+.wardrobe-card-info-plate .dresscode-label,
+.dresscode-label,
+.wardrobe-card-info-plate .dresscode-val,
+.dresscode-val {
+  font-family: 'ITC Souvenir', Georgia, serif !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+}
+.wardrobe-card-info-plate .dresscode-line {
+  font-size: clamp(0.74rem, 2.1vw, 0.82rem) !important;
+  letter-spacing: 0.01em !important;
+  column-gap: 5px !important;
+  line-height: 1.4;
+}
+.wardrobe-card-info-plate .dresscode-label,
+.dresscode-label { color: #5A1A1E !important; letter-spacing: 0.01em !important; font-size: 1em !important; }
+.wardrobe-card-info-plate .dresscode-val,
+.dresscode-val { color: #6A2A2A !important; }
 
-  .kolaghat-weather-img {
-    width: 100% !important;
-  }
+/* Info plate: centred stack filling the plate (no divider above the date) */
+.wardrobe-card-info-plate {
+  justify-content: center !important;
+  gap: 0 !important;
+  padding: 7% 4px 3% !important;
+}
+.wardrobe-card-info-plate .wardrobe-card-date {
+  margin: 0 0 2px !important;
+  font-size: clamp(1.26rem, 3.6vw, 1.42rem) !important;
+}
+.wardrobe-card-info-plate .wardrobe-info-divider { margin: 4px auto 8px !important; padding: 2px 4px !important; width: 78% !important; }
+.wardrobe-card-info-plate .wardrobe-card-dresscode { margin: 0 auto !important; gap: 5px !important; max-width: 100% !important; }
+.wardrobe-card-info-plate .dresscode-line { font-size: clamp(0.84rem, 2.4vw, 0.94rem) !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
+.wardrobe-card-info-plate .dresscode-line,
+.wardrobe-card-info-plate .dresscode-label,
+.wardrobe-card-info-plate .dresscode-val { font-style: italic !important; font-synthesis: style !important; }
+.wardrobe-card-info-plate .wardrobe-swatch { width: 24px !important; height: 24px !important; }
+.wardrobe-card-info-plate .wardrobe-swatches-wrap { margin-top: 16px !important; }
+.wardrobe-card-info-plate .wardrobe-swatches { margin-top: 0 !important; gap: 12px !important; }
+
+/* Plate: sit a little closer to the lotus line; dress-code lines stay on one row and scale with the plate width */
+.wardrobe-card-info-plate {
+  container-type: inline-size;
+  padding: 5% 4px calc(3% + 22px) !important;
+}
+.wardrobe-card-info-plate .dresscode-line {
+  font-size: clamp(0.84rem, 2.4vw, 0.94rem) !important;
+}
+/* wrap only when a word genuinely doesn't fit (no balancing, no shrinking) */
+.wardrobe-card-info-plate .dresscode-val,
+.dresscode-val {
+  white-space: normal !important;
+  text-wrap: wrap !important;
+}
+
+/* Mayra card only: nudge the dress-code block right so it reads centred when its first line wraps */
+.wardrobe-scene-mayra .wardrobe-card-info-plate .wardrobe-card-dresscode {
+  transform: translateX(4%);
+}
+
+/* Formal invitation: full-bleed so the side frame starts at the page edge,
+   and tucked up against the brown Ganesh mandap so the top filigree grows out of it */
+.formal-invite-card {
+  padding: 0 !important;
+  margin: -14px auto 26px !important;
+  z-index: 9;
+}
+.formal-invite-inner,
+.fi-card { max-width: none !important; }
+
+/* Frame artwork's side rules sit 13px (of 1144) inside the image — stretch it so they land on the page edges */
+.fi-card { overflow: clip; }
+.fi-card .fi-frame {
+  left: calc(-13 / 1117 * 100%);
+  width: calc(1144 / 1117 * 100%);
+  right: auto;
+}
+
+/* Footer arch sits over the end of the weather river (the paper above the arch is transparent).
+   140px of the 720px-wide artwork overlaps; 28px cancels the layout gap. */
+.royal-arch-footer {
+  margin-top: calc(-28px - 140 / 720 * 100%) !important;
+}
+
+/* Weather section spans exactly the page column (same width as the footer arch) */
+.kolaghat-weather-section {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Two Hearts: natural wrapping (no hard breaks, no single-word lines) + gold lotus divider */
+.two-hearts-lotus-rule {
+  display: block;
+  width: min(62%, 260px);
+  height: auto;
+  margin: 10px auto 2px;
+  user-select: none;
+  pointer-events: none;
+}
+.two-hearts-body {
+  max-width: 25em !important;
+  padding: 0 18px;
+  box-sizing: border-box;
+  margin-top: 16px !important;
+  gap: 14px !important;
+}
+.two-hearts-body .two-hearts-para {
+  line-height: 1.6 !important;
+  text-wrap: pretty !important;
+}
+
+/* Invitation -> Save the Date: small even 12px gap under the bottom corner florals (no overlap, so nothing spills over the card). */
+.formal-invite-card { margin-bottom: -16px !important; z-index: 12 !important; }
+.formal-invite-card .fi-card { pointer-events: none; }
+.formal-invite-card .fi-card a, .formal-invite-card .fi-card p { pointer-events: auto; }
+
+/* Exact joins for the formal invitation (frame art: first ink row 19/1144 of width from top,
+   last ink row 16/1144 of width from bottom):
+   - top filigree starts exactly where the wooden mandap ends
+   - Save the Date card's top border sits level with the bottom of the corner florals */
+.formal-invite-card {
+  margin-top: calc(-19 / 1144 * 100%) !important;
+  margin-bottom: calc(-28px - 16 / 1144 * 100%) !important;
+}
+
+/* Wardrobe intro pill: burgundy ribbon with gold frame, no icon, gold diamond accents */
+.intro-exact-pill {
+  gap: 12px !important;
+  padding: 10px 22px !important;
+  background: linear-gradient(180deg, #8E1A2C 0%, #6E1020 100%) !important;
+  border: 1px solid #D2AA5E !important;
+  box-shadow:
+    inset 0 0 0 3px #7A1424,
+    inset 0 0 0 4px rgba(226, 190, 110, 0.75),
+    0 6px 16px rgba(110, 16, 32, 0.22) !important;
+  max-width: 94% !important;
+  border-radius: 26px !important;
+}
+.intro-exact-pill::before,
+.intro-exact-pill::after {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #F3D68C, #C99A42);
+  box-shadow: 0 0 6px rgba(243, 214, 140, 0.55);
+}
+.intro-exact-pill-text {
+  white-space: normal !important;
+  text-wrap: balance;
+  min-width: 0;
+  color: #F7E4BC !important;
+  letter-spacing: 0.02em !important;
+  text-shadow: 0 1px 1px rgba(60, 6, 14, 0.35);
+  text-align: center;
+}
+@media (max-width: 420px) {
+  .intro-exact-pill { padding: 9px 16px !important; gap: 10px !important; }
+}
+
+/* Weather tip: lotus of the lower divider centred, jacket tucked right beneath it,
+   message lines left-aligned inside a centred block so line 2 starts under line 1 */
+.kw-divider-2 { transform: translateX(-1.855%); }
+.kw-tip { margin-top: 1.2cqw !important; gap: 1.4cqw !important; }
+.kw-tip-text {
+  display: block;
+  white-space: nowrap;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: left;
 }

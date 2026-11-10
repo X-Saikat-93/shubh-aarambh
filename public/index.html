@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Everdezign Framer Theme CSS -->
-  <link rel="stylesheet" href="/css/framer-theme.css?v=161" />
+  <link rel="stylesheet" href="/css/framer-theme.css?v=209" />
 </head>
 
 <body class="is-envelope-closed">
@@ -138,8 +138,26 @@
     <article id="page-2-invitation" class="formal-invite-card scroll-reveal"
       aria-label="Formal Wedding Invitation · Kaavya Weds Garv">
       <div class="formal-invite-inner zoom-reveal">
-        <img src="/media/page2_formal_invite_card.webp?v=40" alt="Kaavya Weds Garv - Formal Wedding Invitation"
-          class="formal-invite-main-img" />
+        <div class="fi-card">
+          <img class="fi-frame" src="/media/invite/fi_frame.webp?v=2" alt="" aria-hidden="true" />
+          <img class="fi-art" style="--x:145;--y:55;--w:285" src="/media/invite/fi_top.png?v=2" alt="" aria-hidden="true" />
+          <img class="fi-art" style="--x:80;--y:118;--w:410" src="/media/invite/fi_kaavya.png?v=2" alt="Kaavya" />
+          <p class="fi-rel" style="--y:274;--fs:27.5">Grand daughter of</p>
+          <p class="fi-names" style="--y:313;--fs:25.2">Lt. Laxmipat Singh &ndash; Lt. Bhiki Devi Chandalia</p>
+          <span class="fi-rule" style="--y:344" aria-hidden="true"></span>
+          <p class="fi-rel" style="--y:380;--fs:27.5">Daughter of</p>
+          <p class="fi-names" style="--y:413;--fs:27.8">Rakesh &ndash; Sunita Chandalia</p>
+          <p class="fi-place" style="--y:444;--fs:24.6">(Rajaldesar, Kolkata)</p>
+          <img class="fi-art" style="--x:90;--y:460;--w:390" src="/media/invite/fi_weds.png?v=1" alt="Weds" />
+          <img class="fi-art" style="--x:145;--y:570;--w:290" src="/media/invite/fi_garv.png?v=1" alt="Garv" />
+          <p class="fi-rel" style="--y:715;--fs:27.5">Grandson of</p>
+          <p class="fi-names" style="--y:750;--fs:25.2">Shri Shyamlal ji &ndash; Smt. Munni Devi ji Agarwal</p>
+          <span class="fi-rule" style="--y:788" aria-hidden="true"></span>
+          <p class="fi-rel" style="--y:820;--fs:27.5">Son of</p>
+          <p class="fi-names" style="--y:854;--fs:27.8">Shri Sanjay ji &ndash; Smt. Kavita ji Garg</p>
+          <p class="fi-place" style="--y:886;--fs:24.6">(Guwahati)</p>
+          <img class="fi-art" style="--x:150;--y:908;--w:265" src="/media/invite/fi_bottom.png?v=1" alt="" aria-hidden="true" />
+        </div>
       </div>
     </article>
 
@@ -236,11 +254,6 @@
     <!-- ── 2F. Two Hearts, One Beautiful Journey (Our Story Section) ── -->
     <section id="two-hearts-section" class="two-hearts-story-section scroll-reveal" aria-label="Our Love Story">
       <div class="two-hearts-inner">
-        <!-- Top Lotus Ornament -->
-        <div class="two-hearts-top-lotus zoom-reveal">
-          <img src="/media/two_hearts_lotus.png" alt="" class="two-hearts-lotus-img" />
-        </div>
-
         <!-- Heading -->
         <h2 class="two-hearts-title zoom-reveal">
           <span class="two-hearts-line-1">Two Hearts,</span>
@@ -253,35 +266,22 @@
               </path>
             </svg>
           </span>
-          <img src="/media/two_hearts_head_flourish.png" alt="" class="two-hearts-head-flourish" />
         </h2>
 
-        <!-- Gold Floral Rule Divider -->
-        <div class="two-hearts-rule-wrap zoom-reveal" aria-hidden="true">
-          <img src="/media/two_hearts_divider.png" alt="" class="two-hearts-rule-img" />
-        </div>
+        <!-- Gold lotus divider -->
+        <img class="two-hearts-lotus-rule zoom-reveal" src="/media/weather/wx_divider.png?v=1" alt="" aria-hidden="true" />
 
         <!-- Story Message -->
         <div class="two-hearts-body zoom-reveal">
           <p class="two-hearts-para">
-            And just like that, two lives became one beautiful story.<br />
-            Filled with laughter, little moments, endless love and<br />
-            dreams of a lifetime together.
+            And just like that, two lives became one beautiful story. Filled with laughter, little moments, endless love and dreams of a lifetime together.
           </p>
           <p class="two-hearts-para">
-            Every moment has brought us closer to this special day,<br />
-            where a new chapter begins and forever feels a little<br />
-            more magical.
+            Every moment has brought us closer to this special day, where a new chapter begins and forever feels a little more magical.
           </p>
           <p class="two-hearts-para">
-            Here&rsquo;s to love, togetherness and a lifetime of<br />
-            happily ever after!
+            Here&rsquo;s to love, togetherness and a lifetime of happily ever after!
           </p>
-        </div>
-
-        <!-- Gold Floral Rule Divider -->
-        <div class="two-hearts-rule-wrap zoom-reveal" aria-hidden="true">
-          <img src="/media/two_hearts_divider.png" alt="" class="two-hearts-rule-img" />
         </div>
 
         <!-- Signature -->
@@ -297,7 +297,6 @@
                 </path>
               </svg>
             </div>
-            <img src="/media/two_hearts_names_flourish.png" alt="" class="two-hearts-names-flourish" />
           </div>
         </div>
       </div>
@@ -491,18 +490,6 @@
 
         <!-- Pill Badge -->
         <div class="intro-exact-pill">
-          <svg class="intro-exact-pill-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2.5"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-            <line x1="8" y1="14" x2="8.01" y2="14" stroke-width="2.5"></line>
-            <line x1="12" y1="14" x2="12.01" y2="14" stroke-width="2.5"></line>
-            <line x1="16" y1="14" x2="16.01" y2="14" stroke-width="2.5"></line>
-            <line x1="8" y1="18" x2="8.01" y2="18" stroke-width="2.5"></line>
-            <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"></line>
-            <line x1="16" y1="18" x2="16.01" y2="18" stroke-width="2.5"></line>
-          </svg>
           <span class="intro-exact-pill-text">Awaiting your presence as the celebration unfolds.</span>
         </div>
       </div>
@@ -564,21 +551,14 @@
                     </div>
 
                     <div class="wardrobe-card-dresscode">
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HIM:</span> <span
-                          class="dresscode-val">KURTA SET, ANYTHING TRADITIONAL</span></div>
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HER:</span> <span
-                          class="dresscode-val">GOWN, SAREE, ANARKALI</span></div>
-                    </div>
-
-                    <div class="wardrobe-info-divider" aria-hidden="true">
-                      <span class="wardrobe-divider-wing"></span>
-                      <span class="wardrobe-divider-gem">&#10070;</span>
-                      <span class="wardrobe-divider-wing"></span>
+                      <div class="dresscode-line"><span class="dresscode-label">For Him:</span> <span
+                          class="dresscode-val">Kurta Set, Anything Traditional</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">For Her:</span> <span
+                          class="dresscode-val">Gown, Saree, Anarkali</span></div>
                     </div>
 
                     <!-- Colour Palette inside card -->
                     <div class="wardrobe-swatches-wrap">
-                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
                       <div class="wardrobe-swatches" role="radiogroup" aria-label="Mayra Color Palette">
                         <button class="wardrobe-swatch is-active" style="--swatch-color: #6B1D22;"
                           data-color="Royal Maroon" aria-label="Royal Maroon" type="button"></button>
@@ -625,21 +605,14 @@
                     </div>
 
                     <div class="wardrobe-card-dresscode">
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HIM:</span> <span
-                          class="dresscode-val">TUXEDO, INDO-WESTERN SET</span></div>
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HER:</span> <span
-                          class="dresscode-val">INDO-WESTERN GOWN, DRAPE SAREE</span></div>
-                    </div>
-
-                    <div class="wardrobe-info-divider" aria-hidden="true">
-                      <span class="wardrobe-divider-wing"></span>
-                      <span class="wardrobe-divider-gem">&#10070;</span>
-                      <span class="wardrobe-divider-wing"></span>
+                      <div class="dresscode-line"><span class="dresscode-label">For Him:</span> <span
+                          class="dresscode-val">Tuxedo, Indo-Western Set</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">For Her:</span> <span
+                          class="dresscode-val">Indo-Western Gown, Drape Saree</span></div>
                     </div>
 
                     <!-- Colour Palette inside card -->
                     <div class="wardrobe-swatches-wrap">
-                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
                       <div class="wardrobe-swatches" role="radiogroup" aria-label="Sangeet Color Palette">
                         <button class="wardrobe-swatch is-active" style="--swatch-color: #1B263B;"
                           data-color="Midnight Blue" aria-label="Midnight Blue" type="button"></button>
@@ -686,21 +659,14 @@
                     </div>
 
                     <div class="wardrobe-card-dresscode">
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HIM:</span> <span
-                          class="dresscode-val">BREEZY OUTFITS, CO-ORD SET</span></div>
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HER:</span> <span
-                          class="dresscode-val">INDO-WESTERN, DRESSES, CO-ORD SET</span></div>
-                    </div>
-
-                    <div class="wardrobe-info-divider" aria-hidden="true">
-                      <span class="wardrobe-divider-wing"></span>
-                      <span class="wardrobe-divider-gem">&#10070;</span>
-                      <span class="wardrobe-divider-wing"></span>
+                      <div class="dresscode-line"><span class="dresscode-label">For Him:</span> <span
+                          class="dresscode-val">Breezy Outfits, Co-ord Set</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">For Her:</span> <span
+                          class="dresscode-val">Indo-Western, Dresses, Co-ord Set</span></div>
                     </div>
 
                     <!-- Colour Palette inside card -->
                     <div class="wardrobe-swatches-wrap">
-                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
                       <div class="wardrobe-swatches" role="radiogroup" aria-label="Carnival Haldi Color Palette">
                         <button class="wardrobe-swatch is-active" style="--swatch-color: #E5A93B;"
                           data-color="Marigold Yellow" aria-label="Marigold Yellow" type="button"></button>
@@ -747,21 +713,14 @@
                     </div>
 
                     <div class="wardrobe-card-dresscode">
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HIM:</span> <span
-                          class="dresscode-val">BANDHGALA, THREE PIECE SUIT</span></div>
-                      <div class="dresscode-line"><span class="dresscode-label">FOR HER:</span> <span
-                          class="dresscode-val">LEHENGA, SAREE</span></div>
-                    </div>
-
-                    <div class="wardrobe-info-divider" aria-hidden="true">
-                      <span class="wardrobe-divider-wing"></span>
-                      <span class="wardrobe-divider-gem">&#10070;</span>
-                      <span class="wardrobe-divider-wing"></span>
+                      <div class="dresscode-line"><span class="dresscode-label">For Him:</span> <span
+                          class="dresscode-val">Bandhgala, Three Piece Suit</span></div>
+                      <div class="dresscode-line"><span class="dresscode-label">For Her:</span> <span
+                          class="dresscode-val">Lehenga, Saree</span></div>
                     </div>
 
                     <!-- Colour Palette inside card -->
                     <div class="wardrobe-swatches-wrap">
-                      <span class="wardrobe-swatches-title">COLOUR PALETTE</span>
                       <div class="wardrobe-swatches" role="radiogroup" aria-label="Varmala &amp; Phere Color Palette">
                         <button class="wardrobe-swatch is-active" style="--swatch-color: #8B1E22;"
                           data-color="Sindoor Crimson" aria-label="Sindoor Crimson" type="button"></button>
@@ -801,23 +760,69 @@
     <!-- ── 2H. Kolaghat Weather Forecast Section (Exact User Reference Match) ── -->
     <section class="kolaghat-weather-section scroll-reveal" id="weather-section" aria-label="Kolaghat Weather">
       <div class="kolaghat-weather-wrap">
-        <img src="/media/weather/kolaghat_weather_seamless.webp?v=17"
-          alt="Kolaghat Weather · 11 Dec 2026: 26° / 14°C, Mostly Sunny · 12 Dec 2026: 26° / 14°C, Clear &amp; Mild · Carry warm, comfy clothes for the festivities."
-          class="kolaghat-weather-img"
-          loading="lazy" />
+        <header class="kw-head">
+          <img class="kw-head-icon" src="/media/weather/wx_cloudsun.png?v=1" alt="" aria-hidden="true" />
+          <h2 class="kw-title"><span class="kw-title-a">Kolaghat</span> <span class="kw-title-b">Weather</span></h2>
+        </header>
+        <p class="kw-sub">December brings clear skies and cool evenings</p>
+        <img class="kw-divider" src="/media/weather/wx_divider.png?v=1" alt="" aria-hidden="true" />
+
+        <div class="kw-grid">
+          <article class="kw-card kw-card-day" aria-label="11th December, day: 26 degrees Celsius, mostly sunny">
+            <span class="kw-date">11<sup>th</sup> December</span>
+            <span class="kw-when">Day</span>
+            <img class="kw-card-icon" src="/media/weather/wx_sun.png?v=1" alt="" aria-hidden="true" />
+            <span class="kw-temp">26<i>°C</i></span>
+            <div class="kw-card-foot"><span>Mostly Sunny</span></div>
+          </article>
+          <article class="kw-card kw-card-night" aria-label="11th December, night: 14 degrees Celsius, clear and mild">
+            <span class="kw-date">11<sup>th</sup> December</span>
+            <span class="kw-when">Night</span>
+            <img class="kw-card-icon kw-card-icon-moon" src="/media/weather/wx_moon.png?v=1" alt="" aria-hidden="true" />
+            <span class="kw-temp">14<i>°C</i></span>
+            <div class="kw-card-foot"><span>Clear &amp; Mild</span></div>
+          </article>
+          <article class="kw-card kw-card-day" aria-label="12th December, day: 26 degrees Celsius, clear and mild">
+            <span class="kw-date">12<sup>th</sup> December</span>
+            <span class="kw-when">Day</span>
+            <img class="kw-card-icon" src="/media/weather/wx_sun.png?v=1" alt="" aria-hidden="true" />
+            <span class="kw-temp">26<i>°C</i></span>
+            <div class="kw-card-foot"><span>Clear &amp; Mild</span></div>
+          </article>
+          <article class="kw-card kw-card-night" aria-label="12th December, night: 14 degrees Celsius, clear skies">
+            <span class="kw-date">12<sup>th</sup> December</span>
+            <span class="kw-when">Night</span>
+            <img class="kw-card-icon kw-card-icon-moon" src="/media/weather/wx_moon.png?v=1" alt="" aria-hidden="true" />
+            <span class="kw-temp">14<i>°C</i></span>
+            <div class="kw-card-foot"><span>Clear Skies</span></div>
+          </article>
+        </div>
+
+        <img class="kw-divider kw-divider-2" src="/media/weather/wx_divider2.png?v=1" alt="" aria-hidden="true" />
+        <p class="kw-tip">
+          <img class="kw-tip-icon" src="/media/weather/wx_jacket.png?v=1" alt="" aria-hidden="true" />
+          <span class="kw-tip-text">Please carry some warm clothes or a light<br />jacket, as it can get quite chilly at night.&nbsp;💫</span>
+        </p>
+
+        <img class="kw-skyline" src="/media/weather/wx_skyline.webp?v=2" alt="" aria-hidden="true" loading="lazy" />
       </div>
     </section>
 
     <!-- ── 2I. Auspicious Royal Closing Pavilion (Exact Match to User Reference) ── -->
     <footer class="royal-arch-footer anim-footer scroll-reveal">
       <div class="royal-arch-footer-wrap">
-        <img src="/media/wardrobe/footer_seamless.webp?v=50"
-          alt="Save The Date · 11th and 12th December 2026 · With Love &amp; Warm Blessings · Chandalia &amp; Garg Families · Crafted with Love by The Corporate Pot · +91 82503 77707"
-          class="royal-arch-footer-img" />
+        <img src="/media/wardrobe/footer_clean.webp?v=2" alt="" aria-hidden="true" class="royal-arch-footer-img" />
+        <p class="ft-line ft-deva" style="--y:338;--fs:29">॥ श्री गणेशाय नमः ॥</p>
+        <p class="ft-line ft-save" style="--y:430;--fs:22.3">Save the Date</p>
+        <p class="ft-line ft-date" style="--y:499;--fs:56.7">11<span>th</span> and 12<span>th</span></p>
+        <p class="ft-line ft-dec" style="--y:548;--fs:30.5">December 2026</p>
+        <p class="ft-line ft-love" style="--y:635;--fs:23.9">With Love &amp; Warm Blessings</p>
+        <p class="ft-line ft-fam" style="--y:677;--fs:28.9">The Chandalia &amp; Garg Families</p>
+        <p class="ft-line ft-craft" style="--y:984;--fs:15.7">Crafted with Love by The Corporate Pot</p>
         <!-- Interactive Back to Top Overlay Button directly over graphic button -->
         <a href="#landing-section" class="footer-btn-top-overlay" id="btn-back-to-top" aria-label="Back to Top"></a>
         <!-- Interactive Phone Number Link directly over graphic number -->
-        <a href="tel:+918250377707" class="footer-phone-overlay" aria-label="Call +91 82503 77707"></a>
+        <a href="tel:+918250377707" class="ft-line ft-phone" style="--y:1019;--fs:19.3" aria-label="Call +91 82503 77707">+91 82503 77707</a>
       </div>
     </footer>
 

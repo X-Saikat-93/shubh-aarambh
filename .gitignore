@@ -10,6 +10,8 @@ node_modules/
 __pycache__/
 *.txt
 fonts/
+# ...but the self-hosted ITC Souvenir web fonts must deploy
+!public/media/fonts/
 public/index.original.html
 framer_page.html
 page_component.js
