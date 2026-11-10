@@ -13,17 +13,25 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="The Wedding Celebration (Envelope)" />
+  <meta property="og:url" content="https://kaavyaandgarvwedding.online/" />
+  <meta property="og:title" content="Garv &amp; Kaavya" />
   <meta property="og:description"
     content="We invite you to share our joy! Tap to open and view the details of our special day. #kaarvinlove" />
-  <meta property="og:image" content="/media/peacock_terrace_cover.jpg" />
+  <meta property="og:image" content="https://kaavyaandgarvwedding.online/media/og_share.jpg?v=1" />
+  <meta property="og:image:secure_url" content="https://kaavyaandgarvwedding.online/media/og_share.jpg?v=1" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="G &amp; K gold monogram on ivory with roses" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://kaavyaandgarvwedding.online/media/og_share.jpg?v=1" />
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Everdezign Framer Theme CSS -->
-  <link rel="stylesheet" href="/css/framer-theme.css?v=215" />
+  <link rel="stylesheet" href="/css/framer-theme.css?v=227" />
 </head>
 
 <body class="is-envelope-closed">
@@ -49,6 +57,16 @@
       <!-- Original Envelope Opening Video with Radiant Glow Burst (2.0s Master with New Card) -->
       <video id="envelope-video" class="envelope-video" src="/media/envelope_open_glow.mp4?v=16" playsinline
         webkit-playsinline muted preload="auto" type="video/mp4"></video>
+
+      <!-- Opening finale (takes over once the flaps are open): calm interior, red floral,
+           then the G&K logo grows from the centre before the landing page fades in -->
+      <div class="env-stage" aria-hidden="true">
+        <img class="env-stage-bg" src="/media/env_stage_bg.webp?v=1" alt="" />
+        <div class="env-stage-centre">
+          <img class="env-floral" src="/media/env_floral_red.svg?v=1" alt="" />
+          <img class="env-logo" src="/media/env_logo.webp?v=1" alt="" />
+        </div>
+      </div>
 
       <!-- Pre-Tap Wax Seal Overlay (Instant static render on mobile) -->
       <div class="envelope-cover-overlay">
@@ -82,7 +100,7 @@
         <audio id="wedding-audio" src="/media/music.mp3" preload="none" loop></audio>
       </div>
 
-      <img src="/media/cover_ghat.webp?v=10"
+      <img src="/media/cover_ghat.webp?v=11"
         alt="Kaavya &amp; Garv · #kaarvinlove · Sher Bengal River Resort, Kolaghat, West Bengal"
         class="page-fullwidth-img" />
 
@@ -835,7 +853,7 @@
   </main>
 
   <!-- Interactive JavaScript Engine -->
-  <script type="module" src="/js/framer-app.js?v=61"></script>
+  <script type="module" src="/js/framer-app.js?v=78"></script>
 </body>
 
 </html>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" width="400" height="400">
+  <defs>
+    <!-- petal fills run from the deep base (bottom of each petal) to a richer ruby tip -->
+    <linearGradient id="pOuter" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#4a0510"/>
+      <stop offset="0.55" stop-color="#7e0b1d"/>
+      <stop offset="1" stop-color="#a8182e"/>
+    </linearGradient>
+    <linearGradient id="pOuterIn" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#8e1225"/>
+      <stop offset="1" stop-color="#c22a40"/>
+    </linearGradient>
+    <linearGradient id="pMid" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#5a0613"/>
+      <stop offset="0.6" stop-color="#930f24"/>
+      <stop offset="1" stop-color="#c0233a"/>
+    </linearGradient>
+    <linearGradient id="pIn" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#6d0918"/>
+      <stop offset="1" stop-color="#b81f36"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6dc9a"/>
+      <stop offset="0.45" stop-color="#d4a24c"/>
+      <stop offset="1" stop-color="#9c6a22"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0.4" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#fbe7b0"/>
+      <stop offset="0.5" stop-color="#d9a84f"/>
+      <stop offset="1" stop-color="#8f5d1c"/>
+    </radialGradient>
+
+    <path id="outer" d="M0,-28 C17,-42 21,-70 0,-94 C-21,-70 -17,-42 0,-28Z"/>
+    <path id="outerIn" d="M0,-38 C10,-50 12,-68 0,-84 C-12,-68 -10,-50 0,-38Z"/>
+    <path id="mid" d="M0,-18 C14,-30 17,-50 0,-66 C-17,-50 -14,-30 0,-18Z"/>
+    <path id="inner" d="M0,-10 C9,-18 10,-30 0,-40 C-10,-30 -9,-18 0,-10Z"/>
+  </defs>
+
+  <!-- outer ring of 12 pointed petals -->
+  <g stroke="url(#gold)" stroke-width="1.3" stroke-linejoin="round">
+    <use href="#outer" fill="url(#pOuter)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(30)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(60)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(90)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(120)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(150)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(180)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(210)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(240)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(270)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(300)"/>
+    <use href="#outer" fill="url(#pOuter)" transform="rotate(330)"/>
+  </g>
+  <!-- inner petal inlay + gold vein in each outer petal -->
+  <g stroke="url(#gold)" stroke-width="0.8" stroke-linejoin="round">
+    <g id="inlay">
+      <use href="#outerIn" fill="url(#pOuterIn)"/>
+      <path d="M0,-42 L0,-80" fill="none"/>
+      <path d="M0,-56 L-5,-63 M0,-56 L5,-63 M0,-66 L-4,-72 M0,-66 L4,-72" fill="none" stroke-width="0.6"/>
+    </g>
+    <use href="#inlay" transform="rotate(30)"/>
+    <use href="#inlay" transform="rotate(60)"/>
+    <use href="#inlay" transform="rotate(90)"/>
+    <use href="#inlay" transform="rotate(120)"/>
+    <use href="#inlay" transform="rotate(150)"/>
+    <use href="#inlay" transform="rotate(180)"/>
+    <use href="#inlay" transform="rotate(210)"/>
+    <use href="#inlay" transform="rotate(240)"/>
+    <use href="#inlay" transform="rotate(270)"/>
+    <use href="#inlay" transform="rotate(300)"/>
+    <use href="#inlay" transform="rotate(330)"/>
+  </g>
+
+  <!-- middle ring, offset between the outer petals -->
+  <g stroke="url(#gold)" stroke-width="1.1" stroke-linejoin="round">
+    <use href="#mid" fill="url(#pMid)" transform="rotate(15)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(45)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(75)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(105)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(135)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(165)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(195)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(225)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(255)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(285)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(315)"/>
+    <use href="#mid" fill="url(#pMid)" transform="rotate(345)"/>
+  </g>
+
+  <!-- inner ring -->
+  <g stroke="url(#gold)" stroke-width="0.9" stroke-linejoin="round">
+    <use href="#inner" fill="url(#pIn)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(30)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(60)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(90)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(120)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(150)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(180)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(210)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(240)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(270)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(300)"/>
+    <use href="#inner" fill="url(#pIn)" transform="rotate(330)"/>
+  </g>
+
+  <!-- gold centre with a ring of beads -->
+  <g fill="url(#gold)">
+    <circle cx="0" cy="-15" r="1.6"/><circle cx="7.5" cy="-13" r="1.6"/><circle cx="13" cy="-7.5" r="1.6"/>
+    <circle cx="15" cy="0" r="1.6"/><circle cx="13" cy="7.5" r="1.6"/><circle cx="7.5" cy="13" r="1.6"/>
+    <circle cx="0" cy="15" r="1.6"/><circle cx="-7.5" cy="13" r="1.6"/><circle cx="-13" cy="7.5" r="1.6"/>
+    <circle cx="-15" cy="0" r="1.6"/><circle cx="-13" cy="-7.5" r="1.6"/><circle cx="-7.5" cy="-13" r="1.6"/>
+  </g>
+  <circle cx="0" cy="0" r="9.5" fill="url(#core)" stroke="#7a4a14" stroke-width="0.6"/>
+  <circle cx="0" cy="0" r="4.2" fill="#8e1225" stroke="#f3d48a" stroke-width="0.7"/>
+</svg>

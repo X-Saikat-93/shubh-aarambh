@@ -37,16 +37,25 @@ void main() {
   // Slow, graceful pendulum breeze field — zero internal boundaries, zero tearing
   if (m.g > 0.002) {
     float hang = clamp(p.y / 480.0, 0.15, 1.0);
-    float sway = sin(t * 1.65 - p.x * 0.0016) * 0.82 + sin(t * 0.95 + 0.8) * 0.18;
-    d.x += m.g * sway * 7.2 * hang;
-    d.y += m.g * abs(sway) * 1.0 * hang;
+    float sway = sin(t * 2.65 - p.x * 0.0016) * 0.82 + sin(t * 1.5 + 0.8) * 0.18;
+    d.x += m.g * sway * 19.0 * hang;
+    d.y += m.g * abs(sway) * 2.6 * hang;
   }
 
   // 2. Top-Left Red Silk Drapery Interior (Red Channel m.r):
   if (m.r > 0.002) {
-    float cWave = sin(t * 1.45 + p.y * 0.0038 - p.x * 0.0028);
-    d.x += m.r * cWave * 6.8;
-    d.y += m.r * cos(t * 1.20 + p.y * 0.0032) * 2.8;
+    float cWave = sin(t * 2.35 + p.y * 0.0038 - p.x * 0.0028);
+    d.x += m.r * cWave * 18.0;
+    d.y += m.r * cos(t * 1.95 + p.y * 0.0032) * 6.0;
+  }
+
+  // 3. Leafy sprig by the brass bowl (Blue Channel m.b):
+  // the whole sprig nods around where its stem enters from the right edge, plus a small leaf flutter
+  if (m.b > 0.002) {
+    vec2 r = p - vec2(1152.0, 1308.0);
+    float ang = 0.026 * sin(t * 2.2 + 0.6) + 0.007 * sin(t * 3.9 + 1.3);
+    d += m.b * ang * vec2(-r.y, r.x);
+    d += m.b * vec2(1.6 * sin(t * 3.3 + p.y * 0.02), 1.8 * sin(t * 2.9 + p.x * 0.018));
   }
 
   vec2 finalUV = clamp((p - d) / SRC, vec2(0.0005), vec2(0.9995));
@@ -65,8 +74,8 @@ void main() {
 
   // Subtle natural sunlight flutter through leaves
   if (m.g > 0.02) {
-    float leafGlint = sin(t * 2.2 + p.x * 0.03 - p.y * 0.02) * 0.5 + 0.5;
-    col += col * m.g * 0.045 * (leafGlint - 0.5);
+    float leafGlint = sin(t * 3.4 + p.x * 0.03 - p.y * 0.02) * 0.5 + 0.5;
+    col += col * m.g * 0.07 * (leafGlint - 0.5);
   }
 
   outColor = vec4(clamp(col, 0.0, 1.0), 1.0);
@@ -183,7 +192,11 @@ export function initCoverLife() {
   function frame(now) {
     raf = 0;
     if (!visible || document.hidden) return;
-    if (!document.body.classList.contains('is-envelope-closed')) {
+    // Start moving as soon as the envelope video plays (the cover is hidden under it),
+    // so by the time the envelope fades away everything is already in motion.
+    const wrap = document.getElementById('envelope-wrapper');
+    const opening = wrap && wrap.classList.contains('is-playing-video');
+    if (opening || !document.body.classList.contains('is-envelope-closed')) {
       draw(now / 1000);
     }
     raf = requestAnimationFrame(frame);
@@ -208,10 +221,12 @@ export function initCoverLife() {
       card.insertBefore(canvas, img.nextSibling);
       ready = true;
       layout();
-      draw(0);
+      // Same clock as the animation loop, so the first moving frame continues from this pose
+      // instead of jumping from the rest pose (which smeared the branches for a frame).
+      draw(performance.now() / 1000);
       start();
     };
-    mask.src = '/media/cover_ghat_mask.png?v=15';
+    mask.src = '/media/cover_ghat_mask.png?v=16';
   }
 
   if (img.complete && img.naturalWidth) boot();

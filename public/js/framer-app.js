@@ -2,36 +2,196 @@
 // Everdezign Framer Exact Replica Engine
 // ═══════════════════════════════════════════════════════════
 import { CONFIG, photo } from './config.js?v=52';
-import { initCoverLife } from './cover-life.js?v=47';
+import { initCoverLife } from './cover-life.js?v=51';
 
 // ───────── Falling Red Rose Petals Canvas (Subtle & Organic) ─────────
 function initPetals() {
   const canvas = document.getElementById('petals-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let width, height;
+  function size() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  window.addEventListener('resize', size);
 
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
+  // A handful of petals for a serene, graceful drift in front of the content
+  const COUNT = 8;
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-  // 7 petals for a serene, graceful ambient drift
-  const COUNT = 7;
-
+  // Dark red velvet rose shades: [deep base, body, light crown, edge highlight]
   const ROSE_SHADES = [
-    { fill: 'rgba(178, 22, 38, 0.85)', dark: 'rgba(110, 10, 20, 0.45)' },
-    { fill: 'rgba(155, 14, 26, 0.88)', dark: 'rgba(92, 8, 15, 0.50)' },
-    { fill: 'rgba(192, 30, 46, 0.80)', dark: 'rgba(125, 14, 24, 0.42)' },
-    { fill: 'rgba(140, 12, 22, 0.85)', dark: 'rgba(80, 6, 12, 0.52)' }
+    ['#3d0209', '#7a0a18', '#a3162a', 'rgba(214, 74, 92, 0.55)'],
+    ['#33020a', '#6c0815', '#951224', 'rgba(205, 64, 84, 0.5)'],
+    ['#45040e', '#850d1d', '#b01d33', 'rgba(224, 88, 104, 0.5)'],
+    ['#2c0106', '#5e0711', '#86101f', 'rgba(196, 58, 76, 0.5)']
   ];
+
+  // Real rose petal silhouettes, traced from reference petals. Each is a set of points around
+  // the outline (100 x 110 box) drawn as a smooth closed curve, plus where the petal was
+  // attached to the flower (the darker base) and, for folded petals, the crease line.
+  const PETAL_SHAPES = [
+    { // broad, slightly squared petal with one soft corner
+      pts: [[44, 104], [24, 96], [9, 74], [6, 46], [12, 20], [32, 8], [58, 5], [84, 9], [96, 28], [95, 56], [84, 84], [64, 100]],
+      base: [44, 102]
+    },
+    { // rounded oval
+      pts: [[48, 105], [28, 97], [13, 78], [9, 52], [15, 26], [33, 9], [56, 5], [78, 12], [91, 32], [92, 60], [83, 84], [66, 100]],
+      base: [48, 103]
+    },
+    { // longer leaning oval
+      pts: [[42, 106], [27, 96], [18, 76], [16, 50], [22, 25], [37, 8], [57, 3], [74, 12], [84, 32], [85, 58], [76, 84], [58, 101]],
+      base: [44, 104]
+    },
+    { // rounded triangle, attached at one corner
+      pts: [[24, 104], [12, 86], [6, 60], [12, 34], [30, 15], [56, 6], [82, 7], [96, 20], [94, 46], [80, 72], [56, 94], [36, 104]],
+      base: [26, 100]
+    },
+    { // folded petal: rolled lip along one side
+      pts: [[52, 106], [36, 98], [25, 80], [22, 56], [28, 32], [42, 12], [62, 4], [80, 9], [88, 28], [84, 54], [73, 80], [62, 99]],
+      base: [52, 104],
+      crease: [[63, 6], [52, 34], [47, 66], [51, 103]]
+    },
+    { // wide petal with a soft diagonal crease
+      pts: [[46, 104], [26, 96], [10, 76], [6, 50], [14, 26], [34, 10], [60, 6], [84, 12], [96, 32], [94, 60], [82, 86], [64, 100]],
+      base: [46, 102],
+      crease: [[20, 18], [42, 46], [58, 74], [62, 100]]
+    }
+  ];
+
+  function smoothClosed(c, pts) {
+    const n = pts.length;
+    c.beginPath();
+    c.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 0; i < n; i++) {
+      const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+      c.bezierCurveTo(
+        p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6,
+        p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6,
+        p2[0], p2[1]
+      );
+    }
+    c.closePath();
+  }
+
+  // Pre-render each shape x shade once as a shaded sprite (front face + duller back face).
+  function makeSprite(shape, shade, back) {
+    const S = 100, H = 110, pad = 10;
+    const cv = document.createElement('canvas');
+    cv.width = (S + pad * 2) * DPR;
+    cv.height = (H + pad * 2) * DPR;
+    const c = cv.getContext('2d');
+    c.scale(DPR, DPR);
+    c.translate(pad, pad);
+    const [bx, by] = shape.base;
+
+    // Soft shadow so the petal reads as a real object over the page
+    c.save();
+    c.shadowColor = 'rgba(40, 0, 6, 0.35)';
+    c.shadowBlur = 7;
+    c.shadowOffsetX = 2;
+    c.shadowOffsetY = 4;
+    smoothClosed(c, shape.pts);
+    c.fillStyle = shade[1];
+    c.fill();
+    c.restore();
+
+    c.save();
+    smoothClosed(c, shape.pts);
+    c.clip();
+
+    // Body: lighter velvety crown fading into a deep base where it met the flower
+    const g = c.createRadialGradient(bx, by, 2, bx, by, 115);
+    g.addColorStop(0, shade[0]);
+    g.addColorStop(0.42, shade[1]);
+    g.addColorStop(1, back ? shade[1] : shade[2]);
+    c.fillStyle = g;
+    c.fillRect(0, 0, S, H);
+
+    // Cupped curvature: darker towards the edges, lit across the middle
+    const cup = c.createRadialGradient(54, 44, 10, 50, 52, 66);
+    cup.addColorStop(0, 'rgba(255, 190, 200, 0.05)');
+    cup.addColorStop(0.7, 'rgba(20, 0, 4, 0)');
+    cup.addColorStop(1, 'rgba(20, 0, 4, 0.4)');
+    c.fillStyle = cup;
+    c.fillRect(0, 0, S, H);
+
+    // Satin sheen on the upper body
+    const sheen = c.createRadialGradient(60, 30, 2, 60, 30, 42);
+    sheen.addColorStop(0, back ? 'rgba(255, 170, 185, 0.1)' : 'rgba(255, 175, 190, 0.26)');
+    sheen.addColorStop(1, 'rgba(255, 175, 190, 0)');
+    c.fillStyle = sheen;
+    c.fillRect(0, 0, S, H);
+
+    // Faint, softly curving veins fanning out from the base (real petals barely show them)
+    c.lineWidth = 0.6;
+    for (let i = -4; i <= 4; i++) {
+      const ang = -Math.PI / 2 + i * 0.2 + (50 - bx) * 0.006;
+      const ex = bx + Math.cos(ang) * 100, ey = by + Math.sin(ang) * 100;
+      c.strokeStyle = `rgba(30, 0, 6, ${0.06 + (4 - Math.abs(i)) * 0.01})`;
+      c.beginPath();
+      c.moveTo(bx + i * 1.2, by);
+      c.quadraticCurveTo(bx + (ex - bx) * 0.45 + i * 2, by + (ey - by) * 0.55, ex, ey);
+      c.stroke();
+    }
+
+    // Fold: a lit rolled lip on one side of the crease, shadow on the other
+    if (shape.crease) {
+      const [a0, a1, a2, a3] = shape.crease;
+      const creasePath = (dx) => {
+        c.beginPath();
+        c.moveTo(a0[0] + dx, a0[1]);
+        c.bezierCurveTo(a1[0] + dx, a1[1], a2[0] + dx, a2[1], a3[0] + dx, a3[1]);
+      };
+      c.lineCap = 'round';
+      // Layered wide, faint strokes = a soft fold without canvas filters (works on iOS Safari too)
+      const lit = back ? '255, 160, 175' : '255, 168, 182';
+      [16, 11, 6].forEach((w, i) => {
+        creasePath(-5);
+        c.strokeStyle = `rgba(${lit}, ${back ? 0.03 : 0.05 + i * 0.015})`;
+        c.lineWidth = w;
+        c.stroke();
+        creasePath(6);
+        c.strokeStyle = `rgba(25, 0, 5, ${0.05 + i * 0.03})`;
+        c.lineWidth = w;
+        c.stroke();
+      });
+    }
+    c.restore();
+
+    // Thin lit rim along the edge, strongest away from the base
+    c.save();
+    smoothClosed(c, shape.pts);
+    const rim = c.createRadialGradient(bx, by, 30, bx, by, 110);
+    rim.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    rim.addColorStop(1, shade[3]);
+    c.strokeStyle = rim;
+    c.lineWidth = 1.1;
+    c.stroke();
+    c.restore();
+
+    return { cv, w: S + pad * 2, h: H + pad * 2 };
+  }
+
+  // Every shape in every shade, so each falling petal looks different
+  const SPRITES = [];
+  PETAL_SHAPES.forEach((shape) => {
+    ROSE_SHADES.forEach((shade) => {
+      SPRITES.push({ front: makeSprite(shape, shade, false), back: makeSprite(shape, shade, true) });
+    });
+  });
 
   const petals = [];
 
   function resetPetal(p, initial, idx = 0) {
-    const shade = ROSE_SHADES[Math.floor(Math.random() * ROSE_SHADES.length)];
-    p.r = 8.5 + Math.random() * 5.0; // natural petal size
+    p.sprite = SPRITES[Math.floor(Math.random() * SPRITES.length)];
+    p.r = 11 + Math.random() * 7; // natural petal size (half-height in px)
     p.x = Math.random() * width;
     p.y = initial ? (Math.random() * height) : -25;
     
@@ -50,8 +210,6 @@ function initPetals() {
     p.tilt = Math.random() * Math.PI * 2;
     p.tiltSpeed = 0.022 + Math.random() * 0.028;
     
-    p.fill = shade.fill;
-    p.dark = shade.dark;
     p.wait = initial ? idx * 30 : Math.floor(Math.random() * 60);
   }
 
@@ -68,26 +226,15 @@ function initPetals() {
     
     // 3D perspective foreshortening as the petal gently flips in the breeze
     const flip = Math.cos(p.tilt);
-    const squish = Math.sin(p.tilt * 0.7) * 0.25 + 0.75;
-    ctx.scale(flip, squish);
+    const squish = Math.sin(p.tilt * 0.7) * 0.22 + 0.78;
+    // Never collapse to a hairline: real petals are cupped, so some width always shows
+    const sx = Math.sign(flip || 1) * Math.max(Math.abs(flip), 0.18);
+    ctx.scale(sx, squish);
 
-    // Elegant organic teardrop rose petal geometry
-    const r = p.r;
-    ctx.beginPath();
-    ctx.moveTo(0, -r * 1.1);
-    ctx.bezierCurveTo(r * 0.85, -r * 1.05, r * 1.0, r * 0.45, 0, r * 1.15);
-    ctx.bezierCurveTo(-r * 1.0, r * 0.45, -r * 0.85, -r * 1.05, 0, -r * 1.1);
-    ctx.closePath();
-    ctx.fillStyle = p.fill;
-    ctx.fill();
-
-    // Delicate inner shadow / vein line
-    ctx.beginPath();
-    ctx.moveTo(0, -r * 0.75);
-    ctx.quadraticCurveTo(r * 0.2, 0, 0, r * 0.75);
-    ctx.strokeStyle = p.dark;
-    ctx.lineWidth = 0.6;
-    ctx.stroke();
+    const spr = flip >= 0 ? p.sprite.front : p.sprite.back;
+    const k = (p.r * 2) / 110; // sprite petal body is 110 units tall
+    const dw = spr.w * k, dh = spr.h * k;
+    ctx.drawImage(spr.cv, -dw / 2, -dh / 2, dw, dh);
 
     ctx.restore();
   }
@@ -866,8 +1013,8 @@ function initGkGlow() {
     const offsetY = 0;
 
     if (flare) {
-      flare.style.left = `${offsetX + renderedW * 0.6426}px`;
-      flare.style.top = `${offsetY + renderedH * 0.2985}px`;
+      flare.style.left = `${offsetX + renderedW * 0.6091}px`;
+      flare.style.top = `${offsetY + renderedH * 0.3427}px`;
     }
   }
 
@@ -1088,6 +1235,9 @@ function initWardrobeCarousel() {
 }
 
 // ───────── Master Boot & Video Opening Flow ─────────
+// Phones otherwise restore the old scroll position on reload, then get yanked back to the top.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 document.addEventListener('DOMContentLoaded', () => {
   initPetals();
   initCountdown();
@@ -1135,20 +1285,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function revealLandingPage() {
       if (revealed) return;
       revealed = true;
+      // Pin the scroll at the top *instantly* before unlocking. The page has
+      // scroll-behavior: smooth, so a plain scrollTo animated a visible slide on phones.
+      const root = document.documentElement;
+      root.style.scrollBehavior = 'auto';
+      if (window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.body.classList.remove('is-envelope-closed');
       if (mainCard) mainCard.classList.add('is-revealed');
       if (envelopeWrapper) envelopeWrapper.classList.add('is-hidden');
+      if (window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      requestAnimationFrame(() => { root.style.scrollBehavior = ''; });
 
       window.dispatchEvent(new Event('resize'));
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
 
       if (window.__refreshScratchCanvas) {
         window.__refreshScratchCanvas();
       }
 
-      // Complete cleanup after slow 1.8s CSS fade completes
+      // Complete cleanup after the CSS fade (up to 2.2s) completes
       setTimeout(() => {
         if (envelopeWrapper) envelopeWrapper.style.display = 'none';
         if (envelopeVideo) envelopeVideo.pause();
@@ -1156,7 +1310,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.__refreshScratchCanvas) {
           window.__refreshScratchCanvas();
         }
-      }, 1850);
+      }, 2300);
     }
 
     // 2. Play authentic glowing video and sync reveal to actual video progress (buffer-safe on live mobile networks)
@@ -1164,32 +1318,188 @@ document.addEventListener('DOMContentLoaded', () => {
       envelopeVideo.muted = true;
       envelopeVideo.defaultMuted = true;
       envelopeVideo.currentTime = 0;
+      // A touch slower than recorded so the flaps open with some weight (not rushed);
+      // 0.8x keeps the 30fps footage smooth.
+      try { envelopeVideo.defaultPlaybackRate = 0.8; envelopeVideo.playbackRate = 0.8; } catch (e) {}
 
-      const onTimeUpdate = () => {
+      // The video is used only for the flaps opening (0 – ~1s). After that it would show a
+      // strong glow and then an old version of the cover art, so we take over with our own
+      // finale: calm interior + red floral -> G&K logo grows from the centre -> slow fade to
+      // the landing page.
+      // The video's gold floral starts to show through the parting flaps at ~0.43s
+      const STAGE_AT = 0.42;
+      const FLAPS_OPEN_AT = 1.0;   // video time when the flaps are fully open
+      let staged = false;
+
+      // Place the floral exactly where the interior art (720x1280, object-fit: cover) has it,
+      // and size the logo to just under the screen.
+      const placeStage = () => {
+        if (!envelopeContainer) return;
+        const W = envelopeContainer.clientWidth, H = envelopeContainer.clientHeight;
+        const s = Math.max(W / 720, H / 1280);
+        const ox = (W - 720 * s) / 2, oy = (H - 1280 * s) / 2;
+        const st = envelopeContainer.style;
+        st.setProperty('--env-s', s.toFixed(4));
+        st.setProperty('--env-x', (ox + 361 * s).toFixed(1) + 'px');
+        st.setProperty('--env-y', (oy + 611 * s).toFixed(1) + 'px');
+        st.setProperty('--env-logo-w', Math.round(Math.min(W * 0.84, H * 0.62)) + 'px');
+      };
+
+      // As the crisp logo spreads away (CSS), gold sparkles fly off it. Each sparkle is born on a
+      // point of the logo, fades in while already moving outward (faster than the logo expands),
+      // then twinkles out. Nothing ever sits still, and there's no dotted copy of the logo.
+      const burstLogoIntoGlitter = () => {
+        const logo = envelopeWrapper.querySelector('.env-logo');
+        if (!logo || !logo.naturalWidth) return;
+        const r = logo.getBoundingClientRect();
+        const lw = Math.max(1, Math.round(r.width)), lh = Math.max(1, Math.round(r.height));
+        let data;
+        try {
+          const off = document.createElement('canvas');
+          off.width = lw; off.height = lh;
+          const oc = off.getContext('2d', { willReadFrequently: true });
+          oc.drawImage(logo, 0, 0, lw, lh);
+          data = oc.getImageData(0, 0, lw, lh).data;
+        } catch (e) { return; }
+
+        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        const parts = [];
+        const step = Math.max(3, Math.round(lw / 85));
+        for (let y = 0; y < lh; y += step) {
+          for (let x = 0; x < lw; x += step) {
+            const i = (y * lw + x) * 4;
+            if (data[i + 3] < 120 || Math.random() > 0.6) continue;
+            const px = r.left + x + (Math.random() - 0.5) * step, py = r.top + y + (Math.random() - 0.5) * step;
+            const dx = px - cx, dy = py - cy;
+            const k = 0.7 + Math.random() * 1.3;               // outward speed relative to distance
+            const mix = 0.45 + Math.random() * 0.4;           // brighten towards shimmering gold
+            parts.push({
+              x: px, y: py,
+              vx: dx * k + (Math.random() - 0.5) * 80,
+              vy: dy * k + (Math.random() - 0.5) * 80 - 50,
+              size: 1.2 + Math.random() * 1.6,
+              col: `${Math.round(data[i] * (1 - mix) + 255 * mix)}, ${Math.round(data[i + 1] * (1 - mix) + 224 * mix)}, ${Math.round(data[i + 2] * (1 - mix) + 150 * mix)}`,
+              life: 0.9 + Math.random() * 0.7,
+              tw: Math.random() * Math.PI * 2,
+              star: Math.random() < 0.14
+            });
+          }
+        }
+
+        const cv = document.createElement('canvas');
+        cv.className = 'env-glitter';
+        cv.setAttribute('aria-hidden', 'true');
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cv.width = Math.round(window.innerWidth * dpr);
+        cv.height = Math.round(window.innerHeight * dpr);
+        document.body.appendChild(cv);
+        const g = cv.getContext('2d');
+        g.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const t0 = performance.now();
+        let last = t0;
+        const tick = (now) => {
+          const t = (now - t0) / 1000, dt = Math.min(0.05, Math.max(0, (now - last) / 1000));
+          last = now;
+          g.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          let alive = 0;
+          for (const p of parts) {
+            if (t > p.life) continue;
+            alive++;
+            p.x += p.vx * dt; p.y += p.vy * dt;
+            p.vx *= 0.992; p.vy = p.vy * 0.992 - 25 * dt;       // keeps flying, drifting upward
+            const k = t / p.life;
+            const fadeIn = Math.min(1, t / 0.12);
+            const twinkle = 0.7 + 0.3 * Math.sin(p.tw + t * 16);
+            const a = fadeIn * (1 - k * k) * twinkle;
+            const sz = p.size * (1 - k * 0.4);
+            g.fillStyle = `rgba(${p.col}, ${a * 0.22})`;         // soft glow
+            g.beginPath(); g.arc(p.x, p.y, sz * 2.6, 0, Math.PI * 2); g.fill();
+            g.fillStyle = `rgba(${p.col}, ${a})`;                // bright core
+            g.beginPath(); g.arc(p.x, p.y, sz, 0, Math.PI * 2); g.fill();
+            if (p.star) {
+              const L = sz * 4;
+              g.strokeStyle = `rgba(255, 240, 200, ${a * 0.9})`;
+              g.lineWidth = 0.8;
+              g.beginPath();
+              g.moveTo(p.x - L, p.y); g.lineTo(p.x + L, p.y);
+              g.moveTo(p.x, p.y - L); g.lineTo(p.x, p.y + L);
+              g.stroke();
+            }
+          }
+          if (alive) requestAnimationFrame(tick);
+          else cv.remove();
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const runFinale = () => {
+        if (staged || revealed) return;
+        staged = true;
+        placeStage();
+        envelopeWrapper.classList.add('is-playing-video');      // hide the pre-tap seal overlay
+        // Red floral appears over the gold one and immediately starts spreading; the logo
+        // grows out of it (CSS keyframes, continuous motion from the first frame)
+        envelopeWrapper.classList.add('env-floral-on');
+        // Let the flaps finish opening (video ~1.0s) before the glow settles into the calm
+        // interior, so the opening is never cut short; the red floral sits over it meanwhile.
+        let settled = false;
+        const settleInterior = () => {
+          if (settled) return;
+          settled = true;
+          envelopeWrapper.classList.add('env-stage-on');                    // glow -> calm interior
+          setTimeout(() => envelopeVideo.pause(), 750);                     // interior now covers it
+        };
+        const waitFlaps = () => {
+          if (settled) return;
+          if (envelopeVideo.currentTime >= FLAPS_OPEN_AT || envelopeVideo.paused || envelopeVideo.ended) { settleInterior(); return; }
+          requestAnimationFrame(waitFlaps);
+        };
+        requestAnimationFrame(waitFlaps);
+        setTimeout(settleInterior, 1400);                                    // safety net
+        // Just before the logo finishes growing (so it never sits still), burst it into glitter
+        // and start revealing the landing page underneath.
+        setTimeout(() => {
+          burstLogoIntoGlitter();
+          envelopeWrapper.classList.add('env-logo-burst');
+          setTimeout(() => {
+            envelopeWrapper.classList.add('env-slow-fade');
+            revealLandingPage();
+          }, 250);
+        }, 1550 + Math.round(1700 * 0.93));   // floral gone (1.55s) -> logo grows -> burst before it rests
+      };
+
+      // Checked every animation frame (timeupdate alone fires only ~4x a second on phones)
+      const watchStage = () => {
+        if (staged || revealed) return;
         if (envelopeVideo.currentTime > 0.02 && envelopeWrapper) {
           envelopeWrapper.classList.add('is-playing-video');
         }
-        if (envelopeVideo.currentTime >= 4.35) {
-          envelopeVideo.removeEventListener('timeupdate', onTimeUpdate);
-          revealLandingPage();
-        }
+        if (envelopeVideo.currentTime >= STAGE_AT) { runFinale(); return; }
+        requestAnimationFrame(watchStage);
       };
-      envelopeVideo.addEventListener('timeupdate', onTimeUpdate);
-      envelopeVideo.addEventListener('ended', revealLandingPage, { once: true });
+      requestAnimationFrame(watchStage);
+      // Backup trigger in case animation frames are throttled (e.g. Low Power Mode)
+      envelopeVideo.addEventListener('timeupdate', () => {
+        if (envelopeVideo.currentTime > 0.02 && envelopeWrapper) envelopeWrapper.classList.add('is-playing-video');
+        if (envelopeVideo.currentTime >= STAGE_AT) runFinale();
+      });
+      envelopeVideo.addEventListener('ended', runFinale, { once: true });
 
       const playPromise = envelopeVideo.play();
       if (playPromise && typeof playPromise.then === 'function') {
         playPromise.then(() => {
           if (envelopeWrapper) envelopeWrapper.classList.add('is-playing-video');
         }).catch(() => {
-          revealLandingPage();
+          runFinale();   // video blocked: still play the finale over the calm interior
         });
       } else if (envelopeWrapper) {
         envelopeWrapper.classList.add('is-playing-video');
       }
 
-      // Safety fallback in case mobile network stalls or Low Power Mode pauses video
-      setTimeout(revealLandingPage, 6500);
+      // Safety fallbacks in case a mobile network stalls or Low Power Mode pauses the video
+      setTimeout(runFinale, 3500);
+      setTimeout(revealLandingPage, 10000);
     } else {
       revealLandingPage();
     }

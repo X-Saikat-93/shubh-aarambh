@@ -4639,3 +4639,138 @@ body.at-footer .royal-scroll-prompt {
   background: linear-gradient(to right, #B8893A 0%, rgba(196, 154, 78, 0.85) 45%, rgba(196, 154, 78, 0) 100%) !important;
 }
 .framer-gold-divider .divider-diamond { color: #B8893A !important; }
+
+/* Footer: bold "11th and 12th" */
+.ft-date { font-weight: 700 !important; }
+
+/* Rose petals fall in FRONT of the page content (still under the envelope overlay, never blocks taps) */
+#petals-canvas { z-index: 9000 !important; opacity: 1 !important; pointer-events: none !important; }
+
+/* Wardrobe intro: each sentence stays on exactly one line, shrinking only as much as the width needs */
+.wardrobe-intro-exact-card { container-type: inline-size; }
+.intro-exact-text {
+  white-space: nowrap !important;
+  padding-left: 6px !important;
+  padding-left: 2cqw !important;
+  padding-right: 6px !important;
+  padding-right: 2cqw !important;
+  font-size: min(1.52rem, 4vw) !important;      /* fallback: browsers without container units */
+  font-size: min(1.52rem, 4.3cqw) !important;
+}
+
+/* Phones: while the envelope is shown, the page must not move at all. 100vh is taller than the
+   visible area when the address bar is showing, so overflow:hidden alone still let the page slide
+   a little under a finger; that slide then snapped back on reveal. Pin the page instead. */
+body.is-envelope-closed {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+.envelope-wrapper { touch-action: none; overscroll-behavior: none; }
+
+/* Footer date: real lowercase ordinals ("11th"), since Cinzel only has capitals */
+.ft-date span {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  font-size: 0.62em !important;
+  letter-spacing: 0.01em;
+  vertical-align: 0.42em;
+  line-height: 0;
+  margin-left: 0.02em;
+}
+
+/* ═══ Envelope opening finale: red floral replaces the video's gold one → it spreads open while
+   the G&K logo grows from its centre → calm interior → slow fade to the landing page ═══ */
+.env-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 4;                 /* above the video, below the pre-tap seal overlay (z 5) */
+  pointer-events: none;
+}
+.env-stage-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+/* --env-x / --env-y / --env-s are set by JS from the cover-fit of the 720x1280 interior art */
+.env-stage-centre {
+  position: absolute;
+  left: var(--env-x, 50%);
+  top: var(--env-y, 47.7%);
+  width: 0;
+  height: 0;
+}
+.env-floral,
+.env-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.env-floral {
+  width: calc(250px * var(--env-s, 0.66));
+  transform: translate(-50%, -50%) scale(0.8);
+  filter: drop-shadow(0 0 7px rgba(255, 214, 170, 0.6));
+  /* soft cream backing (the glow's colour) so the video's gold floral can't show through */
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 248, 224, 0.97) 0%, rgba(255, 248, 224, 0.92) 60%, rgba(255, 248, 224, 0) 100%);
+}
+.env-logo {
+  width: var(--env-logo-w, 82vw);
+  transform: translate(-50%, -50%) scale(0.1);
+}
+
+/* 1. Flaps parting: the red floral appears over the video's gold one and never stops moving:
+      it blooms outward and turns while it fades, and the G&K logo grows out of its centre */
+.envelope-wrapper.env-floral-on .env-floral {
+  animation: envFloralSpread 1.6s cubic-bezier(0.33, 0.5, 0.45, 1) forwards;
+}
+@keyframes envFloralSpread {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.8) rotate(0deg); }
+  12%  { opacity: 1; }
+  45%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.7) rotate(28deg); }
+}
+.envelope-wrapper.env-floral-on .env-logo {
+  animation: envLogoGrow 1.7s cubic-bezier(0.3, 0.55, 0.45, 1) 1.55s forwards;
+}
+@keyframes envLogoGrow {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+  25%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 2. The glow settles into the calm envelope interior */
+.envelope-wrapper.env-stage-on .env-stage-bg { opacity: 1; }
+
+/* 3. The logo spreads away: the crisp logo expands outward, softens and fades,
+      while gold sparkles fly off it (particles drawn on .env-glitter) */
+.envelope-wrapper.env-logo-burst .env-logo {
+  animation: envLogoSpread 1.1s cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
+}
+@keyframes envLogoSpread {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1);    filter: blur(0); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.45); filter: blur(4px); }
+}
+.env-glitter {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10001;             /* above the envelope, so the glitter drifts over the landing page */
+  pointer-events: none;
+}
+
+/* 4. Slow, soft hand-over to the landing page */
+.envelope-wrapper.env-slow-fade { transition: opacity 2.2s ease-in-out, visibility 2.2s ease-in-out; }
