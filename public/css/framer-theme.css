@@ -4494,6 +4494,7 @@ body.at-footer .royal-scroll-prompt {
   gap: 14px !important;
 }
 .two-hearts-body .two-hearts-para {
+  font-size: clamp(1.22rem, 3.8vw, 1.38rem) !important;
   line-height: 1.6 !important;
   text-wrap: pretty !important;
 }
@@ -4560,3 +4561,81 @@ body.at-footer .royal-scroll-prompt {
   margin: 0 auto;
   text-align: left;
 }
+
+/* Wardrobe: date sits centred between the lotus line and the divider below it */
+.wardrobe-card-info-plate .wardrobe-card-date { position: relative; top: 4px; }
+
+/* Weather: larger date pills, card text and sub-text (cards widened a little to make room) */
+.kw-grid { width: 92% !important; column-gap: 2.4cqw !important; }
+.kw-card { padding-left: 0.9cqw !important; padding-right: 0.9cqw !important; }
+.kw-date { font-size: 2.85cqw !important; padding: 0.6cqw 0.9cqw 0.5cqw !important; letter-spacing: 0.005em !important; }
+.kw-when { font-size: 5.3cqw !important; }
+.kw-temp { font-size: 8.8cqw !important; }
+.kw-card-foot { font-size: 3.25cqw !important; padding-left: 0 !important; padding-right: 0 !important; }
+.kw-sub { font-size: 4.6cqw !important; }
+.kw-tip { font-size: 5cqw !important; }
+
+/* Weather: one date per day — a pill on a gold bracket that encloses that day's Day + Night cards */
+.kw-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  column-gap: 3.6cqw !important;
+  width: 92% !important;
+}
+.kw-group { display: flex; flex-direction: column; min-width: 0; }
+.kw-group-head {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3cqw;
+}
+.kw-group-head::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  bottom: -3cqw;
+  border: 1px solid #C9A25A;
+  border-bottom: none;
+  border-radius: 1.6cqw 1.6cqw 0 0;
+  pointer-events: none;
+}
+.kw-group-date {
+  position: relative;
+  z-index: 1;
+  padding: 0.7cqw 2.4cqw 0.6cqw;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #9A1B2E, #741020);
+  border: 1px solid #D2AA5E;
+  box-shadow: 0 0 0 0.9cqw #FBF6EE, 0 0.6cqw 1.4cqw rgba(116, 16, 32, 0.22);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 3.5cqw;
+  font-variant-numeric: lining-nums;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  color: #F7E4BC;
+  white-space: nowrap;
+}
+.kw-group-date sup { font-size: 0.62em; vertical-align: 0.5em; line-height: 0; margin-left: 0.05em; }
+.kw-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2.4cqw;
+  flex: 1;
+}
+.kw-card { padding-top: 0.6cqw !important; }
+.kw-card-icon { margin-top: 2.6cqw !important; }
+.kw-card-icon-moon { margin-top: 3.4cqw !important; }
+
+/* Diamond dividers: visible gold side lines (tapering outward), matching the other gold rules */
+.framer-gold-divider { width: min(70%, 280px) !important; gap: 10px !important; }
+.framer-gold-divider .divider-line {
+  height: 1.5px !important;
+  background: linear-gradient(to left, #B8893A 0%, rgba(196, 154, 78, 0.85) 45%, rgba(196, 154, 78, 0) 100%) !important;
+}
+.framer-gold-divider .divider-line:last-child {
+  background: linear-gradient(to right, #B8893A 0%, rgba(196, 154, 78, 0.85) 45%, rgba(196, 154, 78, 0) 100%) !important;
+}
+.framer-gold-divider .divider-diamond { color: #B8893A !important; }
